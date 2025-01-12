@@ -7,11 +7,14 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        peyda: ['PEYDA', 'PEYDA-BLACK', 'Arial', 'Helvetica', 'sans-serif'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'lucano-color': '#69B0C4',
+        'lucano-productcolor':'#0F2636',
       },
     },
   },
-  plugins: [],
+  variants: {},
 };

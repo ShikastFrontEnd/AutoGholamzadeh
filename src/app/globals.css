@@ -9,8 +9,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #FCFCFC;
   }
 }
 
@@ -18,4 +17,88 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+/* custom css */
+
+@font-face {
+  font-family: 'PEYDA-BLACK';
+  src: url('/static/fonts/PEYDA-BLACK.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PEYDA-BOLD';
+  src: url('/static/fonts/PEYDA-BOLD.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PEYDA-REGULAR';
+  src: url('/static/fonts/PEYDA-REGULAR.TTF') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Use the custom font in your body or specific elements */
+body {
+  font-family:'PEYDA-BOLD', Arial, Helvetica, sans-serif; /* Use PEYDA as the primary font */
+}
+.PEYDA-REGULAR{
+  font-family: 'PEYDA-REGULAR';
+}
+.PEYDA-BLACK{
+  font-family: 'PEYDA-BLACK';
+}
+.PEYDA-BOLD{
+  font-family: 'PEYDA-BOLD';
+}
+
+.lucano-color{
+  background-color: #236160;
+}
+.lucano-colorcolor{
+  color: #236160;
+}
+.lucanoInput-color{
+  background-color: #F3F3F3;
+}
+.has-\[\:checked\]\:lucano-color:has(:checked) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(35, 97, 96 / var(--tw-bg-opacity, 1))
+}
+.custominput[required]+label:after {
+  content: '*';
+  color: red;
+}
+.customOverlay {
+  background: rgba(36, 123, 160, 0.7);
+}
+.customModal {
+  background: #090909;
+  max-width: 500px;
+  width: 100%;
+}
+.flex {
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.flex::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+/* Add this to your global CSS file or a specific CSS module */
+.custom-scrollbar {
+  position: relative;
+}
+
+.custom-scrollbar .ps__rail-y {
+  left: 0; /* Position the scrollbar on the left */
+  right: auto; /* Remove the default right positioning */
+}
+
+.custom-scrollbar .ps__thumb-y {
+  left: 0; /* Ensure the thumb is also positioned correctly */
+  right: auto; /* Remove the default right positioning */
 }
