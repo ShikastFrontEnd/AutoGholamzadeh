@@ -19,16 +19,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/bundle';
+
+// import styles bundle
 import 'swiper/css/bundle';
 import InputField from './InputField';
 import SelectField from './SelectField';
 
 
-
-
-
-
-function PreRegistrationForm() {
+function TestDriveForm() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -102,20 +100,20 @@ function PreRegistrationForm() {
                     >
                         <div className="w-full h-full backdrop-blur-md flex  pt-32">
                         <main id="content" role="main" className=" w-full mx-auto flex justify-center items-center p-5  ">
-                        <div dir="rtl" className="px-5 py-16 bg-lucano-productcolor lg:w-[1700px] sm:w-screen w-full h-screen rounded-3xl shadow-2xl border border-white">
-  <section className="relative flex h-full">
-    <div className="w-full h-full lg:w-1/2 flex flex-col justify-center">
-      <div className="mx-auto max-w-lg text-center">
+<div dir="rtl" className="px-5 bg-lucano-productcolor sm:w-screen w-full h-full max-w-[1800] rounded-3xl shadow-2xl border border-white">
+<section className="relative flex flex-wrap h-full ">
+  <div className="w-full  lg:w-1/2 flex flex-col justify-center">
+    <div className="mx-auto max-w-lg text-center">
       <button className="p-2 transition">
                         <div className="flex justify-center items-center">
-                                <img 
-                                    src="/static/images/ecodalucano.png" 
-                                    alt="Logo" 
-                                    className="w-auto max-w-[360px] h-auto filter invert brightness-200" 
-                                />
+                        <img 
+                src="https://ecodalucano.com/wp-content/uploads/2024/07/Logo-final-01-scaled-e1735563656132-300x27.webp" 
+                alt="Logo" 
+                className="hidden md:block w-[330px] h-auto" 
+            />
                         </div>
                     </button>
-      <h1 className="text-xl text-white font-bold text-nowrap">فرم پیش ثبت نام نمایندگی <span className="text-lucano-color">729</span> رادین تجارت</h1>
+      <h1 className="text-xl text-white font-bold text-nowrap">فرم ثبت نام تست درایو  <span className="text-lucano-color">729</span> رادین تجارت</h1>
 
     </div>
 
@@ -207,7 +205,7 @@ function PreRegistrationForm() {
     </form>
   </div>
 
-  <div className="relative flex justify-center items-center w-full lg:h-full lg:w-1/2 overflow-hidden py-4 sm:hidden  md:block ">
+  <div className="relative flex justify-center items-center w-full sm:h-96 lg:h-full lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
   <div className="relative h-full w-full  p-12 md:p-0  ">
     <Swiper
       pagination={{ clickable: true }}
@@ -253,4 +251,4 @@ function PreRegistrationForm() {
         </> );
     }
 
-export default PreRegistrationForm;
+export default TestDriveForm;

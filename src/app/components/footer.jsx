@@ -1,20 +1,22 @@
 'use client'
 import Link from "next/link";
 import { useRef } from "react";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Footer = () => {
     // Create a ref for the address paragraph
     const addressRef = useRef(null);
 
     // Function to scroll to the address paragraph
-    const scrollToAddress = () => {
+    const scrollToAddress = (event) => {
+        event.preventDefault(); // Prevent the default anchor behavior
         if (addressRef.current) {
             addressRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
     return (
-        <footer className="mx-auto w-full relative text-center bg-gradient-to-r from-lucano-color to-lucano-productcolor text-white">
+        <footer className="mx-auto w-screen relative text-center bg-gradient-to-r from-lucano-color to-lucano-productcolor text-white">
             <div className="px-6 py-8 md:py-14 xl:pt-20 xl:pb-12">
                 <h2 className="font-bold text-3xl xl:text-4xl leading-snug">
                     لوکانو فراتر از کلاسیک
@@ -28,10 +30,11 @@ const Footer = () => {
                 <div className="mt-14 xl:mt-20">
                     <nav className="flex flex-wrap justify-center text-lg font-medium">
                         <div className="px-5 py-2">
-                            <a href="#" onClick={scrollToAddress}>ادرس ما<i className="pl-1 bi bi-geo-alt-fill"></i></a>
+                        <a href="#" onClick={scrollToAddress}>ادرس ما<i className="pl-1 bi bi-geo-alt-fill"></i></a>
                         </div>
                         <div className="px-5 py-2">
-                            <a href="#">درباره ما<i className="pl-1 bi bi-info-circle"></i></a>
+                        <Link href="/aboutus" passHref> <span href="#">درباره ما<i className="pl-1 bi bi-info-circle"></i></span></Link>
+                           
                         </div>
                         <div className="px-5 py-2">
                             <a href="tel:09361411566">تلفن : 09361411566 <i className="pl-1 bi bi-telephone"></i></a>
