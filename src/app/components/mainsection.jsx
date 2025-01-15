@@ -4,7 +4,7 @@ export default function MainSection() {
     return (
         <>
             <div
-                className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center  h-screen"
+                className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-screen  h-screen"
                 style={{ backgroundImage: "url('/static/images/lucano3.jpg')" }}
             >
                 <div className="backdrop-blur-sm w-full h-full flex justify-center items-center sm:w-full">

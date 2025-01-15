@@ -95,18 +95,18 @@ function PreRegistrationForm() {
     <ToastContainer />
     </div>
         
-                        <div className="bg-zinc-400 bg-auto h-screen w-screen" >
+                        <div className="bg-zinc-400 bg-auto h-auto w-screen " >
                     <div
-                        className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full h-full"
+                        className="bg-no-repeat bg-cover bg-bottom bg-gray-200   flex justify-center items-center w-full h-auto min-h-screen "
                         style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
                     >
-                        <div className="w-full h-full backdrop-blur-md flex  pt-32">
-                        <main id="content" role="main" className=" w-full mx-auto flex justify-center items-center p-5  ">
-                        <div dir="rtl" className="px-5 py-16 bg-lucano-productcolor lg:w-[1700px] sm:w-screen w-full h-screen rounded-3xl shadow-2xl border border-white">
+                        <div className="w-full h-full backdrop-blur-md flex  py-32">
+                        <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
+                        <div dir="rtl" className=" px-5 py-16 bg-lucano-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full md:h-screen  rounded-3xl shadow-2xl border border-white">
   <section className="relative flex h-full">
     <div className="w-full h-full lg:w-1/2 flex flex-col justify-center">
       <div className="mx-auto max-w-lg text-center">
-      <button className="p-2 transition">
+      <button className="p-2 transition hidden md:block">
                         <div className="flex justify-center items-center">
                                 <img 
                                     src="/static/images/ecodalucano.png" 
@@ -115,7 +115,7 @@ function PreRegistrationForm() {
                                 />
                         </div>
                     </button>
-      <h1 className="text-xl text-white font-bold text-nowrap">فرم پیش ثبت نام نمایندگی <span className="text-lucano-color">729</span> رادین تجارت</h1>
+      <h1 className="text-base md:text-xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم پیش ثبت نام نمایندگی <span className="text-lucano-color">729</span> رادین تجارت</h1>
 
     </div>
 
@@ -207,7 +207,7 @@ function PreRegistrationForm() {
     </form>
   </div>
 
-  <div className="relative flex justify-center items-center w-full lg:h-full lg:w-1/2 overflow-hidden py-4 sm:hidden  md:block ">
+  <div className="relative flex justify-center items-center w-full lg:h-full lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
   <div className="relative h-full w-full  p-12 md:p-0  ">
     <Swiper
       pagination={{ clickable: true }}
