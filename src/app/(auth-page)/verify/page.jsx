@@ -8,7 +8,7 @@ import VerificationInput from "react-verification-input";
 import Link from "next/link";
 import Countdown from 'react-countdown';
 import 'animate.css/animate.min.css';
-
+import Cookies from 'js-cookie';
 
 const Completionist = () => <span className="text-red-600 text-xl">کد وارد شده منقضی شده است</span>;
 
@@ -19,9 +19,10 @@ export default function Verify() {
     const [verifyTime, setVerifyTime] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [timeLoading, setTimeLoading] = useState(true);
-
     useEffect(() => {
-        const mobile = localStorage.getItem('newMobile');
+        
+
+        const mobile =Cookies.get('newMobile')
         if (mobile) {
             setNewMobile(mobile);
         }
@@ -42,16 +43,6 @@ export default function Verify() {
     const [values, setValues] = useState('');
     const phoneNumber =newMobile
     const [verifyFaild,setVerifyFaild]=useState(false)
-    const setCookie = (name, value, days) => {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    };
-
     const handleChange = (newValues) => {
         setValues(newValues);
     };
@@ -80,7 +71,7 @@ export default function Verify() {
             let verifyTimeAgain = response.data.time;
             if (verifyTimeAgain !== undefined) {
                 const newVerifyTime = verifyTimeAgain * 60000;
-                localStorage.setItem('verifyTime', newVerifyTime);
+                Cookies.set('verifyTime',newVerifyTime, { expires: 7 })
                 setTime(newVerifyTime);
                 setCountdownDate(Date.now() + newVerifyTime);
 
@@ -115,15 +106,15 @@ export default function Verify() {
     };
     useEffect(() => {
         const interval = setInterval(() => {
-            const remainingTime = localStorage.getItem('verifyTime');
+            const remainingTime =Cookies.get('verifyTime');
             if (remainingTime) {
                 const newTime = parseInt(remainingTime, 10) - 1000; // Decrement by 1 second
                 if (newTime <= 0) {
                     clearInterval(interval);
-                    localStorage.removeItem('verifyTime');
+                    deleteCookie('verifyTime');
                     setVerifyFaild(true);
                 } else {
-                    localStorage.setItem('verifyTime', newTime);
+                    Cookies.set('verifyTime', newTime, { expires: 1 });
                     setTime(newTime);
                     setCountdownDate(Date.now() + newTime); // Update countdown date
                 }
@@ -152,8 +143,8 @@ export default function Verify() {
                let my_response_message=response.data.data.message
                
                 if(my_response_status =='error'){
-                    localStorage.removeItem('newMobile') 
-                    localStorage.removeItem('verifyTime') 
+                    Cookies.remove('newMobile'); 
+                    Cookies.remove('verifyTime');
                     toast.error(my_response_message, {position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: false,
@@ -165,20 +156,20 @@ export default function Verify() {
                         className:'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                     });
                 }else{
-                    localStorage.removeItem('newMobile')       
-                    localStorage.removeItem('verifyTime')       
+                    Cookies.remove('newMobile'); 
+                    Cookies.remove('verifyTime');
                     toast.success('شما با موفقیت وارد شدید', {
                         position: "top-center"
                     });
-                    setCookie('user-cookie',response.data.data.token, 7)
+                    Cookies.set('user-cookie',response.data.data.token, { expires: 7 })
                     setTimeout(() => {
                         router.push('/')
                     }, 1000);
                 }
                 
             } else {
-                localStorage.removeItem('newMobile') 
-                localStorage.removeItem('verifyTime') 
+                Cookies.remove('newMobile'); 
+                Cookies.remove('verifyTime');
                 toast.error(error.response.data.message, {
                     position: "top-center",
                     autoClose: 5000,
@@ -192,8 +183,8 @@ export default function Verify() {
                 });
             }
         } catch (error) {
-            localStorage.removeItem('newMobile') 
-            localStorage.removeItem('verifyTime') 
+            Cookies.remove('newMobile'); 
+            Cookies.remove('verifyTime'); 
             toast.error(error, {
                 position: "top-center",
                 autoClose: 5000,
@@ -208,7 +199,7 @@ export default function Verify() {
         }
     }
 
-    const [time,setTime] =useState(localStorage.getItem('verifyTime'));
+    const [time,setTime] =useState(Cookies.get('verifyTime'));
     const [countdownDate, setCountdownDate] = useState(Date.now() + (time ? parseInt(time, 10) : 0));
 
     useEffect(() => {
@@ -223,7 +214,7 @@ export default function Verify() {
         }
     };
     const handleCountdownComplete = () => {
-        localStorage.removeItem('verifyTime');
+        Cookies.remove('verifyTime');
         setVerifyFaild(true);
     };
     return (

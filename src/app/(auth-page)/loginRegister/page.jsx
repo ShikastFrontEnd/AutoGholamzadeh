@@ -10,6 +10,7 @@ import Image from "next/image";
 import { ClipLoader } from 'react-spinners';
 import 'animate.css/animate.min.css';
 import { useRouter } from 'next/navigation';
+import Cookies from "js-cookie";
 
 function loginRegister() {
     const router = useRouter();
@@ -34,11 +35,13 @@ function loginRegister() {
             });
             let verifyTime = response.data.time;
             if (verifyTime !== undefined) {
-                localStorage.setItem('verifyTime', verifyTime*60000);
+                Cookies.set('verifyTime', verifyTime * 60000)
             }
-
+            console.log('xxxxxxxxxxxxxxxxxxxxxx')
+            console.log(verifyTime * 60000)
             console.log(verifyTime)
-            localStorage.setItem('newMobile', newMobile);
+            console.log('xxxxxxxxxxxxxxxxxxxxxx')
+            Cookies.set('newMobile',newMobile)
             router.push('/verify');
         } catch (error) {
             if (error.response) {
