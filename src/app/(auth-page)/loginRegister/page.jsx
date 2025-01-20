@@ -20,7 +20,7 @@ function loginRegister() {
     const inputRef = useRef(null);
     const sendRequest = async () => {
         setLoading(true);
-        const url = 'https://api.shikast.com/api/auth/v1/loginRegister';
+        const url = 'https://api.gholamzadeh.com/api/auth/v1/loginRegister';
 
         const data = {
             "register_phone": newMobile
@@ -37,10 +37,6 @@ function loginRegister() {
             if (verifyTime !== undefined) {
                 Cookies.set('verifyTime', verifyTime * 60000)
             }
-            console.log('xxxxxxxxxxxxxxxxxxxxxx')
-            console.log(verifyTime * 60000)
-            console.log(verifyTime)
-            console.log('xxxxxxxxxxxxxxxxxxxxxx')
             Cookies.set('newMobile',newMobile)
             router.push('/verify');
         } catch (error) {
@@ -126,7 +122,7 @@ function loginRegister() {
                             />
                         </div>
                     </button>
-                    <h3 className="text-xs md:text-base lg:text-2xl">فرم پیش ثبت نام نمایندگی غلامزاده</h3>
+                    <h3 className="text-xs md:text-base lg:text-2xl">فرم پیش ثبت نام نمایندگی 729 لوکانو</h3>
                 </div>
             </div>
             <div className="mt-5">

@@ -13,7 +13,7 @@ export default function MainSection() {
         { text: "پیش ثبت نام لوکانو", href: "/preregisterform" },
         { text: "تست درایو", href: "/testdrive" },
         { text: "تست درایو های من", href: "/mytestdrives" },
-        { text: "نمایش پیش ثبت نام لوکانو", href: "/showpreregisterform" },
+        { text: " پیش ثبت نام های من", href: "/showpreregisterform" },
         { text: "شرایط فروش لوکانو", href: "/" }
     ].map((item, index) => (
         <div key={index} className="relative inline-flex group">

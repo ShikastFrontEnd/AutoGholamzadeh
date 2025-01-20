@@ -1,5 +1,6 @@
 
-const InputField = ({ placeholder, iconClass,value,onChange }) => (
+const InputField = ({ placeholder, iconClass,value,onChange,error }) => (
+    <>
     <div className="relative z-30">
       <input
         type="text"
@@ -12,6 +13,8 @@ const InputField = ({ placeholder, iconClass,value,onChange }) => (
         <i className={`bi pt-2 ${iconClass} text-lucano-color text-2xl`}></i>
       </span>
     </div>
+    <div className="w-full  z-30"><h6 className="text-red-600 w-full text-center h-full">{error}</h6></div>
+    </>
   );
 
   export default InputField

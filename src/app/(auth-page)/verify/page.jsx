@@ -55,7 +55,7 @@ export default function Verify() {
     };
     
     const sendCodeAgain = async () => {
-        const url = 'https://api.shikast.com/api/auth/v1/loginRegister';
+        const url = 'https://api.gholamzadeh.com/api/auth/v1/loginRegister';
     
         const data = {
             "register_phone": phoneNumber
@@ -124,7 +124,7 @@ export default function Verify() {
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
     async function sendRequest(fullCode) {
-        const url = 'https://api.shikast.com/api/auth/v1/verify';
+        const url = 'https://api.gholamzadeh.com/api/auth/v1/verify';
         const formData = new FormData();
         formData.append('phone', phoneNumber);
         formData.append('code', fullCode);
@@ -143,7 +143,7 @@ export default function Verify() {
                let my_response_message=response.data.data.message
                
                 if(my_response_status =='error'){
-                    Cookies.remove('newMobile'); 
+                   
                     Cookies.remove('verifyTime');
                     toast.error(my_response_message, {position: "top-center",
                         autoClose: 5000,
@@ -156,7 +156,7 @@ export default function Verify() {
                         className:'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                     });
                 }else{
-                    Cookies.remove('newMobile'); 
+                    
                     Cookies.remove('verifyTime');
                     toast.success('شما با موفقیت وارد شدید', {
                         position: "top-center"
@@ -168,7 +168,7 @@ export default function Verify() {
                 }
                 
             } else {
-                Cookies.remove('newMobile'); 
+                
                 Cookies.remove('verifyTime');
                 toast.error(error.response.data.message, {
                     position: "top-center",
@@ -183,7 +183,7 @@ export default function Verify() {
                 });
             }
         } catch (error) {
-            Cookies.remove('newMobile'); 
+            
             Cookies.remove('verifyTime'); 
             toast.error(error, {
                 position: "top-center",
@@ -243,7 +243,7 @@ export default function Verify() {
                             />
                         </div>
                     </button>
-                    <h3 className="text-xs md:text-base lg:text-2xl">فرم پیش ثبت نام نمایندگی غلامزاده</h3>
+                    <h3 className="text-xs md:text-base lg:text-2xl">فرم پیش ثبت نام نمایندگی 729 لوکانو</h3>
                 </div>
             </div>
             <div className="mt-5">

@@ -1,7 +1,83 @@
+'use client'
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 export default function MyTestDrives(params) {
+    const [infos, setInfos] = useState({
+        "firstName": "علی",
+        "lastName": "بیدل نیکو",
+        "phone": "09051383167",
+        "nationalCode": "2742642145",
+        "birth_date": null,
+        "carModel": "اکستریم VX",
+        "regModel": "نقدی",
+        "installmentsPercentage": null,
+        "installmentsMonth": null,
+        "color": "سیاه",
+        "isConfirm": 0,
+        "isWon": 0,
+        "isRegisterModiran": 0,
+        "deliveryCar": 0,
+        "completePay": 0,
+        "completeDoc": 0,
+        "reason_out": 0,
+        "reason_out_description": null,
+        "testDriver": 0,
+        "showRom": 0,
+        "description": null,
+        "knowMySite": "سایر",
+        "created_at": "2025-01-20T08:40:56.000000Z",
+        "updated_at": "2025-01-20T08:40:56.000000Z"
+      });
+        
+    const token=Cookies.get('user-cookie');
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('https://api.gholamzadeh.com/api/web/carRegister/show', {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+      
+          if (response.status === 200) {
+            console.log(response.data);
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          if (error.response) {
+            if (error.response.status === 401) {
+              toast.error(error.response.data, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+              });
+              router.push('/loginRegister');
+            } else {
+              console.log('Error:', error.response.data.message);
+            }
+          } else if (error.request) {
+            console.log('No response received:', error.request);
+          } else {
+            console.log('Error:', error.message);
+          }
+        }
+      };
+      
+      useEffect(() => {
+        fetchData(); // Call the fetchData function when the component mounts
+      }, []);
     return(
         <>
             <Header />
@@ -22,7 +98,7 @@ export default function MyTestDrives(params) {
             <div className="sm:flex sm:justify-between sm:gap-4">
                 <div>
                 <h3 className="text-lg font-bold text-lucano-color sm:text-xl">
-                   تست درایو های من
+                   پیش ثبت نام های من
                 </h3>
     
                 <p className="mt-1 text-xs font-medium text-white">نمایندگی 729 لوکانو</p>
@@ -40,7 +116,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    علی
+                    {infos.firstName}
                     </dt>
                 
                 <dd className="text-xs text-white">نام</dd>
@@ -48,7 +124,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    نیکو
+                    {infos.lastName}
                     </dt>
                 
                 <dd className="text-xs text-white">نام خانوادگی</dd>
@@ -58,25 +134,25 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    مرد
+                    {infos.regModel}
                     </dt>
                 
-                <dd className="text-xs text-white">جنسیت</dd>
+                <dd className="text-xs text-white">شیوه پرداخت</dd>
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    برنامه نویس
+                   {infos.knowMySite}
                     </dt>
                 
-                <dd className="text-xs text-white">شغل</dd>
+                <dd className="text-xs text-white">شیوه اشنایی </dd>
                 </div>
                 </dl>
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    2742642145
+                    {infos.nationalCode}
                     </dt>
                 
                 <dd className="text-xs text-white">کد ملی</dd>
@@ -84,7 +160,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    09051383167
+                    {infos.phone}
                     </dt>
                 
                 <dd className="text-xs text-white">تلفن همراه</dd>
@@ -94,7 +170,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    اکستریم VX
+                    {infos.carModel}
                     </dt>
                 
                 <dd className="text-xs text-white">خودرو</dd>
@@ -102,90 +178,21 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    اروميه
+                    {infos.color}
                     </dt>
                 
-                <dd className="text-xs text-white">شهرستان</dd>
+                <dd className="text-xs text-white">رنگ</dd>
                 </div>
                 </dl>
-                <dl className="mt-6 flex ">
-                <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    دارد
-                    </dt>
-                
-                <dd className="text-xs text-white">وضعیت گواهینامه</dd>
-                </div>
-                <div className="flex flex-col-reverse  space-x-2 text-center w-full">
-               
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    بود
-                    </dt>
-                
-                <dd className="text-xs text-white">قبلا مشتری بود؟</dd>
-                </div>
-                </dl>
             
-                <dl className="mt-6 flex ">
-                <div className="flex flex-col-reverse space-x-2 text-center w-full">
+            
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    فونیکس
-                    </dt>
-                
-                <dd className="text-xs text-white">خودروفعلی</dd>
-                </div>
-                <div className="flex flex-col-reverse  space-x-2 text-center w-full">
-               
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    0
-                    </dt>
-                
-                <dd className="text-xs text-white">تعداد همراه </dd>
-                </div>
-                </dl>
-                <dl className="mt-6 flex ">
-                <div className="flex flex-col-reverse space-x-2 text-center w-full">
-                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    1403-10-26
-                    </dt>
-                
-                <dd className="text-xs text-white">تاریخ ثبت نام</dd>
-                </div>
-                <div className="flex flex-col-reverse  space-x-2 text-center w-full">
-               
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    انجام شده
-                    </dt>
-                
-                <dd className="text-xs text-white">وضعیت تست درایو</dd>
-                </div>
-                </dl>
-                <dl className="mt-6 flex ">
-                <div className="flex flex-col-reverse space-x-2 text-center w-full">
-                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    شیخ شلتوت روبروی میدان تره بار
-                    </dt>
-                
-                <dd className="text-xs text-white">مکان برگزاری</dd>
-                </div>
-                <div className="flex flex-col-reverse  space-x-2 text-center w-full">
-               
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    انجام شده
-                    </dt>
-                
-                <dd className="text-xs text-white">وضعیت تست درایو</dd>
-                </div>
-                </dl>
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm text-wrap max-w-96 font-medium text-lucano-color hover:text-white cursor-pointer">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, nobis. Accusamus, aut exercitationem? Eum veniam libero delectus commodi rerum exercitationem sunt porro, tenetur doloremque mollitia labore nisi alias, voluptates hic!
+                    {infos.description}
                     </dt>
                 
                 <dd className="text-xs text-white">توضیحات </dd>

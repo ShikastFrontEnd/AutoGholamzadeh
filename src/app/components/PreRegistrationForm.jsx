@@ -4,8 +4,6 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
 import Link from 'next/link';
 import Image from "next/image";
@@ -22,24 +20,41 @@ import 'swiper/bundle';
 import 'swiper/css/bundle';
 import InputField from './InputField';
 import SelectField from './SelectField';
-
+import Cookies from 'js-cookie';
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 
 
 function PreRegistrationForm() {
+  const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fatherName, setFatherName] = useState('');
-  const [phone, setPhone] = useState('');
+  const mobile =Cookies.get('newMobile')
   const [nationalCode, setNationalCode] = useState('');
   const [address, setAddress] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedCat, setSelectedCat] = useState('');
-
+  const [carsList, setCarsList] = useState([]);
+  const [regModel, setRegModal] = useState('');
+  const [errors, setErrors] = useState({
+    firstName:"",
+    lastName: "",
+    fatherName:"",
+    nationalCode:"" ,
+    address: "",
+    selectedOption:"",
+    phone: "",
+    color: "",
+    selectedCat: "" ,
+    regModel:""
+  });
+  const token=Cookies.get('user-cookie');
   const handleSelectedCat = (event) => {
     setSelectedCat(event.target.value);
   };
@@ -50,49 +65,124 @@ function PreRegistrationForm() {
   const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
   };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = {
-      firstName,
-      lastName,
-      fatherName,
-      phone,
-      nationalCode,
-      address,
-      selectedOption,
-      selectedColor,
-    };
-    console.log(formData);
-    // You can send formData to your server or handle it as needed
+  const handleRegChange = (event) => {
+    setRegModal(event.target.value);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+  
+    try {
+      const url = 'https://api.gholamzadeh.com/api/web/carRegister/store';
+      const data = {
+        firstName,
+        lastName,
+        fatherName,
+        phone: mobile,
+        nationalCode,
+        carModel: selectedOption,
+        regModel,
+        color: selectedColor,
+        knowMySite: selectedCat,
+        address,
+      };
+  
+      const response = await axios.post(url, data, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.status === 201) {
+        toast.success(response.data.message, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+        });
+        router.push('/showpreregisterform');
+      } else {
+        router.push('/')
+      }
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+        });
+        setErrors(error.response.data.errors);
+      } else if (error.request) {
+        router.push('/')
+      } else {
+        router.push('/')
+      }
+    }
+  };
+  
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api.lucano729.com/api/web/carRegister/createView', {
+      const response = await axios.get('https://api.gholamzadeh.com/api/web/carRegister/createView', {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
-          // Add any other headers your API requires here
         },
       });
-
-      if (!response.ok) {
+  
+      if (response.status === 200) {
+        setCarsList(response.data.data.brands);
+      } else {
         throw new Error('Network response was not ok');
       }
-
-      console.log(data); // Log the data received from the API
     } catch (error) {
-      console.log('Fetch error:', error); // Log the error for debugging
+      if (error.response) {
+        if (error.response.status === 401) {
+          toast.error(error.response.data, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+          });
+          router.push('/loginRegister');
+        } else {
+          console.log('Error:', error.response.data.message);
+        }
+      } else if (error.request) {
+        console.log('No response received:', error.request);
+      } else {
+        console.log('Error:', error.message);
+      }
     }
   };
-
+  
   useEffect(() => {
     fetchData(); // Call the fetchData function when the component mounts
-  }, []); // 
+  }, []);
+  
+  // Log carsList whenever it changes
     return ( <>
     <div className="z-50">
-    <ToastContainer />
+    <div className=""><ToastContainer className={`z-50 px-5`} /></div>
     </div>
         
                         <div className="bg-zinc-400 bg-auto h-auto w-screen " >
@@ -126,50 +216,52 @@ function PreRegistrationForm() {
           iconClass="bi-person-badge-fill"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          error={errors.firstName} 
         />
         <InputField
           placeholder="نام خانوادگی خود را وارد کنید"
           iconClass="bi-person-badge"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          error={errors.lastName} 
         />
         <InputField
           placeholder="نام پدر خود را وارد کنید"
           iconClass="bi-person-bounding-box"
           value={fatherName}
           onChange={(e) => setFatherName(e.target.value)}
+          error={errors.fatherName} 
         />
-        <InputField
-          placeholder="تلفن همراه خود را وارد کنید"
-          iconClass="bi-telephone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
+        
         <InputField
           placeholder="کدملی خود را وارد کنید"
           iconClass="bi-person-vcard-fill"
           value={nationalCode}
           onChange={(e) => setNationalCode(e.target.value)}
+          error={errors.nationalCode} 
         />
         <InputField
           placeholder="ادرس محل سکونت"
           iconClass="bi-geo-alt"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          error={errors.address} 
         />
         <div className="flex justify-between">
-          <div className="">
+          <div className="w-full">
             <SelectField
-              label="خودرو مورد نظر"
-              options={[
-                { value: 'لوکانو L7', label: 'لوکانو L7' },
-              ]}
-              placeholder="خودروهای موجود فعلی"
-              value={selectedOption}
-              onChange={handleSelectChange}
-            />
+                label="خودرو مورد نظر"
+                options={carsList.map(element => ({
+                  value: element,
+                  label: element
+                }))}
+                placeholder="خودروهای موجود فعلی"
+                value={selectedOption}
+                onChange={handleSelectChange}
+                error={errors.selectedOption} 
+              />
           </div>
-          <div className="ms-2">
+          <div className="ms-2 w-full">
             <SelectField
               label="رنگ مورد نظر"
               options={[
@@ -179,10 +271,12 @@ function PreRegistrationForm() {
               placeholder="رنگ های موجود فعلی"
               value={selectedColor}
               onChange={handleColorChange}
+              error={errors.color} 
             />
           </div>
         </div>
-        <div className="">
+        <div className="flex justify-between">
+          <div className="w-full">
             <SelectField
               label="شیوه اشنایی با نمایندگی"
               options={[
@@ -195,7 +289,25 @@ function PreRegistrationForm() {
               placeholder="شیوه اشنایی"
               value={selectedCat}
               onChange={handleSelectedCat}
+              error={errors.selectedCat} 
             />
+          </div>
+          <div className="ms-2 w-full">
+            <SelectField
+              label="روش پرداخت"
+              options={[
+                { value: 'اقساطی', label: 'اقساطی' },
+                { value: 'نقدی', label: 'نقدی' },
+              ]}
+              placeholder="روش پرداخت"
+              value={regModel}
+              onChange={handleRegChange}
+              error={errors.regModel} 
+            />
+          </div>
+        </div>
+        <div className="">
+            
           </div>
       </div>
 
