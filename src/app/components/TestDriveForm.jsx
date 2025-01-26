@@ -30,27 +30,27 @@ import persian_fa from "react-date-object/locales/persian_fa"
 
 
 function TestDriveForm({eventId}) {
-  const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [currentCar, setCurrentCar] = useState('');
-  const mobile =Cookies.get('newMobile')
-  const [nationalCode, setNationalCode] = useState('');
-  const [yourJob, setYourJob] = useState('');
-  const [howMany, setHowMany] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
-  const [gender, setGender] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
-  const [isCustomer, setIsCustomer] = useState('');
-  const [isDriveLicence, setIsDriveLicence] = useState('');
-  const [selectedCat, setSelectedCat] = useState('');
-  const [carsList, setCarsList] = useState([]);
-  const [regModel, setRegModal] = useState('');
-  const [dateValue, setDateValue] = useState(null);
-  const [formattedDate,setFormattedDate] = useState('')
-  const handleDateChange = (date) => {
+    const router = useRouter();
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [currentCar, setCurrentCar] = useState('');
+    const mobile =Cookies.get('newMobile')
+    const [nationalCode, setNationalCode] = useState('');
+    const [yourJob, setYourJob] = useState('');
+    const [howMany, setHowMany] = useState('');
+    const [description, setDescription] = useState('');
+    const [selectedOption, setSelectedOption] = useState('');
+    const [gender, setGender] = useState('');
+    const [selectedCity, setSelectedCity] = useState('');
+    const [isCustomer, setIsCustomer] = useState('');
+    const [isDriveLicence, setIsDriveLicence] = useState('');
+    const [selectedCat, setSelectedCat] = useState('');
+    const [carsList, setCarsList] = useState([]);
+    const [regModel, setRegModal] = useState('');
+    const [dateValue, setDateValue] = useState(null);
+    const [formattedDate,setFormattedDate] = useState('')
+    const handleDateChange = (date) => {
     setDateValue(date);
     setFormattedDate(date.format('YYYY/MM/DD')); // Correctly update the state variable
 };
