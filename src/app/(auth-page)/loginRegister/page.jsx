@@ -20,7 +20,7 @@ function loginRegister() {
     const inputRef = useRef(null);
     const sendRequest = async () => {
         setLoading(true);
-        const url = 'https://api.gholamzadeh.com/api/auth/v1/loginRegister';
+        const url = `${process.env.BASE_URL}/api/auth/v1/loginRegister`;
 
         const data = {
             "register_phone": newMobile

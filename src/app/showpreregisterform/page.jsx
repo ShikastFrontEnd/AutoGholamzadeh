@@ -7,37 +7,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 export default function MyTestDrives(params) {
-    const [infos, setInfos] = useState({
-        "firstName": "علی",
-        "lastName": "بیدل نیکو",
-        "phone": "09051383167",
-        "nationalCode": "2742642145",
-        "birth_date": null,
-        "carModel": "اکستریم VX",
-        "regModel": "نقدی",
-        "installmentsPercentage": null,
-        "installmentsMonth": null,
-        "color": "سیاه",
-        "isConfirm": 0,
-        "isWon": 0,
-        "isRegisterModiran": 0,
-        "deliveryCar": 0,
-        "completePay": 0,
-        "completeDoc": 0,
-        "reason_out": 0,
-        "reason_out_description": null,
-        "testDriver": 0,
-        "showRom": 0,
-        "description": null,
-        "knowMySite": "سایر",
-        "created_at": "2025-01-20T08:40:56.000000Z",
-        "updated_at": "2025-01-20T08:40:56.000000Z"
-      });
+    const [infos, setInfos] = useState({});
         
     const token=Cookies.get('user-cookie');
     const fetchData = async () => {
         try {
-          const response = await axios.get('https://api.gholamzadeh.com/api/web/carRegister/show', {
+          const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/show`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
@@ -45,7 +20,7 @@ export default function MyTestDrives(params) {
           });
       
           if (response.status === 200) {
-            console.log(response.data);
+            setInfos(response.data.data);
           } else {
             throw new Error('Network response was not ok');
           }
@@ -83,7 +58,7 @@ export default function MyTestDrives(params) {
             <Header />
             <div className="bg-zinc-400 bg-auto h-full w-full" >
                         <div
-                            className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-full"
+                            className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-screen"
                             style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
                         >
                             <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">

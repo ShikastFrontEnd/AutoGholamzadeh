@@ -19,7 +19,11 @@ const Header = () => {
             setNextButtonText('رادین تجارت');
         }
     }, [token]); 
+    const [isMounted, setIsMounted] = useState(false);
 
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
     return (
         <header className={`fixed inset-x-0 top-0 z-30 mx-auto w-screen max-w-screen border border-gray-100 bg-black/50 py-3 shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
             <div className="px-4">
@@ -56,23 +60,25 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className="flex items-center justify-end gap-3 text-nowrap">
-                        <a
-                            className={` items-center justify-center rounded-xl ${changeColor ? 'bg-lucano-productcolor' : 'bg-lucano-color'} px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 focus-visible:outline 
-                            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:inline-flex`}
-                            href={token?"/logout":"/loginRegister"}      
-                            onMouseEnter={() => setChangeColor(true)}
-                            onMouseLeave={() => setChangeColor(false)}
-                        >
-                            {buttonText}
-                        </a>
-                        <a
-                            className={`hidden md:flex items-center justify-center rounded-xl ${changeColor ? 'bg-lucano-color' : 'bg-lucano-productcolor'} px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 focus-visible:outline 
-                            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:inline-flex`}
-                            href={token?"/loginRegister":"/loginRegister"}  
-                        >
-                         {nextButtonText}
-                            {/* You can add another button text here if needed */}
-                        </a>
+                    <Link href={token ? "/logout" : "/loginRegister"}>
+        <span
+            className={`items-center justify-center rounded-xl ${isMounted && changeColor ? 'bg-lucano-productcolor' : 'bg-lucano-color'} px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 focus-visible:outline 
+            focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:inline-flex`}
+            onMouseEnter={() => setChangeColor(true)}
+            onMouseLeave={() => setChangeColor(false)}
+        >
+            {buttonText}
+        </span>
+    </Link>
+<Link href={token ? "/loginRegister" : "/loginRegister"} passHref>
+    <span
+        className={`hidden md:flex items-center justify-center rounded-xl ${changeColor ? 'bg-lucano-color' : 'bg-lucano-productcolor'} px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 focus-visible:outline 
+        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:inline-flex`}
+    >
+        {nextButtonText}
+        {/* You can add another button text here if needed */}
+    </span>
+</Link>
                     </div>
                 </div>
             </div>

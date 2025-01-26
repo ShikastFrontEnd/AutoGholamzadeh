@@ -1,18 +1,20 @@
+'use client'
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
-export default function MyTestDrives(params) {
-    return(
-        <>
-            <Header />
-            <div className="bg-zinc-400 bg-auto h-full w-full" >
-                        <div
-                            className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-full"
-                            style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
-                        >
-                            <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import moment from "jalali-moment";
+import { toast, ToastContainer } from "react-toastify";
+
+
+function MyDrives({infos}) {
+    console.log(infos)
+    return(<>
+    <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
-            className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
+            className="relative block overflow-hidden rounded-lg h-full border border-gray-100 p-4 sm:p-6 lg:p-8"
             dir="rtl"
             >
             <span
@@ -22,7 +24,7 @@ export default function MyTestDrives(params) {
             <div className="sm:flex sm:justify-between sm:gap-4">
                 <div>
                 <h3 className="text-lg font-bold text-lucano-color sm:text-xl">
-                   تست درایو های من
+                   تست درایو های من شماره {infos.Number}
                 </h3>
     
                 <p className="mt-1 text-xs font-medium text-white">نمایندگی 729 لوکانو</p>
@@ -40,7 +42,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    علی
+                    {infos.firstName}
                     </dt>
                 
                 <dd className="text-xs text-white">نام</dd>
@@ -48,7 +50,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    نیکو
+                   {infos.lastName}
                     </dt>
                 
                 <dd className="text-xs text-white">نام خانوادگی</dd>
@@ -58,7 +60,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    مرد
+                    {infos.gender}
                     </dt>
                 
                 <dd className="text-xs text-white">جنسیت</dd>
@@ -66,7 +68,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    برنامه نویس
+                   {infos.job}
                     </dt>
                 
                 <dd className="text-xs text-white">شغل</dd>
@@ -76,7 +78,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    2742642145
+                    {infos.nationalCode}
                     </dt>
                 
                 <dd className="text-xs text-white">کد ملی</dd>
@@ -84,7 +86,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    09051383167
+                    {infos.phone}
                     </dt>
                 
                 <dd className="text-xs text-white">تلفن همراه</dd>
@@ -94,7 +96,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    اکستریم VX
+                    {infos.carModel}
                     </dt>
                 
                 <dd className="text-xs text-white">خودرو</dd>
@@ -102,7 +104,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    اروميه
+                   {infos.city}
                     </dt>
                 
                 <dd className="text-xs text-white">شهرستان</dd>
@@ -112,7 +114,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    دارد
+                    {infos.isDriveLicence?'دارد':'ندارد'}
                     </dt>
                 
                 <dd className="text-xs text-white">وضعیت گواهینامه</dd>
@@ -120,7 +122,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    بود
+                    {infos.isCustomer?'بود':'نخیر'}
                     </dt>
                 
                 <dd className="text-xs text-white">قبلا مشتری بود؟</dd>
@@ -131,7 +133,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    فونیکس
+                    {infos.customerCarModel}
                     </dt>
                 
                 <dd className="text-xs text-white">خودروفعلی</dd>
@@ -139,7 +141,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    0
+                    {infos.howMany}
                     </dt>
                 
                 <dd className="text-xs text-white">تعداد همراه </dd>
@@ -149,7 +151,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    1403-10-26
+                    {infos.created_at}
                     </dt>
                 
                 <dd className="text-xs text-white">تاریخ ثبت نام</dd>
@@ -157,7 +159,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    انجام شده
+                    {infos.status}
                     </dt>
                 
                 <dd className="text-xs text-white">وضعیت تست درایو</dd>
@@ -167,7 +169,7 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    شیخ شلتوت روبروی میدان تره بار
+                    {infos.address}
                     </dt>
                 
                 <dd className="text-xs text-white">مکان برگزاری</dd>
@@ -175,17 +177,17 @@ export default function MyTestDrives(params) {
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
                     <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
-                    انجام شده
+                    {infos.eventPlace}
                     </dt>
                 
-                <dd className="text-xs text-white">وضعیت تست درایو</dd>
+                <dd className="text-xs text-white">ایونت</dd>
                 </div>
                 </dl>
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
                     <dt className="text-sm text-wrap max-w-96 font-medium text-lucano-color hover:text-white cursor-pointer">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, nobis. Accusamus, aut exercitationem? Eum veniam libero delectus commodi rerum exercitationem sunt porro, tenetur doloremque mollitia labore nisi alias, voluptates hic!
+               {infos.description}
                     </dt>
                 
                 <dd className="text-xs text-white">توضیحات </dd>
@@ -193,10 +195,78 @@ export default function MyTestDrives(params) {
                 
                 </dl>
             
-            </span></div></div>
+            </span></div>
+            </>)
+}
+
+
+
+export default function MyTestDrives(params) {
+    const [allInfos, setAllInfos] = useState([]);
+    const token=Cookies.get('user-cookie');
+    const fetchData = async () => {
+        try {
+          const response = await axios.get(`${process.env.BASE_URL}/api/web/testDrive/showTestDrive`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+      
+          if (response.status === 200) {
+            setAllInfos(response.data.data);
+            console.log(response.data.data)
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          if (error.response) {
+            if (error.response.status === 401) {
+              toast.error(error.response.data, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+              });
+              router.push('/loginRegister');
+            } else {
+              console.log('Error:', error.response.data.message);
+            }
+          } else if (error.request) {
+            console.log('No response received:', error.request);
+          } else {
+            console.log('Error:', error.message);
+          }
+        }
+      };
+      
+      useEffect(() => {
+        fetchData(); // Call the fetchData function when the component mounts
+      }, []);
+      return (
+        <>
+            <Header />
+            <div className="z-50"><ToastContainer /></div>
+            <div className="bg-zinc-400 bg-auto h-full w-full">
+                <div
+                    className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32 flex justify-center items-center w-full h-full"
+                    style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }}
+                >
+                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-rows-2 w-full mx-10 space-y-5">
+                        {Array.isArray(allInfos) && allInfos.map((element) => (
+                            <div key={element.Number} className="w-full flex justify-center">
+                                <MyDrives infos={element} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
             <Footer />
-    
         </>
-       ) 
+    );
 }

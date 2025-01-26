@@ -4,7 +4,7 @@ export default function MainSection() {
     return (
         <>
             <div
-                className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-screen  h-screen"
+                className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full  h-screen"
                 style={{ backgroundImage: "url('/static/images/lucano3.jpg')" }}
             >
                 <div className="backdrop-blur-sm w-full h-full flex justify-center items-center sm:w-full">
@@ -14,7 +14,7 @@ export default function MainSection() {
         { text: "تست درایو", href: "/testdrive" },
         { text: "تست درایو های من", href: "/mytestdrives" },
         { text: " پیش ثبت نام های من", href: "/showpreregisterform" },
-        { text: "شرایط فروش لوکانو", href: "/" }
+        { text: "شرایط فروش لوکانو", href: "/carsalesconditions" }
     ].map((item, index) => (
         <div key={index} className="relative inline-flex group">
             <div

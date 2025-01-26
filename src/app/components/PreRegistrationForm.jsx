@@ -18,11 +18,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/bundle';
 import 'swiper/css/bundle';
-import InputField from './InputField';
 import SelectField from './SelectField';
 import Cookies from 'js-cookie';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import PreInputField from './preInputField';
 
 
 
@@ -74,7 +74,7 @@ function PreRegistrationForm() {
   
   
     try {
-      const url = 'https://api.gholamzadeh.com/api/web/carRegister/store';
+      const url = `${process.env.BASE_URL}/api/web/carRegister/store`;
       const data = {
         firstName,
         lastName,
@@ -137,7 +137,7 @@ function PreRegistrationForm() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api.gholamzadeh.com/api/web/carRegister/createView', {
+      const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/createView`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -211,21 +211,21 @@ function PreRegistrationForm() {
 
     <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
       <div className="relative z-30 space-y-4">
-        <InputField
+        <PreInputField
           placeholder="نام خود را وارد کنید"
           iconClass="bi-person-badge-fill"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           error={errors.firstName} 
         />
-        <InputField
+        <PreInputField
           placeholder="نام خانوادگی خود را وارد کنید"
           iconClass="bi-person-badge"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           error={errors.lastName} 
         />
-        <InputField
+        <PreInputField
           placeholder="نام پدر خود را وارد کنید"
           iconClass="bi-person-bounding-box"
           value={fatherName}
@@ -233,14 +233,14 @@ function PreRegistrationForm() {
           error={errors.fatherName} 
         />
         
-        <InputField
+        <PreInputField
           placeholder="کدملی خود را وارد کنید"
           iconClass="bi-person-vcard-fill"
           value={nationalCode}
           onChange={(e) => setNationalCode(e.target.value)}
           error={errors.nationalCode} 
         />
-        <InputField
+        <PreInputField
           placeholder="ادرس محل سکونت"
           iconClass="bi-geo-alt"
           value={address}
@@ -251,15 +251,15 @@ function PreRegistrationForm() {
           <div className="w-full">
             <SelectField
                 label="خودرو مورد نظر"
-                options={carsList.map(element => ({
-                  value: element,
-                  label: element
-                }))}
+                options={Array.isArray(carsList) ? carsList.map(element => ({
+                    value: element,
+                    label: element
+                })) : []}
                 placeholder="خودروهای موجود فعلی"
                 value={selectedOption}
                 onChange={handleSelectChange}
                 error={errors.selectedOption} 
-              />
+            />
           </div>
           <div className="ms-2 w-full">
             <SelectField

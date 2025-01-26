@@ -48,7 +48,7 @@ export default function Verify({ params }) {
     };
     
     const sendCodeAgain = async () => {
-        const url = 'https://api.shikast.com/api/auth/v1/loginRegister';
+        const url = `${process.env.BASE_URL}/api/auth/v1/loginRegister`;
     
         const data = {
             "register_phone": phoneNumber
@@ -103,7 +103,7 @@ export default function Verify({ params }) {
     };
     async function sendRequest(fullCode) {
         
-        const url = 'https://api.shikast.com/api/auth/v1/verify';
+        const url =`${process.env.BASE_URL}/api/auth/v1/verify`;
         const formData = new FormData();
         formData.append('phone', phoneNumber);
         formData.append('code', fullCode);

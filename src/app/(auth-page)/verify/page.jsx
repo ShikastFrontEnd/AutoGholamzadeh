@@ -55,7 +55,7 @@ export default function Verify() {
     };
     
     const sendCodeAgain = async () => {
-        const url = 'https://api.gholamzadeh.com/api/auth/v1/loginRegister';
+        const url = `${process.env.BASE_URL}/api/auth/v1/loginRegister`;
     
         const data = {
             "register_phone": phoneNumber
@@ -111,7 +111,7 @@ export default function Verify() {
                 const newTime = parseInt(remainingTime, 10) - 1000; // Decrement by 1 second
                 if (newTime <= 0) {
                     clearInterval(interval);
-                    deleteCookie('verifyTime');
+                    Cookies.remove('verifyTime')
                     setVerifyFaild(true);
                 } else {
                     Cookies.set('verifyTime', newTime, { expires: 1 });
@@ -124,7 +124,7 @@ export default function Verify() {
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
     async function sendRequest(fullCode) {
-        const url = 'https://api.gholamzadeh.com/api/auth/v1/verify';
+        const url = `${process.env.BASE_URL}/api/auth/v1/verify`;
         const formData = new FormData();
         formData.append('phone', phoneNumber);
         formData.append('code', fullCode);

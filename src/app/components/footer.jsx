@@ -16,7 +16,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="mx-auto w-screen relative text-center bg-gradient-to-r from-lucano-color to-lucano-productcolor text-white">
+        <footer className="mx-auto w-full relative text-center bg-gradient-to-r from-lucano-color to-lucano-productcolor text-white">
             <div className="px-6 py-8 md:py-14 xl:pt-20 xl:pb-12">
                 <h2 className="font-bold text-3xl xl:text-4xl leading-snug">
                     لوکانو فراتر از کلاسیک
