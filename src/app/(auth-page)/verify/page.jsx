@@ -230,20 +230,23 @@ export default function Verify() {
                     >
                         <div className="w-full h-full backdrop-blur-md flex items-center">
                       <main id="content" role="main" className="p-5 w-full mx-auto flex justify-center">
-    <div className="w-full h-full lg:w-[600px] lg:h-auto md:w-[400px] md:h-auto sm:w-full sm:h-full bg-lucano-productcolor rounded-[50px] shadow-2xl border-2 border-white">
+    <div className="w-full h-full lg:w-[600px] lg:h-auto md:w-[400px] md:h-auto sm:w-full sm:h-full bg-gholamzadeh-productcolor rounded-[50px] shadow-2xl border-2 border-white">
         <div className="p-7">
             <div className="text-center">
                 <div className="block text-2xl font-bold text-gray-800 dark:text-white">
                 <button className="p-2 transition">
                         <div className="flex justify-center items-center">
-                            <img 
+                            {/* <img 
                                 src="https://ecodalucano.com/wp-content/uploads/2024/07/Logo-final-01-scaled-e1735563656132-300x27.webp" 
                                 alt="Logo" 
                                 className="w-[350] h-auto" 
-                            />
+                            /> */}
+                            <div className="BeutyFont text-6xl lg:text-7xl text-gholamzadeh-color">
+                                        <h1 className="w-auto min-w-full max-w-[350px] h-auto ">Gholamzadeh</h1>
+                                    </div>
                         </div>
                     </button>
-                    <h3 className="text-xs md:text-base lg:text-2xl">فرم پیش ثبت نام نمایندگی 729 لوکانو</h3>
+                    <h3 className=" md:text-base text-xl lg:text-2xl">هلدینگ خودرویی غلامزاده</h3>
                 </div>
             </div>
             <div className="mt-5">
@@ -268,7 +271,7 @@ export default function Verify() {
                                         container: "flex justify-center w-full lg:w-[240px] md:w-[150px] sm:w-full",
                                         input: " w-12 h-12 text-center border border-gray-300 rounded-2xl",
                                         character:' rounded-lg',
-                                        characterSelected:'text-lucano-color '
+                                        characterSelected:'text-gholamzadeh-color '
                                     }}
                                     autoFocus={true}
                                 />
@@ -295,21 +298,21 @@ export default function Verify() {
                                 </p>
                             </div>
                             <div className={`w-full grid  ${verifyFaild?"grid-cols-2 gap-2":"grid-cols-3 gap-3"}`}>
-    <button type="button" onClick={sendCodeAgain} className="animate__animated animate__fadeIn w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent border-white text-white hover:bg-white hover:text-lucano-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
+    <button type="button" onClick={sendCodeAgain} className="animate__animated animate__fadeIn w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent border-white text-white hover:bg-white hover:text-gholamzadeh-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
         ارسال مجدد کد
     </button>
     <Link href="/loginRegister" replace>
-    <button type="button" className="animate__animated animate__fadeIn w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent  border-white text-white hover:bg-white hover:text-lucano-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all  dark:focus:ring-offset-gray-800">
+    <button type="button" className="animate__animated animate__fadeIn w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent  border-white text-white hover:bg-white hover:text-gholamzadeh-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all  dark:focus:ring-offset-gray-800">
         ویرایش شماره
     </button>
     </Link>
     {verifyFaild
     ?
-    <button type="submit" className=" animate__animated invisible animate__jackInTheBox w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-lucano-color text-white hover:bg-white hover:text-lucano-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
+    <button type="submit" className=" animate__animated invisible animate__jackInTheBox w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent bg-gholamzadeh-color text-white hover:bg-white hover:text-gholamzadeh-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
         ورود/عضویت
     </button>
     :
-    <button type="submit" className="animate__animated  animate__jackInTheBox w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent  bg-lucano-color text-white hover:bg-white hover:text-lucano-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
+    <button type="submit" className="animate__animated  animate__jackInTheBox w-full text-xs lg:text-2xl py-2 inline-flex justify-center items-center gap-2 rounded-xl border border-transparent  bg-gholamzadeh-color text-white hover:bg-white hover:text-gholamzadeh-color focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 transition-all dark:focus:ring-offset-gray-800">
     ورود/عضویت
     </button>  }
     

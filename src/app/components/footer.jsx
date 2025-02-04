@@ -16,13 +16,13 @@ const Footer = () => {
     };
 
     return (
-        <footer className="mx-auto w-full relative text-center bg-gradient-to-r from-lucano-color to-lucano-productcolor text-white">
+        <footer className="mx-auto w-full relative text-center bg-gradient-to-r from-gholamzadeh-color to-gholamzadeh-productcolor text-white">
             <div className="px-6 py-8 md:py-14 xl:pt-20 xl:pb-12">
                 <h2 className="font-bold text-3xl xl:text-4xl leading-snug">
-                    لوکانو فراتر از کلاسیک
+                  هلدینگ خودرویی غلامزاده
                 </h2>
                 <Link
-                    className="mt-8 xl:mt-12 px-12 py-5 text-lg font-medium leading-tight inline-block bg-lucano-color rounded-full shadow-xl border border-transparent hover:bg-lucano-productcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-999 focus:ring-sky-500"
+                    className="mt-8 xl:mt-12 px-12 py-5 text-lg font-medium leading-tight inline-block bg-gholamzadeh-color rounded-full shadow-xl border border-transparent hover:bg-gholamzadeh-productcolor focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-999 focus:ring-sky-500"
                     href="/preregisterform"
                 >
                     پیش ثبت نام
@@ -40,7 +40,7 @@ const Footer = () => {
                             <a href="tel:09361411566">تلفن : 09361411566 <i className="pl-1 bi bi-telephone"></i></a>
                         </div>
                         <div className="px-5 py-2">
-                            <a href="https://instagram.com/lucano.729">اینستاگرام<i className="pl-1 bi bi-instagram"></i></a>
+                            <a href="https://instagram.com/gholamzadeh_holding">اینستاگرام<i className="pl-1 bi bi-instagram"></i></a>
                         </div>
                     </nav>
                     <p ref={addressRef} className="mt-7 text-base">آدرس : ارومیه - خیابان امام علی جنب مسجد امام علی پالم سنتر (در حال استاندارد سازی) بزودی افتتاح خواهد شد</p>

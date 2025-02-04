@@ -1,6 +1,5 @@
 'use client'
 
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from "react";
@@ -23,12 +22,14 @@ import Cookies from 'js-cookie';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import PreInputField from './preInputField';
+import Breadcrumb from './Breadcrumb';
+import ColorSelectField from './ColorSelectField';
 
 
 
 
-
-function PreRegistrationForm() {
+function PreRegistrationForm({carid}) {
+  const car_id =carid
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -40,8 +41,43 @@ function PreRegistrationForm() {
   const [selectedOption, setSelectedOption] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedCat, setSelectedCat] = useState('');
-  const [carsList, setCarsList] = useState([]);
+  const [selectedPercentage, setSelectedPercentage] = useState('');
+  const [carName, setCarName] = useState('');
   const [regModel, setRegModal] = useState('');
+  const [maxMonth, setMaxMonth] = useState('');
+  const [imageUrl, setImageUrl] = useState();
+  const [carscolors,setCarsColors] = useState([])
+  const [startPercentage,setStartPercentage] =useState(null);
+  const [endPercentage,setEndPercentage] = useState(null);
+  const [isInstallments,setIsInstallments] = useState(null);
+  const generatePercentageOptions = () => {
+    const options = [];
+    const start = parseInt(startPercentage, 10);
+    const end = parseInt(endPercentage, 10);
+
+    if (!isNaN(start) && !isNaN(end) && start <= end) {
+      for (let i = start; i <= end; i += 10) {
+        options.push({ value: i, label: `${i}%` });
+      }
+    }
+
+    return options;
+  };
+  const [startMonth,setStartMonth] =useState(1);
+  const [endMonth,setEndMonth] = useState(null);
+  const generateMonth = () => {
+    const options = [];
+    const start = parseInt(startMonth, 10); // Corrected here
+    const end = parseInt(endMonth, 10); // Corrected here
+
+    if (!isNaN(start) && !isNaN(end) && start <= end) {
+        for (let i = start; i <= end; i++) {
+            options.push({ value: i, label: `${i}` }); // Changed label to just i
+        }
+    }
+
+    return options;
+};
   const [errors, setErrors] = useState({
     firstName:"",
     lastName: "",
@@ -51,10 +87,15 @@ function PreRegistrationForm() {
     selectedOption:"",
     phone: "",
     color: "",
-    selectedCat: "" ,
+    installmentsPercentage:"",
+    installmentsMonth:"",
+    selectedPercentage: "" ,
     regModel:""
   });
   const token=Cookies.get('user-cookie');
+  const handleSelectedPercentage = (event) => {
+    setSelectedPercentage(event.target.value);
+  };
   const handleSelectedCat = (event) => {
     setSelectedCat(event.target.value);
   };
@@ -67,6 +108,9 @@ function PreRegistrationForm() {
   };
   const handleRegChange = (event) => {
     setRegModal(event.target.value);
+  };
+  const handleMaxMonth = (event) => {
+    setMaxMonth(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -81,9 +125,11 @@ function PreRegistrationForm() {
         fatherName,
         phone: mobile,
         nationalCode,
-        carModel: selectedOption,
+        carModel: carName,
         regModel,
         color: selectedColor,
+        installmentsPercentage:selectedPercentage,
+        installmentsMonth:maxMonth,
         knowMySite: selectedCat,
         address,
       };
@@ -137,7 +183,7 @@ function PreRegistrationForm() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/createView`, {
+      const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/carConditional/${car_id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -145,7 +191,13 @@ function PreRegistrationForm() {
       });
   
       if (response.status === 200) {
-        setCarsList(response.data.data.brands);
+      setCarName(response.data.data.carName)
+      setImageUrl(response.data.data.imageUrl)
+      setIsInstallments(response.data.data.is_installments)
+      setCarsColors(response.data.data.colors)
+      setStartPercentage(response.data.data.minInstallmentsPercentage)
+      setEndPercentage(response.data.data.maxInstallmentsPercentage)
+      setEndMonth(response.data.data.maxMonth)
       } else {
         throw new Error('Network response was not ok');
       }
@@ -179,24 +231,32 @@ function PreRegistrationForm() {
     fetchData(); // Call the fetchData function when the component mounts
   }, []);
   
-  // Log carsList whenever it changes
+  const breadcrumbLinks = [
+    { url: '/preregisterform', label: 'لیست خودرو ها' },
+    { url: `/preregisterform/${car_id}`, label: `${carName}`,classNames:'hidden md:block' }
+  ];
     return ( <>
     <div className="z-50">
     <div className=""><ToastContainer className={`z-50 px-5`} /></div>
     </div>
         
-                        <div className="bg-zinc-400 bg-auto h-auto w-screen " >
+                        <div className="bg-zinc-400 bg-auto h-auto w-full " >
                     <div
                         className="bg-no-repeat bg-cover bg-bottom bg-gray-200   flex justify-center items-center w-full h-auto min-h-screen "
                         style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex  py-32">
                         <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
-                        <div dir="rtl" className=" px-5 py-16 bg-lucano-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full md:h-screen  rounded-3xl shadow-2xl border border-white">
-  <section className="relative flex h-full">
-    <div className="w-full h-full lg:w-1/2 flex flex-col justify-center">
+                        <div dir="rtl" className=" px-5 py-16 bg-gholamzadeh-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full md:h-full  rounded-3xl shadow-2xl border border-white">
+                        <div dir='ltr' className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
+            <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+              <div className="flex items-center"><Breadcrumb links={breadcrumbLinks}/></div>
+              <div className="flex items-center justify-end"><h1 className="text-end">پیش ثبت نام</h1></div>
+            </div>
+            </div><section className="relative flex h-full justify-center items-center">
+    <div className="w-full md:max-h-full lg:w-1/2 flex flex-col justify-center">
       <div className="mx-auto max-w-lg text-center">
-      <button className="p-2 transition hidden md:block">
+      {/* <button className="p-2 transition hidden md:block">
                         <div className="flex justify-center items-center">
                                 <img 
                                     src="/static/images/ecodalucano.png" 
@@ -204,8 +264,9 @@ function PreRegistrationForm() {
                                     className="w-auto max-w-[360px] h-auto filter invert brightness-200" 
                                 />
                         </div>
-                    </button>
-      <h1 className="text-base md:text-xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم پیش ثبت نام نمایندگی <span className="text-lucano-color">729</span> رادین تجارت</h1>
+                    </button> */}
+                          <h1 className="w-auto max-w-[360px] text-center h-auto text-6xl BeutyFont text-gholamzadeh-color" >Gholamzadeh</h1>
+      <h1 className="text-base md:text-xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم پیش ثبت نام نمایندگی <span className="text-gholamzadeh-color">غلامزاده</span></h1>
 
     </div>
 
@@ -249,36 +310,30 @@ function PreRegistrationForm() {
         />
         <div className="flex justify-between">
           <div className="w-full">
-            <SelectField
-                label="خودرو مورد نظر"
-                options={Array.isArray(carsList) ? carsList.map(element => ({
-                    value: element,
-                    label: element
-                })) : []}
-                placeholder="خودروهای موجود فعلی"
-                value={selectedOption}
-                onChange={handleSelectChange}
-                error={errors.selectedOption} 
-            />
+          <div className="relative z-30">
+          <label className="block text-sm font-medium text-gholamzadeh-color mb-1  backdrop-blur-sm">خودروی مورد نظر</label>
+            <div className="w-full flex justify-center items-center text-wrap"><h1 className='pt-2 text-center text-xl'>{carName}</h1></div>
+          </div>
           </div>
           <div className="ms-2 w-full">
-            <SelectField
-              label="رنگ مورد نظر"
-              options={[
-                { value: 'سیاه', label: 'سیاه' },
-                { value: 'سفید', label: 'سفید' },
-              ]}
-              placeholder="رنگ های موجود فعلی"
-              value={selectedColor}
-              onChange={handleColorChange}
-              error={errors.color} 
-            />
+              <ColorSelectField
+                  label="رنگ مورد نظر"
+                  options={carscolors.map(color => ({
+                      value: color.name,
+                      label: color.name,
+                      colorCode: color.color
+                  }))}
+                  placeholder="رنگ های موجود فعلی"
+                  value={selectedColor}
+                  onChange={handleColorChange}
+                  error={errors.color}
+              />
           </div>
         </div>
         <div className="flex justify-between">
           <div className="w-full">
             <SelectField
-              label="شیوه اشنایی با نمایندگی"
+              label="شیوه اشنایی "
               options={[
                 { value: 'گوگل', label: 'گوگل' },
                 { value: 'اینستاگرام', label: 'اینستاگرام' },
@@ -306,52 +361,45 @@ function PreRegistrationForm() {
             />
           </div>
         </div>
+        {isInstallments !==0?(<div className="flex justify-between">
+            <div className="w-full">
+            <SelectField
+                label="درصد اقساط"
+                options={startPercentage !== null && endPercentage !== null ? generatePercentageOptions() : []}
+                placeholder="درصد اقساط"
+                value={selectedPercentage}
+                onChange={handleSelectedPercentage}
+                error={errors.installmentsPercentage}
+              />
+            </div>
+          <div className="ms-2 w-full">
+          <SelectField
+                label="تعداد اقساط"
+                
+                options={startMonth !== null && endMonth !== null ? generateMonth() : []}
+                placeholder="تعداد اقساط"
+                value={maxMonth}
+                onChange={handleMaxMonth}
+                error={errors.installmentsMonth} 
+            />
+          </div>
+        </div>):(<></>)}
         <div className="">
             
           </div>
       </div>
 
       <div className="flex items-center justify-between">
-        <button type="submit" className="inline-block rounded-lg bg-lucano-color px-5 py-3 text-sm font-medium text-white">
+        <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
           پیش ثبت نام
         </button>
       </div>
     </form>
   </div>
 
-  <div className="relative flex justify-center items-center w-full lg:h-full lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
+  <div className="relative flex justify-center items-center w-full md:h-[700px] lg:h-[800px] lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
   <div className="relative h-full w-full  p-12 md:p-0  ">
-    <Swiper
-      pagination={{ clickable: true }}
-      effect='coverflow'
-      centeredSlides
-      className="w-full  h-full rounded-xl" // Use Tailwind classes for full size
-    >
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/lucano5.jpg')",
-        }}
-      />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/lucano23.jpg')",
-        }}
-      />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/lucano3.jpg')",
-        }}
-      />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/lucano4.jpg')",
-        }}
-      />
-    </Swiper>
+    <img src={`${process.env.BASE_URL}${imageUrl}`} className='w-full rounded-xl h-full' />
   </div>
 </div>
 </section>

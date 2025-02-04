@@ -1,6 +1,6 @@
 // next.config.js
 export const env = {
-    BASE_URL: process.env.BASE_URL || 'https://api.gholamzadeh.com', // Default to localhost for development
+    BASE_URL: process.env.BASE_URL || 'http://192.168.1.103:8000',
 };
 
 /** @type {import('next').NextConfig} */

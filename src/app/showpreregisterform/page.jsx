@@ -6,11 +6,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { BeatLoader } from "react-spinners";
 export default function MyTestDrives(params) {
     const [infos, setInfos] = useState({});
-        
+    const router = useRouter()
+    const [loading,setLoading] =useState(false)
     const token=Cookies.get('user-cookie');
     const fetchData = async () => {
+        setLoading(true)
         try {
           const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/show`, {
             headers: {
@@ -21,23 +25,13 @@ export default function MyTestDrives(params) {
       
           if (response.status === 200) {
             setInfos(response.data.data);
+            setLoading(false)
           } else {
             throw new Error('Network response was not ok');
           }
         } catch (error) {
           if (error.response) {
             if (error.response.status === 401) {
-              toast.error(error.response.data, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
-              });
               router.push('/loginRegister');
             } else {
               console.log('Error:', error.response.data.message);
@@ -56,10 +50,17 @@ export default function MyTestDrives(params) {
     return(
         <>
             <Header />
-            <div className="bg-zinc-400 bg-auto h-full w-full" >
+            {loading? <div className="w-full h-screen flex justify-center items-center">
+              <BeatLoader
+        color={'red'}
+        size={'30 md:150'}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /></div>:<>
+      <div className="bg-zinc-400 bg-auto h-full w-full" >
                         <div
-                            className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-screen"
-                            style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
+                            className="bg-no-repeat bg-cover bg-gradient-to-t to-gholamzadeh-productcolor from-zinc-900 bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-screen"
+                            // style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
                         >
                             <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
@@ -67,30 +68,26 @@ export default function MyTestDrives(params) {
             dir="rtl"
             >
             <span
-                className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-lucano-productcolor via-lucano-color to-lucano-productcolor"
+                className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-gholamzadeh-productcolor via-gholamzadeh-color to-gholamzadeh-productcolor"
             ></span>
     
             <div className="sm:flex sm:justify-between sm:gap-4">
                 <div>
-                <h3 className="text-lg font-bold text-lucano-color sm:text-xl">
+                <h3 className="text-lg font-bold text-gholamzadeh-color sm:text-xl">
                    پیش ثبت نام های من
                 </h3>
     
                 <p className="mt-1 text-xs font-medium text-white">نمایندگی 729 لوکانو</p>
                 </div>
     
-                <div className="block">
-                <img
-                    alt=""
-                    src="/static/images/lucanoAboutUs.png"
-                    className="size-16 rounded-lg object-cover shadow-sm"
-                />
+                <div className="block w-16">
+               
                 </div>
             </div>
             <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.firstName}
                     </dt>
                 
@@ -98,7 +95,7 @@ export default function MyTestDrives(params) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.lastName}
                     </dt>
                 
@@ -108,7 +105,7 @@ export default function MyTestDrives(params) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.regModel}
                     </dt>
                 
@@ -116,7 +113,7 @@ export default function MyTestDrives(params) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                    {infos.knowMySite}
                     </dt>
                 
@@ -126,7 +123,7 @@ export default function MyTestDrives(params) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.nationalCode}
                     </dt>
                 
@@ -134,7 +131,7 @@ export default function MyTestDrives(params) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.phone}
                     </dt>
                 
@@ -144,7 +141,7 @@ export default function MyTestDrives(params) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.carModel}
                     </dt>
                 
@@ -152,7 +149,7 @@ export default function MyTestDrives(params) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.color}
                     </dt>
                 
@@ -166,7 +163,7 @@ export default function MyTestDrives(params) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm text-wrap max-w-96 font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm text-wrap max-w-96 font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.description}
                     </dt>
                 
@@ -176,7 +173,8 @@ export default function MyTestDrives(params) {
                 </dl>
             
             </span></div></div>
-            </div>
+            </div></>}
+            
             <Footer />
     
         </>

@@ -8,6 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import Cookies from "js-cookie";
 import moment from "jalali-moment";
 import { useRouter } from "next/navigation";
+import Breadcrumb from "../components/Breadcrumb";
+import { BeatLoader } from "react-spinners";
 
 
 
@@ -22,11 +24,11 @@ function Events({event}) {
                         dir="rtl"
                     >
                         <span
-                            className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-lucano-productcolor via-lucano-color to-lucano-productcolor"
+                            className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-gholamzadeh-productcolor via-gholamzadeh-color to-gholamzadeh-productcolor"
                         ></span>
 
                         <div className="flex w-full justify-center">
-                            <div className="hidden sm:block sm:shrink-0">
+                            <div className="block shrink-0">
                                 <img
                                     alt=""
                                     src={`${process.env.BASE_URL}${event.imageUrl}`}
@@ -37,7 +39,7 @@ function Events({event}) {
                        
                         <div className="text-center">
                             <div>
-                                <h3 className="text-lg font-bold text-lucano-color sm:text-xl">
+                                <h3 className="text-lg font-bold text-gholamzadeh-color sm:text-xl">
                                    {event.name}
                                 </h3>
                                 <p className="mt-1 text-xs font-medium text-white">{event.capacity}</p>
@@ -46,7 +48,7 @@ function Events({event}) {
                         <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     
                     {jalaliStartDate}
                     </dt>
@@ -55,7 +57,7 @@ function Events({event}) {
                 </div>
                 <div className="flex flex-col-reverse  text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {event.start_time}
                     </dt>
                 
@@ -69,7 +71,7 @@ function Events({event}) {
                         </div>
                         <dl className="mt-6 flex text-center ">
                             <div className="flex flex-col-reverse min-w-full">
-                                <span className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                                <span className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                                    {event.place}
                                 </span>
                                 <dd className="text-xs text-gray-500">ادرس</dd>
@@ -87,8 +89,10 @@ function Events({event}) {
 export default function TestDrive(params) {
     const token=Cookies.get('user-cookie');
     const [allevents,setAllEvents] = useState([])
+    const [loading,setLoading] = useState(false)
     const router = useRouter();
     const fetchData = async () => {
+        setLoading(true)
         try {
           const response = await axios.get(`${process.env.BASE_URL}/api/web/testDrive/createView`, {
             headers: {
@@ -98,6 +102,7 @@ export default function TestDrive(params) {
           });
       
           if (response.status === 200) {
+            setLoading(false)
             setAllEvents(response.data.data.events)
           } else {
             throw new Error('Network response was not ok');
@@ -118,41 +123,66 @@ export default function TestDrive(params) {
               });
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);
+              console.log('Error:', error.response.data.message);setLoading(false)
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+            console.log('No response received:', error.request);setLoading(false)
           } else {
-            console.log('Error:', error.message);
+            console.log('Error:', error.message);setLoading(false)
           }
         }
       };
     useEffect(() => {
         fetchData();
     }, []);
-
+    const breadcrumbLinks = [
+      { url: '/testdrive', label: 'ایونت های تست درایو' },
+    ];
 
     return(
-        <>
-    
+      <>
+      <Header />
+      <div className="z-50"><ToastContainer /></div>
+      <div className="bg-zinc-400 bg-auto h-full w-full">
+          <div
+              className={`bg-gholamzadeh-productcolor bg-no-repeat bg-cover bg-bottom flex justify-center items-center w-full ${loading ? 'h-screen' : 'h-full'}`}
+          >
+              <div className="pt-56">
+                  {loading ? (
+                      <div className="w-full h-screen flex justify-center items-center">
+                          <BeatLoader
+                              color={'red'}
+                              size={'30 md:150'}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                          />
+                      </div>
+                  ) : (
+                      <>
+                          <div className="mb-5 pb-5 mx-auto w-full max-w-full border-b-2 border-gray-100 md:top-6 lg:max-w-screen-lg">
+                              <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+                                  <div className="w-full">
+                                      <Breadcrumb links={breadcrumbLinks} />
+                                  </div>
+                                  <div className="flex justify-end items-center w-full">
+                                      <h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1>
+                                  </div>
+                              </div>
+                          </div>
+                      </>
+                  )}
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
+                      <div className="w-full flex justify-center items-center ">
+                          {allevents.map((element, index) => (
+                              <Events key={index} event={element} />
+                          ))}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <Footer />
+  </>
         
-    <Header />
-        <div className="z-50"><ToastContainer /></div>
-        <div className="bg-zinc-400 bg-auto h-screen w-screen" >
-                    <div
-                        className="bg-no-repeat bg-cover bg-bottom rounded-lg bg-gray-200 flex justify-center items-center w-full h-full"
-                        style={{ backgroundImage: "url('/static/images/lucano6.jpg')" }} 
-                    >
-                        <div className="w-full flex justify-evenly">
-                            {allevents.map((element, index) => (
-                                <Events key={index} event={element} />
-                            ))}
-                            
-                        </div>
-
-                        </div>
-        </div>
-        <Footer />
-        </>
     )
 }

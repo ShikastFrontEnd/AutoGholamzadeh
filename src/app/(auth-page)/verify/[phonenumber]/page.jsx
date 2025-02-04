@@ -61,7 +61,8 @@ export default function Verify({ params }) {
                     'Accept': 'application/json'
                 }
             });
-            toast.success(response.data.message, {position: "top-center",
+            toast.success(response.data.message, {
+                position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: false,
@@ -69,7 +70,7 @@ export default function Verify({ params }) {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                className:'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+                className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
             });
         } catch (error) {
             if (error.response) {

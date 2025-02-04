@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import PN from "persian-number";
 import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
+import Breadcrumb from "../components/Breadcrumb";
 
 function Conditioncars({condition}) {
   const formatNumberWithDots = (number) => {
@@ -17,7 +18,7 @@ function Conditioncars({condition}) {
 
   
     return(<>
-        <div className={`mx-auto rounded-xl w-full max-w-full border border-gray-100 bg-black/50  shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
+        <div className={`mx-auto rounded-xl w-full max-w-full border box bg-black/50  shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
        <div className="md:p-3">
        <div className="flex flex-col md:flex-row justify-evenly md:space-x-5">
        <div className="relative w-full ">
@@ -35,7 +36,7 @@ function Conditioncars({condition}) {
        </div>
    </div>
            <div className="w-full space-y-4 p-3 md:p-0">
-            <div className="flex justify-between border-b-2 pb-4 border-gray-100">
+            <div className="flex justify-between border-b-2 pb-4 border-gholamzadeh-color ">
                 <div className="w-full text-center text-xl flex "><span className="pe-1">تومان</span><span>{PN.convertEnToPe(formatNumberWithDots(condition.price))}</span></div>
                 <div className="w-full text-center text-xl flex justify-end">قیمت</div>
             </div>
@@ -111,6 +112,10 @@ function Conditioncars({condition}) {
         ) : (<div className="flex justify-center items-center h-72">
           <h1 className="text-center text-3xl text-red-600">فروش به صورت نقدی</h1>
         </div>)}
+          <div className="w-full flex justify-between">
+            <div className="w-full flex justify-center items-center"></div>
+            <div className="w-full flex justify-center items-center"><button className="text-center w-1/2 border rounded-2xl hover:border-gholamzadeh-color hover:text-gholamzadeh-color">ثبت نام</button></div>
+          </div>
             
             
            </div>
@@ -167,13 +172,16 @@ export default function carsalesconditions() {
       useEffect(() => {
         fetchData(); // Call the fetchData function when the component mounts
       }, []);
+      const breadcrumbLinks = [
+        { url: '/carsalesconditions', label: 'شرایط فروش خودروها' }
+      ];
     return(<>
     <Header />
-    <div className="h-full  py-60 w-full bg-gradient-to-r from-lucano-color to-lucano-productcolor">
+    <div className="h-full  py-60 w-full bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900">
             <ToastContainer />
             <div className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
-            <div className="w-full flex justify-between px-5 md:px-0">
-              <div className=""></div>
+            <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+              <div className=""><Breadcrumb links={breadcrumbLinks} /></div>
               <div className=""><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
             </div>
             </div>

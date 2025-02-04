@@ -7,6 +7,9 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import moment from "jalali-moment";
 import { toast, ToastContainer } from "react-toastify";
+import Breadcrumb from "../components/Breadcrumb";
+import { BeatLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
 
 function MyDrives({infos}) {
@@ -14,16 +17,16 @@ function MyDrives({infos}) {
     return(<>
     <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
-            className="relative block overflow-hidden rounded-lg h-full border border-gray-100 p-4 sm:p-6 lg:p-8"
+            className="relative block overflow-hidden rounded-xl h-full border box p-4 sm:p-6 lg:p-8"
             dir="rtl"
             >
             <span
-                className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-lucano-productcolor via-lucano-color to-lucano-productcolor"
+                className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-gholamzadeh-productcolor via-gholamzadeh-color to-gholamzadeh-productcolor"
             ></span>
     
             <div className="sm:flex sm:justify-between sm:gap-4">
                 <div>
-                <h3 className="text-lg font-bold text-lucano-color sm:text-xl">
+                <h3 className="text-lg font-bold text-gholamzadeh-color sm:text-xl">
                    تست درایو های من شماره {infos.Number}
                 </h3>
     
@@ -41,7 +44,7 @@ function MyDrives({infos}) {
             <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.firstName}
                     </dt>
                 
@@ -49,7 +52,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                    {infos.lastName}
                     </dt>
                 
@@ -59,7 +62,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.gender}
                     </dt>
                 
@@ -67,7 +70,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                    {infos.job}
                     </dt>
                 
@@ -77,7 +80,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.nationalCode}
                     </dt>
                 
@@ -85,7 +88,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.phone}
                     </dt>
                 
@@ -95,7 +98,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.carModel}
                     </dt>
                 
@@ -103,7 +106,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                    {infos.city}
                     </dt>
                 
@@ -113,7 +116,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.isDriveLicence?'دارد':'ندارد'}
                     </dt>
                 
@@ -121,7 +124,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.isCustomer?'بود':'نخیر'}
                     </dt>
                 
@@ -132,7 +135,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.customerCarModel}
                     </dt>
                 
@@ -140,7 +143,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.howMany}
                     </dt>
                 
@@ -150,7 +153,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.created_at}
                     </dt>
                 
@@ -158,7 +161,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.status}
                     </dt>
                 
@@ -168,7 +171,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.address}
                     </dt>
                 
@@ -176,7 +179,7 @@ function MyDrives({infos}) {
                 </div>
                 <div className="flex flex-col-reverse  space-x-2 text-center w-full">
                
-                    <dt className="text-sm font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                     {infos.eventPlace}
                     </dt>
                 
@@ -186,7 +189,7 @@ function MyDrives({infos}) {
                 <dl className="mt-6 flex ">
                 <div className="flex flex-col-reverse space-x-2 text-center w-full">
                 
-                    <dt className="text-sm text-wrap max-w-96 font-medium text-lucano-color hover:text-white cursor-pointer">
+                    <dt className="text-sm text-wrap max-w-96 font-medium text-gholamzadeh-color hover:text-white cursor-pointer">
                {infos.description}
                     </dt>
                 
@@ -203,8 +206,11 @@ function MyDrives({infos}) {
 
 export default function MyTestDrives(params) {
     const [allInfos, setAllInfos] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter()
     const token=Cookies.get('user-cookie');
     const fetchData = async () => {
+        setLoading(true)
         try {
           const response = await axios.get(`${process.env.BASE_URL}/api/web/testDrive/showTestDrive`, {
             headers: {
@@ -215,32 +221,21 @@ export default function MyTestDrives(params) {
       
           if (response.status === 200) {
             setAllInfos(response.data.data);
-            console.log(response.data.data)
+            setLoading(false)
           } else {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not ok');setLoading(false)
           }
         } catch (error) {
           if (error.response) {
             if (error.response.status === 401) {
-              toast.error(error.response.data, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-                className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
-              });
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);
+              console.log('Error:', error.response.data.message);setLoading(false)
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+            console.log('No response received:', error.request);setLoading(false)
           } else {
-            console.log('Error:', error.message);
+            console.log('Error:', error.message);setLoading(false)
           }
         }
       };
@@ -248,25 +243,46 @@ export default function MyTestDrives(params) {
       useEffect(() => {
         fetchData(); // Call the fetchData function when the component mounts
       }, []);
+      const breadcrumbLinks = [
+        { url: '/mytestdrives', label: 'تست درایو های من' }
+      ];
       return (
         <>
             <Header />
-            <div className="z-50"><ToastContainer /></div>
-            <div className="bg-zinc-400 bg-auto h-full w-full">
-                <div
-                    className="bg-no-repeat bg-cover bg-bottom bg-gray-200 py-32 flex justify-center items-center w-full h-full"
-                    style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }}
-                >
-                    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-rows-2 w-full mx-10 space-y-5">
-                        {Array.isArray(allInfos) && allInfos.map((element) => (
-                            <div key={element.Number} className="w-full flex justify-center">
+        <div className="z-50"><ToastContainer /></div>
+        <div className="bg-zinc-400 bg-auto h-full w-full" >
+                    <div
+                        className={`bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900 bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full ${loading?'h-screen':'h-full'}`}
+                        // style={{ backgroundImage: "url('/static/images/lucano6.jpg')" }} 
+                    >
+
+                        <div className="pt-56">
+                         
+            {loading? <div className="w-full h-screen flex justify-center items-center">
+              <BeatLoader
+        color={'red'}
+        size={'30 md:150'}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      /></div>:<><div className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
+      <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+        <div className="w-full"><Breadcrumb links={breadcrumbLinks}
+        /></div>
+        <div className="flex justify-end items-center w-full"><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
+      </div>
+      </div></>}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-[1200px] gap-10 px-5 my-5">
+            {Array.isArray(allInfos) && allInfos.map((element) => (
+                            <div key={element.Number} className="w-full flex justify-center ">
                                 <MyDrives infos={element} />
                             </div>
                         ))}
-                    </div>
-                </div>
-            </div>
-            <Footer />
+</div>
+                        </div>
+
+                        </div>
+        </div>
+        <Footer />
         </>
     );
 }

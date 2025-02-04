@@ -5,20 +5,22 @@ export default function MainSection() {
         <>
             <div
                 className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full  h-screen"
-                style={{ backgroundImage: "url('/static/images/lucano3.jpg')" }}
+                style={{ backgroundImage: "url('/static/images/Xtrim.png')" }}
             >
                 <div className="backdrop-blur-sm w-full h-full flex justify-center items-center sm:w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-screen">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 max-w-screen">
     {[
-        { text: "پیش ثبت نام لوکانو", href: "/preregisterform" },
+        { text: "انتقادات و پیشنهادات", href: "/suggestions" },
+        { text: "پیگیری انتقادات و پیشنهادات", href: "/followupsuggestions" },
+        { text: "پیش ثبت نام خودروها", href: "/preregisterform" },
         { text: "تست درایو", href: "/testdrive" },
         { text: "تست درایو های من", href: "/mytestdrives" },
         { text: " پیش ثبت نام های من", href: "/showpreregisterform" },
-        { text: "شرایط فروش لوکانو", href: "/carsalesconditions" }
+        { text: "شرایط فروش خودروها", href: "/carsalesconditions" }
     ].map((item, index) => (
         <div key={index} className="relative inline-flex group">
             <div
-                className="sm:w-full absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-lucano-color via-lucano-productcolor to-lucano-color rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
+                className="sm:w-full absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-gholamzadeh-color via-gholamzadeh-productcolor to-gholamzadeh-color rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
             ></div>
             <Link href={item.href} passHref className="w-full">
                 <span

@@ -1,6 +1,4 @@
 'use client'
-
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from "react";
@@ -26,6 +24,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
+import Breadcrumb from './Breadcrumb';
 
 
 
@@ -189,7 +188,6 @@ function TestDriveForm({eventId}) {
         );
 
         if (response.status === 200) {
-            console.log(response.data.data);
             setCarsList(response.data.data)
         } else {
             throw new Error('Network response was not ok');
@@ -208,7 +206,7 @@ function TestDriveForm({eventId}) {
                     theme: "dark",
                     className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                 });
-                // router.push('/loginRegister');
+                router.push('/loginRegister');
                 console.log('Error:', error.response);
             } else {
                 console.log('Error:', error.response.data.message);
@@ -224,19 +222,10 @@ function TestDriveForm({eventId}) {
 useEffect(() => {
     fetchData(); 
 }, []);
-
-
-  console.log('************************************')
-  // useEffect(() => {
-  //   const date = new Date(dateValue); // Create a Date object from dateValue
-  //   const year = date.getFullYear(); // Get the year
-  //   const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (0-indexed, so add 1) and pad with zero
-  //   const day = String(date.getDate()).padStart(2, '0'); // Get the day and pad with zero
-
-  //   const formattedDate = `${year}/${month}/${day}`; // Format the date as YYYY/MM/DD
-  //   console.log(formattedDate)
-  // },[dateValue])
-  console.log('************************************')
+const breadcrumbLinks = [
+  { url: '/testdrive', label: 'ایونت های تست درایو' },
+  { url: `/testdrive/${event_id}`, label: `تست درایو` }
+];
     return ( <>
     <div className="z-50">
     <div className=""><ToastContainer className={`z-50 px-5`} /></div>
@@ -247,13 +236,19 @@ useEffect(() => {
                         className="bg-no-repeat bg-cover bg-bottom bg-gray-200   flex justify-center items-center w-full h-auto min-h-screen "
                         style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
                     >
-                        <div className="w-full h-full backdrop-blur-md flex  py-32">
+                        <div className="w-full h-full backdrop-blur-md flex  pt-28 pb-96">
                         <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
-                        <div dir="rtl" className=" px-5 py-16 bg-lucano-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full lg:h-full md:h-screen  rounded-3xl shadow-2xl border border-white">
-  <section className="relative flex h-full">
-    <div className="w-full h-full lg:w-1/2 flex flex-col justify-center">
+                        <div dir="rtl" className=" px-5 py-16 bg-gholamzadeh-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full lg:h-full md:h-screen  rounded-3xl shadow-2xl border border-white">
+                        <div dir='ltr' className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
+            <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+              <div className="flex items-center"><Breadcrumb links={breadcrumbLinks}/></div>
+              <div className="flex items-center justify-end"><h1 className="text-end">تست درایو</h1></div>
+            </div>
+            </div>  
+  <section className="relative flex h-full justify-center items-center">
+    <div className="w-full h-full lg:w-1/2 flex flex-col">
       <div className="mx-auto max-w-lg text-center">
-      <button className="p-2 transition hidden md:block">
+      {/* <button className="p-2 transition hidden md:block">
                         <div className="flex justify-center items-center">
                                 <img 
                                     src="/static/images/ecodalucano.png" 
@@ -261,8 +256,9 @@ useEffect(() => {
                                     className="w-auto max-w-[360px] h-auto filter invert brightness-200" 
                                 />
                         </div>
-                    </button>
-      <h1 className="text-base md:text-xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم پیش ثبت نام نمایندگی <span className="text-lucano-color">729</span> رادین تجارت</h1>
+                    </button> */}
+                                <h1 className="w-auto max-w-[360px] text-center h-auto text-6xl BeutyFont text-gholamzadeh-color" >Gholamzadeh</h1>
+                                <h1 className="text-base md:text-2xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم تست درایو<span className="text-gholamzadeh-color">غلامزاده</span></h1>
 
     </div>
 
@@ -347,7 +343,7 @@ useEffect(() => {
           </div>
           <div className="w-full ms-2">
           <div className="text-black w-full text-sm">
-          <label className="block text-sm font-medium text-lucano-color mb-1  backdrop-blur-sm">تاریخ تولد</label>
+          <label className="block text-sm font-medium text-gholamzadeh-color mb-1  backdrop-blur-sm">تاریخ تولد</label>
           <DatePicker
       value={dateValue}
       onChange={handleDateChange}
@@ -462,14 +458,14 @@ useEffect(() => {
       </div>
 
       <div className="flex items-center justify-between">
-        <button type="submit" className="inline-block rounded-lg bg-lucano-color px-5 py-3 text-sm font-medium text-white">
+        <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
           پیش ثبت نام
         </button>
       </div>
     </form>
   </div>
 
-  <div className="relative flex justify-center items-center w-full lg:h-full lg:w-1/2 overflow-hidden py-4 hidden md:block" style={{ height: '100vh' }}>
+  <div className="relative flex justify-center items-center w-full lg:h-full max-h-[850px] lg:w-1/2 overflow-hidden py-4 hidden md:block" style={{ height: '100vh' }}>
   <div className="relative h-full w-full  p-12 md:p-0  ">
     <Swiper
       pagination={{ clickable: true }}

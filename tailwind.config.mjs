@@ -11,8 +11,8 @@ export default {
         peyda: ['PEYDA', 'PEYDA-BLACK', 'Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
-        'lucano-color': '#69B0C4',
-        'lucano-productcolor':'#0F2636',
+        'gholamzadeh-color': '#C38065',
+        'gholamzadeh-productcolor':'#282828',
       },
     },
   },
