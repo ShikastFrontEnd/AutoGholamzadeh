@@ -44,7 +44,7 @@ const Footer = () => {
                         </div>
                     </nav>
                     <p ref={addressRef} className="mt-7 text-base">آدرس : ارومیه - خیابان امام علی جنب مسجد امام علی پالم سنتر (در حال استاندارد سازی) بزودی افتتاح خواهد شد</p>
-                    <p className="mt-7 text-base">© 2025 Lucano Radin Tejarat 729</p>
+                    <p className="mt-7 text-base">© 2025 Gholamzadeh Holding</p>
                 </div>
             </div>
         </footer>

@@ -25,7 +25,7 @@ const GetUserToken = () => {
         if (!logined) {
             redirect('/loginRegister');
         } else {
-            console.log('User  is logged in');
+           
         }
     }
 

@@ -36,12 +36,12 @@ export default function MyTestDrives(params) {
               const cameRoute = '/showpreregisterform'
               localStorage.setItem('cameRoute', cameRoute);
             } else {
-              console.log('Error:', error.response.data.message);
+              
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+           
           } else {
-            console.log('Error:', error.message);
+            
           }
         }
       };
@@ -62,7 +62,7 @@ export default function MyTestDrives(params) {
       <div className="bg-zinc-400 bg-auto h-full w-full" >
                         <div
                             className="bg-no-repeat bg-cover bg-gradient-to-t to-gholamzadeh-productcolor from-zinc-900 bg-bottom bg-gray-200 py-32  flex justify-center items-center w-full h-screen"
-                            // style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
+                            // style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                         >
                             <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span

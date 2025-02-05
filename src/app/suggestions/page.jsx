@@ -188,12 +188,12 @@ export default function Suggestions() {
               const cameRoute = '/suggestions'
               localStorage.setItem('cameRoute', cameRoute);
           } else {
-            console.log('Error:', error.response.data.message);
+            
           }
         } else if (error.request) {
-          console.log('No response received:', error.request);
+          
         } else {
-          console.log('Error:', error.message);
+          
         }
       }
     };

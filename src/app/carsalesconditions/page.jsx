@@ -151,12 +151,12 @@ export default function carsalesconditions() {
               localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);
+              
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+           
           } else {
-            console.log('Error:', error.message);
+            
           }
         }
       };

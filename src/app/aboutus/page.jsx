@@ -9,7 +9,7 @@ export default function AboutUs(params) {
         <div className="bg-zinc-400 bg-auto h-screen w-screen" >
                     <div
                         className="bg-no-repeat bg-cover bg-bottom bg-gradient-to-t to-gholamzadeh-productcolor from-zinc-900 rounded-lg bg-gray-200 flex justify-center items-center w-full h-full"
-                        // style={{ backgroundImage: "url('/static/images/lucano1.jpg')" }} 
+                        // style={{ backgroundImage: "url('/static/images/spme.jpg')" }} 
                     >
                         <div className="rounded-lg w-96 h-auto backdrop-blur-3xl   flex justify-center items-center">
         <span

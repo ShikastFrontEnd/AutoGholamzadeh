@@ -110,7 +110,7 @@ function loginRegister() {
                         <div className="bg-zinc-400 bg-auto h-screen w-full " >
                     <div
                         className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full h-full"
-                        style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
+                        style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex items-center">
                         <main id="content" role="main" className="p-5 w-full mx-auto flex justify-center ">
@@ -121,7 +121,7 @@ function loginRegister() {
                     <button className="p-2 transition">
                         <div className="flex justify-center items-center">
                             {/* <img 
-                                src="https://ecodalucano.com/wp-content/uploads/2024/07/Logo-final-01-scaled-e1735563656132-300x27.webp" 
+                                src="https://dsaads.com/wp-content/uploads/2024/07/Logo-final-01-scaled-e1735563656132-300x27.webp" 
                                 alt="Logo" 
                                 className="w-[350] h-auto" 
                             /> */}

@@ -209,12 +209,12 @@ function PreRegistrationForm({carid}) {
               localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
         } else {
-          console.log('Error:', error.response.data.message);
+          
         }
       } else if (error.request) {
-        console.log('No response received:', error.request);
+        
       } else {
-        console.log('Error:', error.message);
+        
       }
     }
   };
@@ -235,7 +235,7 @@ function PreRegistrationForm({carid}) {
                         <div className="bg-zinc-400 bg-auto h-auto w-full " >
                     <div
                         className="bg-no-repeat bg-cover bg-bottom bg-gray-200   flex justify-center items-center w-full h-auto min-h-screen "
-                        style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
+                        style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex  py-32">
                         <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
@@ -251,7 +251,7 @@ function PreRegistrationForm({carid}) {
       {/* <button className="p-2 transition hidden md:block">
                         <div className="flex justify-center items-center">
                                 <img 
-                                    src="/static/images/ecodalucano.png" 
+                                    src="/static/images/sss.png" 
                                     alt="Logo" 
                                     className="w-auto max-w-[360px] h-auto filter invert brightness-200" 
                                 />
@@ -340,10 +340,12 @@ function PreRegistrationForm({carid}) {
             />
           </div>
           <div className="ms-2 w-full">
-            <SelectField
+          <SelectField
               label="روش پرداخت"
-              options={[
+              options={isInstallments !== 0 ? [
                 { value: 'اقساطی', label: 'اقساطی' },
+                { value: 'نقدی', label: 'نقدی' },
+              ] : [
                 { value: 'نقدی', label: 'نقدی' },
               ]}
               placeholder="روش پرداخت"

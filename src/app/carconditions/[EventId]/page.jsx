@@ -163,12 +163,12 @@ export default function carsalesconditions(props) {
               localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);
+              
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+           
           } else {
-            console.log('Error:', error.message);
+           
           }
         }
       };
@@ -176,7 +176,6 @@ export default function carsalesconditions(props) {
       useEffect(() => {
         fetchData(); // Call the fetchData function when the component mounts
       }, []);
-      console.log(carName)
 
       const breadcrumbLinks = [
         { url: '/preregisterform', label: 'لیست خودرو ها' },

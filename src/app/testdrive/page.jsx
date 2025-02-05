@@ -123,12 +123,12 @@ export default function TestDrive(params) {
               });
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);setLoading(false)
+              setLoading(false)
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);setLoading(false)
+            setLoading(false)
           } else {
-            console.log('Error:', error.message);setLoading(false)
+            setLoading(false)
           }
         }
       };

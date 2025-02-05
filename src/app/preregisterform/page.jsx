@@ -28,12 +28,12 @@ function Cars({ car }) {
         if (typeof input === 'string') {
             const parsedNumber = parseFloat(input);
             if (isNaN(parsedNumber)) {
-                console.log('Invalid input: expected a number but received', input);
+                
                 return '';
             }
             input = parsedNumber;
         } else if (typeof input !== 'number') {
-            console.log('Invalid input: expected a number but received', input);
+            
             return '';
         }
         return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -123,10 +123,10 @@ function Cars({ car }) {
         )}
                             <div className="flex justify-between">
                                 <div className="w-full text-center text-base flex justify-start">
-                                    <button className="border border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={handleCarConditions}>شرایط فروش</button>
+                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={handleCarConditions}>شرایط فروش</button>
                                 </div>
                                 <div className="w-full text-center text-base text-nowrap flex justify-end">
-                                    <button className="border border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color  px-2 py-1 rounded-xl" onClick={handlePreRegisterButton}>پیش ثبت نام</button>
+                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color  px-2 py-1 rounded-xl" onClick={handlePreRegisterButton}>پیش ثبت نام</button>
                                 </div>
                             </div>
                         
@@ -165,14 +165,14 @@ export default function PreRegisterForm(params) {
               const cameRoute = '/preregisterform'
               localStorage.setItem('cameRoute', cameRoute);
             } else {
-              console.log('Error:', error.response.data.message);
+              
               setLoading(false)
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);
+           
             setLoading(false)
           } else {
-            console.log('Error:', error.message);
+            
             setLoading(false)
           }
         }
@@ -193,7 +193,7 @@ export default function PreRegisterForm(params) {
         <div className="bg-zinc-400 bg-auto h-full w-full" >
                     <div
                         className={`bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900 bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full ${loading?'h-screen':'h-full'}`}
-                        // style={{ backgroundImage: "url('/static/images/lucano6.jpg')" }} 
+                        // style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                     >
 
                         <div className="pt-56">

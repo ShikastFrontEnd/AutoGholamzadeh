@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 
 
 function MyDrives({infos}) {
-    console.log(infos)
     return(<>
     <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
@@ -36,7 +35,7 @@ function MyDrives({infos}) {
                 <div className="block">
                 <img
                     alt=""
-                    src="/static/images/lucanoAboutUs.png"
+                    src="/static/images/gxtrim.png"
                     className="size-16 rounded-lg object-cover shadow-sm"
                 />
                 </div>
@@ -230,12 +229,12 @@ export default function MyTestDrives(params) {
             if (error.response.status === 401) {
               router.push('/loginRegister');
             } else {
-              console.log('Error:', error.response.data.message);setLoading(false)
+             setLoading(false)
             }
           } else if (error.request) {
-            console.log('No response received:', error.request);setLoading(false)
+            setLoading(false)
           } else {
-            console.log('Error:', error.message);setLoading(false)
+            setLoading(false)
           }
         }
       };
@@ -253,7 +252,7 @@ export default function MyTestDrives(params) {
         <div className="bg-zinc-400 bg-auto h-full w-full" >
                     <div
                         className={`bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900 bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full ${loading?'h-screen':'h-full'}`}
-                        // style={{ backgroundImage: "url('/static/images/lucano6.jpg')" }} 
+                        // style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                     >
 
                         <div className="pt-56">

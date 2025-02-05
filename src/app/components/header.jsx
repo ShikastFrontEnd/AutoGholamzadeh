@@ -33,7 +33,7 @@ const Header = () => {
                             <span aria-current="page" className="flex lg:flex items-center">
                                 <div className="flex justify-center items-center">
                                     {/* <img 
-                                        src="/static/images/ecodalucano.png" 
+                                        src="/static/images/s.png" 
                                         alt="Logo" 
                                         className="w-auto min-w-72 max-w-[350px] h-auto filter invert brightness-200" 
                                     /> */}
@@ -41,15 +41,15 @@ const Header = () => {
                                         <h1 className="w-auto min-w-full max-w-[350px] h-auto ">Gholamzadeh</h1>
                                     </div>
                                 </div>
-                                <p className="sr-only">LUCANO729</p>
+                                <p className="sr-only">Gholamzadeh</p>
                             </span>
                         </Link>
                     </div>
-                    <div className="flex md:hidden text-center"><Link href="/followupsuggestions" passHref>
+                    {/* <div className="flex md:hidden text-center"><Link href="/followupsuggestions" passHref>
                             <span className="text-nowrap inline-block rounded-lg px-2 py-1 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-gray-100 hover:text-gray-900">
                             پیگیری انتقادات
                             </span>
-                        </Link></div>
+                        </Link></div> */}
                     <div className=" items-center hidden md:flex justify-center gap-5 md:items-center md:justify-center md:gap-5">
                         <Link href="/aboutus" passHref>
                             <span className=" text-nowrap inline-block rounded-lg px-2 py-1 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-gray-100 hover:text-gray-900">

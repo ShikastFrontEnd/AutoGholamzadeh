@@ -124,7 +124,6 @@ function TestDriveForm({eventId}) {
         howMany,
       };
   
-      console.log("Submitting data:", data); // Log the data being sent
   
       const response = await axios.post(url, data, {
         headers: {
@@ -147,18 +146,18 @@ function TestDriveForm({eventId}) {
         });
         router.push('/mytestdrives')
       } else {
-        console.log('Unexpected response:', response);
+        
       }
     } catch (error) {
       let errorMessage = "An unexpected error occurred.";
       if (error.response) {
         errorMessage = error.response.data.message || errorMessage;
-        console.log(error.response);
+        
         setErrors(error.response.data.errors || {});
       } else if (error.request) {
-        console.log('No response received:', error.request);
+       
       } else {
-        console.log('Error:', error.message);
+        
       }
       toast.error(errorMessage, {
         position: "bottom-right",
@@ -209,14 +208,14 @@ function TestDriveForm({eventId}) {
               const cameRoute = `/testdrive/${event_id}`
               localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
-                console.log('Error:', error.response);
+               
             } else {
-                console.log('Error:', error.response.data.message);
+              
             }
         } else if (error.request) {
-            console.log('No response received:', error.request);
+          
         } else {
-            console.log('Error:', error.message);
+            
         }
     }
 };
@@ -236,7 +235,7 @@ const breadcrumbLinks = [
                         <div className="bg-zinc-400 bg-auto h-auto w-screen " >
                     <div
                         className="bg-no-repeat bg-cover bg-bottom bg-gray-200   flex justify-center items-center w-full h-auto min-h-screen "
-                        style={{ backgroundImage: "url('/static/images/lucano2.jpg')" }} 
+                        style={{ backgroundImage: "url('/static/images/extrim.png')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex  pt-28 pb-96">
                         <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
@@ -253,7 +252,7 @@ const breadcrumbLinks = [
       {/* <button className="p-2 transition hidden md:block">
                         <div className="flex justify-center items-center">
                                 <img 
-                                    src="/static/images/ecodalucano.png" 
+                                    src="/static/images/s.png" 
                                     alt="Logo" 
                                     className="w-auto max-w-[360px] h-auto filter invert brightness-200" 
                                 />
@@ -478,25 +477,25 @@ const breadcrumbLinks = [
       <SwiperSlide
         className="bg-center bg-cover"
         style={{
-          backgroundImage: "url('/static/images/lucano5.jpg')",
+          backgroundImage: "url('/static/images/g.jpg')",
         }}
       />
       <SwiperSlide
         className="bg-center bg-cover"
         style={{
-          backgroundImage: "url('/static/images/lucano23.jpg')",
+          backgroundImage: "url('/static/images/gs.jpg')",
         }}
       />
       <SwiperSlide
         className="bg-center bg-cover"
         style={{
-          backgroundImage: "url('/static/images/lucano3.jpg')",
+          backgroundImage: "url('/static/images/gss.jpg')",
         }}
       />
       <SwiperSlide
         className="bg-center bg-cover"
         style={{
-          backgroundImage: "url('/static/images/lucano4.jpg')",
+          backgroundImage: "url('/static/images/gsss.jpg')",
         }}
       />
     </Swiper>

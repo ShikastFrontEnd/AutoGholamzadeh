@@ -33,13 +33,13 @@ export default function FollowupSuggestions() {
                 }
             });
            
-            console.log(response.data.data);
+            
             setData(response.data.data);
             setDataSuccess(true)
         } catch (error) {
             if (error.response) {
                 
-                console.log(error.response);
+                
                 setErrorMessage(error.response.data.errors.trackingCode);
             } else {
                 
