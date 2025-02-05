@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Breadcrumb from "../components/Breadcrumb";
 import { BeatLoader } from "react-spinners";
 
-
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 
 function Events({event}) {
     const jalaliStartDate = moment(event.start_date, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD');
@@ -31,7 +31,7 @@ function Events({event}) {
                             <div className="block shrink-0">
                                 <img
                                     alt=""
-                                    src={`${process.env.BASE_URL}${event.imageUrl}`}
+                                    src={`${baseUrl}${event.imageUrl}`}
                                     className="size-56 w-64 rounded-3xl object-cover shadow-sm"
                                 />
                             </div>
@@ -90,11 +90,12 @@ export default function TestDrive(params) {
     const token=Cookies.get('user-cookie');
     const [allevents,setAllEvents] = useState([])
     const [loading,setLoading] = useState(false)
+
     const router = useRouter();
     const fetchData = async () => {
         setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/testDrive/createView`, {
+          const response = await axios.get(`${baseUrl}/api/web/testDrive/createView`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

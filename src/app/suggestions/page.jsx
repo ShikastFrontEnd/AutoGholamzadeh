@@ -8,7 +8,7 @@ import SuggInputField from "../components/SuggInputField";
 import SuggSelectField from "../components/SuggSelectField";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 export default function Suggestions() {
     const car_id =17
     const router = useRouter();
@@ -17,6 +17,7 @@ export default function Suggestions() {
     const [phone, setPhone] = useState('');
     const [content, setContent] = useState('');
     const [complainantName, setComplainantName] = useState('');
+    
     // const [isDealerShipSelected, setIsDealerShipSelected] = useState(false);
     // --------- value and nchange of the select
     const [selectedDealerShips, setSelectedDealerShips] = useState('');
@@ -94,7 +95,7 @@ export default function Suggestions() {
     
     
       try {
-        const url = `${process.env.BASE_URL}/api/web/feedback/feedbackStore`;
+        const url = `${baseUrl}/api/web/feedback/feedbackStore`;
         const data = {
           dealerShip_id:selectedDealerShips,
           repairShop_id:selectedRepairShops,
@@ -155,7 +156,7 @@ export default function Suggestions() {
   
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.BASE_URL}/api/web/feedback/feedbackCreateView`, {
+        const response = await axios.get(`${baseUrl}/api/web/feedback/feedbackCreateView`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',

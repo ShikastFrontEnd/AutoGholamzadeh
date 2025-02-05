@@ -25,10 +25,9 @@ import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Breadcrumb from './Breadcrumb';
-import config from "/next.config";
 
 function TestDriveForm({eventId}) {
-    const baseUrl=config.images.remotePatterns[0].hostname;
+    const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
     const router = useRouter();
     const [selectedItem, setSelectedItem] = useState(null);
     const [firstName, setFirstName] = useState('');

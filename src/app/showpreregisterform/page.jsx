@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { BeatLoader } from "react-spinners";
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 export default function MyTestDrives(params) {
     const [infos, setInfos] = useState({});
     const router = useRouter()
@@ -16,7 +17,7 @@ export default function MyTestDrives(params) {
     const fetchData = async () => {
         setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/show`, {
+          const response = await axios.get(`${baseUrl}/api/web/carRegister/show`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

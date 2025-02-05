@@ -10,9 +10,8 @@ import PN from "persian-number";
 import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
-import config from "/next.config";
 
-const baseUrl=config.images.remotePatterns[0].hostname;
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL
 
 function Conditioncars({condition}) {
   const formatNumberWithDots = (number) => {

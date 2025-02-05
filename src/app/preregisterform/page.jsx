@@ -12,8 +12,7 @@ import LazyLoad from "react-lazyload";
 import PN from "persian-number";
 import { BeatLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
-import config from "/next.config";
-const baseUrl=config.images.remotePatterns[0].hostname;
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
 function Cars({ car }) {
     const router = useRouter(); 
 

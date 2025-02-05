@@ -24,13 +24,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import PreInputField from './preInputField';
 import Breadcrumb from './Breadcrumb';
 import ColorSelectField from './ColorSelectField';
-import config from "/next.config";
 
 
 
 
 function PreRegistrationForm({carid}) {
-  const baseUrl=config.images.remotePatterns[0].hostname;
+  const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
   const car_id =carid
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);

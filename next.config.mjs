@@ -1,17 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: "standalone",
     images: {
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: 'api.gholamzadeh.com',
-                // hostname: 'http://192.168.1.103:8000',
+                port: '',
                 pathname: '/**',
+                search: '',
             },
         ],
     },
+    env: {
+        NEXT_PUBLIC_API_BASE_URL: 'https://api.gholamzadeh.com',
+    },
 };
 
-// Export the configuration using ES module syntax
 export default nextConfig;

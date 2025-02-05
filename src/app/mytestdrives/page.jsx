@@ -10,8 +10,8 @@ import { toast, ToastContainer } from "react-toastify";
 import Breadcrumb from "../components/Breadcrumb";
 import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
-import config from "/next.config";
-const baseUrl=config.images.remotePatterns[0].hostname;
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
+
 function MyDrives({infos}) {
     return(<>
     <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
@@ -33,11 +33,11 @@ function MyDrives({infos}) {
                 </div>
     
                 <div className="block">
-                <img
+                {/* <img
                     alt=""
                     src="/static/images/gxtrim.png"
                     className="size-16 rounded-lg object-cover shadow-sm"
-                />
+                /> */}
                 </div>
             </div>
             <dl className="mt-6 flex ">

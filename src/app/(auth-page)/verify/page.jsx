@@ -9,7 +9,6 @@ import Link from "next/link";
 import Countdown from 'react-countdown';
 import 'animate.css/animate.min.css';
 import Cookies from 'js-cookie';
-import config from "/next.config";
 const Completionist = () => <span className="text-red-600 text-xl">کد وارد شده منقضی شده است</span>;
 
 
@@ -17,7 +16,7 @@ const Completionist = () => <span className="text-red-600 text-xl">کد وارد
 export default function Verify() {
 
 
-    const baseUrl=config.images.remotePatterns[0].hostname;
+    const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 
     const [newMobile, setNewMobile] = useState(null);
     const [verifyTime, setVerifyTime] = useState(null);

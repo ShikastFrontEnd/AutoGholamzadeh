@@ -7,9 +7,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import config from "/next.config";
+
 export default function FollowupSuggestions() {
-    const baseUrl=config.images.remotePatterns[0].hostname;
+    const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
     const router = useRouter();
     const [trackingCode, setTrackingCode] = useState('');
     const [errorMessage, setErrorMessage] = useState('');

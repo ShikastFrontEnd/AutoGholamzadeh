@@ -11,10 +11,9 @@ import { ClipLoader } from 'react-spinners';
 import 'animate.css/animate.min.css';
 import { useRouter } from 'next/navigation';
 import Cookies from "js-cookie";
-import config from "/next.config";
 
 function loginRegister() {
-    const baseUrl=config.images.remotePatterns[0].hostname;
+    const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
     const router = useRouter();
     const [newMobile, setNewMobile] = useState('');
     const [isError, setIsError] = useState(false);

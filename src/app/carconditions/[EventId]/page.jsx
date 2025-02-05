@@ -11,10 +11,9 @@ import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "@/app/components/Breadcrumb";
-import config from "/next.config";
 
 
-const baseUrl=config.images.remotePatterns[0].hostname;
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 function Conditioncars({condition}) {
   const formatNumberWithDots = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
