@@ -25,10 +25,10 @@ import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Breadcrumb from './Breadcrumb';
-
-
+import config from "/next.config";
 
 function TestDriveForm({eventId}) {
+    const baseUrl=config.images.remotePatterns[0].hostname;
     const router = useRouter();
     const [selectedItem, setSelectedItem] = useState(null);
     const [firstName, setFirstName] = useState('');
@@ -105,7 +105,7 @@ function TestDriveForm({eventId}) {
     // Validate form data here if necessary
   
     try {
-      const url = `${process.env.BASE_URL}/api/web/testDrive/storeTestDrive`;
+      const url = `${baseUrl}/api/web/testDrive/storeTestDrive`;
       const data = {
         firstName,
         lastName,
@@ -176,7 +176,7 @@ function TestDriveForm({eventId}) {
   const fetchData = async () => {
     try {
         const response = await axios.post(
-            `${process.env.BASE_URL}/api/web/testDrive/carModel/${event_id}`,
+            `${baseUrl}/api/web/testDrive/carModel/${event_id}`,
             {}, // Empty data object
             {
                 headers: {

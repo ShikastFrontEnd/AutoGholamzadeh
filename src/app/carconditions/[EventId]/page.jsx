@@ -11,7 +11,10 @@ import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "@/app/components/Breadcrumb";
+import config from "/next.config";
 
+
+const baseUrl=config.images.remotePatterns[0].hostname;
 function Conditioncars({condition}) {
   const formatNumberWithDots = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -24,7 +27,7 @@ function Conditioncars({condition}) {
        <LazyLoad height={200} offset={100} className="size-72 rounded-xl md:rounded-3xl object-cover shadow-sm w-full h-full md:border border-gray-100">
     <img
         alt=""
-        src={`${process.env.BASE_URL}${condition.imageUrl}`}
+        src={`${baseUrl}${condition.imageUrl}`}
         className="size-72 rounded-xl md:rounded-3xl object-cover shadow-sm w-full h-full md:border border-gray-100"
     />
 </LazyLoad>
@@ -131,7 +134,7 @@ export default function carsalesconditions(props) {
     const fetchData = async () => {
       setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/carConditional/${EventId}`, {
+          const response = await axios.get(`${baseUrl}/api/web/carRegister/carConditional/${EventId}`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

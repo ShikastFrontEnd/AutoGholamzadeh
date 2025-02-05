@@ -10,6 +10,9 @@ import PN from "persian-number";
 import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
+import config from "/next.config";
+
+const baseUrl=config.images.remotePatterns[0].hostname;
 
 function Conditioncars({condition}) {
   const formatNumberWithDots = (number) => {
@@ -25,7 +28,7 @@ function Conditioncars({condition}) {
        <LazyLoad height={200} offset={100} className="size-72 rounded-xl md:rounded-3xl object-cover shadow-sm w-full h-full md:border border-gray-100">
     <img
         alt=""
-        src={`${process.env.BASE_URL}${condition.imageUrl}`}
+        src={`${baseUrl}${condition.imageUrl}`}
         className="size-72 rounded-xl md:rounded-3xl object-cover shadow-sm w-full h-full md:border border-gray-100"
     />
 </LazyLoad>
@@ -132,7 +135,7 @@ export default function carsalesconditions() {
     const fetchData = async () => {
       setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/registerCondition/show`, {
+          const response = await axios.get(`${baseUrl}/api/web/registerCondition/show`, {
             headers: {
               'Content-Type': 'application/json',
             },

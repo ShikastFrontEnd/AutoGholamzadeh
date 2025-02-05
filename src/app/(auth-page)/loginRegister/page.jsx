@@ -11,8 +11,10 @@ import { ClipLoader } from 'react-spinners';
 import 'animate.css/animate.min.css';
 import { useRouter } from 'next/navigation';
 import Cookies from "js-cookie";
+import config from "/next.config";
 
 function loginRegister() {
+    const baseUrl=config.images.remotePatterns[0].hostname;
     const router = useRouter();
     const [newMobile, setNewMobile] = useState('');
     const [isError, setIsError] = useState(false);
@@ -20,7 +22,7 @@ function loginRegister() {
     const inputRef = useRef(null);
     const sendRequest = async () => {
         setLoading(true);
-        const url = `${process.env.BASE_URL}/api/auth/v1/loginRegister`;
+        const url = `${baseUrl}/api/auth/v1/loginRegister`;
 
         const data = {
             "register_phone": newMobile

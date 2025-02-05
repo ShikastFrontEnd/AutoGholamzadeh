@@ -9,12 +9,16 @@ import Link from "next/link";
 import Countdown from 'react-countdown';
 import 'animate.css/animate.min.css';
 import Cookies from 'js-cookie';
-
+import config from "/next.config";
 const Completionist = () => <span className="text-red-600 text-xl">کد وارد شده منقضی شده است</span>;
 
 
 
 export default function Verify() {
+
+
+    const baseUrl=config.images.remotePatterns[0].hostname;
+
     const [newMobile, setNewMobile] = useState(null);
     const [verifyTime, setVerifyTime] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +59,7 @@ export default function Verify() {
     };
     
     const sendCodeAgain = async () => {
-        const url = `${process.env.BASE_URL}/api/auth/v1/loginRegister`;
+        const url = `${baseUrl}/api/auth/v1/loginRegister`;
     
         const data = {
             "register_phone": phoneNumber
@@ -124,7 +128,7 @@ export default function Verify() {
         return () => clearInterval(interval); // Cleanup on unmount
     }, []);
     async function sendRequest(fullCode) {
-        const url = `${process.env.BASE_URL}/api/auth/v1/verify`;
+        const url = `${baseUrl}/api/auth/v1/verify`;
         const formData = new FormData();
         formData.append('phone', phoneNumber);
         formData.append('code', fullCode);

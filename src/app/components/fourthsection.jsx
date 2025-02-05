@@ -5,7 +5,7 @@ const accordionData = [
     { RepresentationName: 'ام وی ام', RepresentationPhone:'09921113685',RepresentationInstagram:'mvm306.gholamzadeh'},
     { RepresentationName: 'فونیکس'  ,RepresentationPhone:'09396925115',RepresentationInstagram:'fownix306'},
     { RepresentationName: 'لاماری',RepresentationPhone:'09144660596',RepresentationInstagram:'lamari_gholamzadeh'},
-    { RepresentationName: 'کرمان موتور',RepresentationPhone:'09144661508',RepresentationInstagram:'kermanmotor1107'},
+    { RepresentationName: "کرمان موتور",RepresentationPhone:'09144661508',RepresentationInstagram:'kermanmotor1107'},
     { RepresentationName: 'میتسوبیشی',RepresentationPhone: '09144660715',RepresentationInstagram:'arianmotor'},
 ];
 

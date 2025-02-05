@@ -12,7 +12,8 @@ import LazyLoad from "react-lazyload";
 import PN from "persian-number";
 import { BeatLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
-
+import config from "/next.config";
+const baseUrl=config.images.remotePatterns[0].hostname;
 function Cars({ car }) {
     const router = useRouter(); 
 
@@ -46,7 +47,7 @@ function Cars({ car }) {
                         <LazyLoad height={200} offset={100} className="size-72 rounded-xl object-cover shadow-sm w-full h-full border-gray-100">
                             <img
                                 alt=""
-                                src={`${process.env.BASE_URL}${car.imageUrl}`}
+                                src={`${baseUrl}${car.imageUrl}`}
                                 className="size-72 rounded-xl object-cover shadow-sm w-full h-full  md:h-44 border-gray-100"
                             />
                         </LazyLoad>
@@ -145,7 +146,7 @@ export default function PreRegisterForm(params) {
     const fetchData = async () => {
         setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/createView2`, {
+          const response = await axios.get(`${baseUrl}/api/web/carRegister/createView2`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

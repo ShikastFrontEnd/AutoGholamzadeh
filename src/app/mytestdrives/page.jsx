@@ -10,8 +10,8 @@ import { toast, ToastContainer } from "react-toastify";
 import Breadcrumb from "../components/Breadcrumb";
 import { BeatLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
-
-
+import config from "/next.config";
+const baseUrl=config.images.remotePatterns[0].hostname;
 function MyDrives({infos}) {
     return(<>
     <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
@@ -211,7 +211,7 @@ export default function MyTestDrives(params) {
     const fetchData = async () => {
         setLoading(true)
         try {
-          const response = await axios.get(`${process.env.BASE_URL}/api/web/testDrive/showTestDrive`, {
+          const response = await axios.get(`${baseUrl}/api/web/testDrive/showTestDrive`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',

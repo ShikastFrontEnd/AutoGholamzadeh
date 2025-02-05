@@ -24,11 +24,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import PreInputField from './preInputField';
 import Breadcrumb from './Breadcrumb';
 import ColorSelectField from './ColorSelectField';
+import config from "/next.config";
 
 
 
 
 function PreRegistrationForm({carid}) {
+  const baseUrl=config.images.remotePatterns[0].hostname;
   const car_id =carid
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -118,7 +120,7 @@ function PreRegistrationForm({carid}) {
   
   
     try {
-      const url = `${process.env.BASE_URL}/api/web/carRegister/store`;
+      const url = `${baseUrl}/api/web/carRegister/store`;
       const data = {
         firstName,
         lastName,
@@ -183,7 +185,7 @@ function PreRegistrationForm({carid}) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/api/web/carRegister/carConditional/${car_id}`, {
+      const response = await axios.get(`${baseUrl}/api/web/carRegister/carConditional/${car_id}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -393,7 +395,7 @@ function PreRegistrationForm({carid}) {
 
   <div className="relative flex justify-center items-center w-full md:h-[700px] lg:h-[800px] lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
   <div className="relative h-full w-full  p-12 md:p-0  ">
-    <img src={`${process.env.BASE_URL}${imageUrl}`} className='w-full rounded-xl h-full' />
+    <img src={`${baseUrl}${imageUrl}`} className='w-full rounded-xl h-full' />
   </div>
 </div>
 </section>

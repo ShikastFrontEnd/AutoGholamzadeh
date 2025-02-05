@@ -7,8 +7,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Link from "next/link";
 import Header from "../components/header";
 import Footer from "../components/footer";
-
+import config from "/next.config";
 export default function FollowupSuggestions() {
+    const baseUrl=config.images.remotePatterns[0].hostname;
     const router = useRouter();
     const [trackingCode, setTrackingCode] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -19,7 +20,7 @@ export default function FollowupSuggestions() {
 
     const sendRequest = async (inputValue) => {
         setLoading(true);
-        const url = `${process.env.BASE_URL}/api/web/feedback/feedbackShow`;
+        const url = `${baseUrl}/api/web/feedback/feedbackShow`;
 
         const data = {
             "trackingCode": inputValue
