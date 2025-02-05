@@ -58,30 +58,30 @@ function Cars({ car }) {
                     </div>
                     <div className="w-full space-y-4 p-3">
                         <div className="flex justify-between border-b-2 pb-4 border-gray-100">
-                            <div className="w-full text-center text-xl flex">
+                            <div className="w-full text-white text-center text-xl flex">
                                 <span className="pe-1">تومان</span>
                                 <span className="PEYDA-BOLD">{PN.convertEnToPe(formatNumberWithDots(car.carPrice))}</span>
                             </div>
-                            <div className="w-full text-center text-xl flex justify-end">قیمت</div>
+                            <div className="w-full text-white text-center text-xl flex justify-end">قیمت</div>
                         </div>
                         {car.is_installments !== 0 ? (
             <>
                 <div className="flex justify-center">
                     <div className="w-full text-center text-base flex justify-center hover:text-white text-gholamzadeh-color">شرایط اقساط</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start"><span className="pe-1">ماه</span>
                         <span>{car.maxMonth}</span></div>
                     <div className="w-full text-center text-base flex justify-end">حداکثر طول اقساط</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start">
                         <span>{car.minInstallmentsPercentage}</span>
                         <span className="pe-1">٪</span>
                     </div>
                     <div className="w-full text-center text-base text-nowrap flex justify-end">حداقل اقساط درصد</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start">
                         <span>{car.maxInstallmentsPercentage}</span>
                         <span className="pe-1">٪</span>
@@ -91,24 +91,24 @@ function Cars({ car }) {
             </>
         ) : car.conditionals !== null && car.conditionals.isMultiStage !== 0 ? (
             <>
-                <div className="flex justify-evenly">
+                <div className="flex justify-evenly text-white">
                     <div className="w-full text-center text-base flex justify-start"></div>
                     <div className="w-full text-center text-base flex justify-end text-nowrap text-gholamzadeh-color hover:text-white">شرایط پرداخت چند مرحله ای</div>
                     <div className="w-full text-center text-base flex justify-start"></div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start"><span className="pe-1">تومان</span>
                     <span>{PN.convertEnToPe(formatNumberWithDots(car.conditionals.stageOne))}</span></div>
                     <div className="w-full text-center text-base flex justify-end">مرحله اول</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start">
                         <span className="pe-1">تومان</span>
                         
                     </div>
                     <div className="w-full text-center text-base text-nowrap flex justify-end">مرحله دوم</div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-white">
                     <div className="w-full text-center text-base flex justify-start">
                         <span className="pe-1">تومان</span>
                         <span>{PN.convertEnToPe(formatNumberWithDots(car.conditionals.stageTow))}</span>

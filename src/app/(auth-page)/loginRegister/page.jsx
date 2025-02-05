@@ -130,7 +130,7 @@ function loginRegister() {
                                     </div>
                         </div>
                     </button>
-                    <h3 className="text-xs md:text-base lg:text-2xl">هلدینگ خودرویی غلامزاده</h3>
+                    <h3 className="text-xs md:text-base lg:text-2xl text-white">هلدینگ خودرویی غلامزاده</h3>
                 </div>
             </div>
             <div className="mt-5">
@@ -175,7 +175,7 @@ function loginRegister() {
                         </button>
                     </div>
                 </form>
-                <h3 className="text-sm text-center w-full py-3 lg:text-2xl">برای ورود و عضویت در سایت شماره همراه خود را وارد کنید</h3>
+                <h3 className="text-sm text-center text-white w-full py-3 lg:text-2xl">برای ورود و عضویت در سایت شماره همراه خود را وارد کنید</h3>
             </div>
         </div>
     </div>

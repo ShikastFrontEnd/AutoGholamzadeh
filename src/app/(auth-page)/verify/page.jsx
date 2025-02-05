@@ -257,7 +257,7 @@ export default function Verify() {
                                     </div>
                         </div>
                     </button>
-                    <h3 className=" md:text-base text-xl lg:text-2xl">هلدینگ خودرویی غلامزاده</h3>
+                    <h3 className=" md:text-base text-xl lg:text-2xl text-white">هلدینگ خودرویی غلامزاده</h3>
                 </div>
             </div>
             <div className="mt-5">
@@ -287,7 +287,7 @@ export default function Verify() {
                                     autoFocus={true}
                                 />
                             </div>
-                            <div className="animate__animated animate__fadeIn flex justify-center lg:text-2xl ">
+                            <div className="animate__animated animate__fadeIn flex justify-center lg:text-2xl text-white ">
                             <Countdown date={countdownDate} renderer={renderer} onComplete={handleCountdownComplete} />
                             </div>
                             <div>
