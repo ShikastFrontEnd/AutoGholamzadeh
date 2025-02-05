@@ -206,7 +206,9 @@ function TestDriveForm({eventId}) {
                     theme: "dark",
                     className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                 });
-                router.push('/loginRegister');
+              const cameRoute = `/testdrive/${event_id}`
+              localStorage.setItem('cameRoute', cameRoute);
+              router.push('/loginRegister');
                 console.log('Error:', error.response);
             } else {
                 console.log('Error:', error.response.data.message);

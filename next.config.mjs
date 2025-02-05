@@ -1,6 +1,6 @@
 // next.config.js
 export const env = {
-    BASE_URL: process.env.BASE_URL || 'http://192.168.1.103:8000',
+    BASE_URL: process.env.BASE_URL || 'https://api.gholamzadeh.com',
 };
 
 /** @type {import('next').NextConfig} */
@@ -11,7 +11,7 @@ export const env = {
 //             {
 //                 protocol: 'https',
 //                 // hostname:'https://api.gholamzadeh.com',
-//                 hostname: 'http://192.168.1.103:8000',
+//                 // hostname: 'http://192.168.1.103:8000',
 //                 // pathname: '/**',
 //             },
 //         ],

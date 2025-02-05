@@ -159,6 +159,8 @@ export default function carsalesconditions(props) {
                 theme: "dark",
                 className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
               });
+              const cameRoute = `/carconditions/${EventId}`
+              localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
             } else {
               console.log('Error:', error.response.data.message);

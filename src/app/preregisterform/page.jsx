@@ -137,7 +137,7 @@ function Cars({ car }) {
     );
 }
 
-export default function TestDrive(params) {
+export default function PreRegisterForm(params) {
     const token=Cookies.get('user-cookie');
     const [loading,setLoading]=useState(false)
     const [allcars,setAllCars] = useState([])
@@ -162,6 +162,8 @@ export default function TestDrive(params) {
           if (error.response) {
             if (error.response.status === 401) {
               router.push('/loginRegister');
+              const cameRoute = '/preregisterform'
+              localStorage.setItem('cameRoute', cameRoute);
             } else {
               console.log('Error:', error.response.data.message);
               setLoading(false)

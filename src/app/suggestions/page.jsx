@@ -185,6 +185,8 @@ export default function Suggestions() {
               className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
             });
             router.push('/loginRegister');
+              const cameRoute = '/suggestions'
+              localStorage.setItem('cameRoute', cameRoute);
           } else {
             console.log('Error:', error.response.data.message);
           }

@@ -159,11 +159,22 @@ export default function Verify() {
                     
                     Cookies.remove('verifyTime');
                     toast.success('شما با موفقیت وارد شدید', {
-                        position: "top-center"
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        className:'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                     });
                     Cookies.set('user-cookie',response.data.data.token, { expires: 7 })
                     setTimeout(() => {
-                        router.push('/')
+                        const retrievedRoute = localStorage.getItem('cameRoute');
+                        const routeToPush = retrievedRoute ? retrievedRoute : '/';
+                        router.push(`${routeToPush}`);
+                        localStorage.removeItem('cameRoute')
                     }, 1000);
                 }
                 

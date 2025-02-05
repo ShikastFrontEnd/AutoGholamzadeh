@@ -11,8 +11,10 @@ export default function LogoutPage() {
         // Remove the cookie
         Cookies.remove('user-cookie', { path: '' });
         
-        // Redirect to the home page
-        router.push('/');
+        const retrievedRoute = localStorage.getItem('cameRoute');
+                        const routeToPush = retrievedRoute ? retrievedRoute : '/';
+                        router.push(`${routeToPush}`);
+                        localStorage.removeItem('cameRoute')
     }, [router]);
 
     // Set loading to false after the effect runs

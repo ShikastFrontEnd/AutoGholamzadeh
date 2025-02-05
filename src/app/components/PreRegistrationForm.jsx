@@ -204,18 +204,10 @@ function PreRegistrationForm({carid}) {
     } catch (error) {
       if (error.response) {
         if (error.response.status === 401) {
-          toast.error(error.response.data, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
-          });
-          router.push('/loginRegister');
+          
+          const cameRoute = `/preregisterform/${car_id}`
+              localStorage.setItem('cameRoute', cameRoute);
+              router.push('/loginRegister');
         } else {
           console.log('Error:', error.response.data.message);
         }
