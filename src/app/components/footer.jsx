@@ -43,7 +43,11 @@ const Footer = () => {
                             <a href="https://instagram.com/gholamzadeh_holding">اینستاگرام<i className="pl-1 bi bi-instagram"></i></a>
                         </div>
                     </nav>
-                    <p ref={addressRef} className="mt-7 text-base">آدرس : ارومیه - خیابان امام علی جنب مسجد امام علی پالم سنتر (در حال استاندارد سازی) بزودی افتتاح خواهد شد</p>
+                    <p ref={addressRef} className="mt-7 text-base">
+
+                        آدرس : ارومیه - خیابان شیخ شلتوت روبروی میدان تره بار - گروه خودرویی غلام زاده
+                        <i className='bi bi-building ml-2'></i>
+                    </p>
                     <p className="mt-7 text-base">© 2025 Gholamzadeh Holding</p>
                 </div>
             </div>

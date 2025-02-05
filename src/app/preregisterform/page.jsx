@@ -208,7 +208,7 @@ export default function PreRegisterForm(params) {
       <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
         <div className="w-full"><Breadcrumb links={breadcrumbLinks}
         /></div>
-        <div className="flex justify-end items-center w-full"><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
+        <div className="flex justify-end items-center w-full"><h1 className="text-end text-white">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
       </div>
       </div></>}
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
