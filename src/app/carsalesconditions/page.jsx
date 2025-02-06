@@ -10,6 +10,7 @@ import PN from "persian-number";
 import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
+import Link from "next/link";
 
 const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -116,7 +117,7 @@ function Conditioncars({condition}) {
         </div>)}
           <div className="w-full flex justify-between">
             <div className="w-full flex justify-center items-center"></div>
-            <div className="w-full flex justify-center items-center"><button className="text-center w-1/2 border rounded-2xl hover:border-gholamzadeh-color hover:text-gholamzadeh-color">ثبت نام</button></div>
+            <div className="w-full flex justify-center items-center"><Link href={`/preregisterform/${condition.id}`} className="text-center w-1/2 border rounded-2xl hover:border-gholamzadeh-color hover:text-gholamzadeh-color">ثبت نام</Link></div>
           </div>
             
             

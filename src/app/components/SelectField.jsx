@@ -19,10 +19,7 @@ const SelectField = ({ label, options, placeholder, value, onChange, error }) =>
           </option>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
-              <div className="w-full flex justify-between">
-                <div className="w-full">{option.label}</div>
-                
-              </div>
+              {option.label} {/* Use text directly instead of a div */}
             </option>
           ))}
         </select>

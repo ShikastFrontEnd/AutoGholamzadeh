@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import Link from 'next/link';
 import Image from "next/image";
-import { ClipLoader } from 'react-spinners';
+import { BeatLoader, ClipLoader } from 'react-spinners';
 import 'animate.css/animate.min.css';
 import { useRouter } from 'next/navigation';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -30,6 +30,8 @@ import ColorSelectField from './ColorSelectField';
 
 function PreRegistrationForm({carid}) {
   const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
+  const [loading,setLoading] = useState(false)
+  const [buttonLoading,setButtonLoading] = useState(false)
   const car_id =carid
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -115,6 +117,7 @@ function PreRegistrationForm({carid}) {
   };
 
   const handleSubmit = async (event) => {
+    setButtonLoading(true)
     event.preventDefault();
   
   
@@ -155,8 +158,10 @@ function PreRegistrationForm({carid}) {
           className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
         });
         router.push('/showpreregisterform');
+        
       } else {
         router.push('/')
+
       }
     } catch (error) {
       if (error.response) {
@@ -173,6 +178,7 @@ function PreRegistrationForm({carid}) {
           className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
         });
         setErrors(error.response.data.errors);
+        setButtonLoading(false)
       } else if (error.request) {
         router.push('/')
       } else {
@@ -183,6 +189,7 @@ function PreRegistrationForm({carid}) {
   
 
   const fetchData = async () => {
+    setLoading(true)
     try {
       const response = await axios.get(`${baseUrl}/api/web/carRegister/carConditional/${car_id}`, {
         headers: {
@@ -199,6 +206,7 @@ function PreRegistrationForm({carid}) {
       setStartPercentage(response.data.data.minInstallmentsPercentage)
       setEndPercentage(response.data.data.maxInstallmentsPercentage)
       setEndMonth(response.data.data.maxMonth)
+      setLoading(false)
       } else {
         throw new Error('Network response was not ok');
       }
@@ -239,6 +247,16 @@ function PreRegistrationForm({carid}) {
                         style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex  py-32">
+                        {loading ? (
+                      <div className="w-full h-screen flex justify-center items-center">
+                          <BeatLoader
+                              color={'red'}
+                              size={'30 md:150'}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                          />
+                      </div>
+                  ) : (
                         <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
                         <div dir="rtl" className=" px-5 py-16 bg-gholamzadeh-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full md:h-full  rounded-3xl shadow-2xl border border-white">
                         <div dir='ltr' className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
@@ -309,18 +327,18 @@ function PreRegistrationForm({carid}) {
           </div>
           </div>
           <div className="ms-2 w-full">
-              <ColorSelectField
-                  label="رنگ مورد نظر"
-                  options={carscolors.map(color => ({
-                      value: color.name,
-                      label: color.name,
-                      colorCode: color.color
-                  }))}
-                  placeholder="رنگ های موجود فعلی"
-                  value={selectedColor}
-                  onChange={handleColorChange}
-                  error={errors.color}
-              />
+          <ColorSelectField
+            label="رنگ مورد نظر"
+            options={(carscolors || []).map(color => ({
+                value: color.name,
+                label: color.name,
+                colorCode: color.color
+            }))}
+            placeholder="رنگ های موجود فعلی"
+            value={selectedColor}
+            onChange={handleColorChange}
+            error={errors.color}
+        />
           </div>
         </div>
         <div className="flex justify-between">
@@ -386,7 +404,14 @@ function PreRegistrationForm({carid}) {
 
       <div className="flex items-center justify-between">
         <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
-          پیش ثبت نام
+          <div className="">پیش ثبت نام</div>{<div className="w-full h-full flex justify-between items-center">
+                          <ClipLoader
+                              color={'red'}
+                              size={'15'}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                          />
+                      </div>}
         </button>
       </div>
     </form>
@@ -399,7 +424,7 @@ function PreRegistrationForm({carid}) {
 </div>
 </section>
 </div>
-</main>
+</main>)}
                         </div>
                      
                     </div>

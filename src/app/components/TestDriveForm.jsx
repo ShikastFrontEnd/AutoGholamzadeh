@@ -1,15 +1,10 @@
 'use client'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
-import clsx from 'clsx'
+
 import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
-import Link from 'next/link';
-import Image from "next/image";
-import { ClipLoader } from 'react-spinners';
 import 'animate.css/animate.min.css';
 import { useRouter } from 'next/navigation';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import SwiperCore, { Pagination, EffectCube } from "swiper";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -17,7 +12,6 @@ import 'swiper/css/pagination';
 import 'swiper/bundle';
 import 'swiper/css/bundle';
 import InputField from './InputField';
-import SelectField from './SelectField';
 import Cookies from 'js-cookie';
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +19,7 @@ import DatePicker from "react-multi-date-picker"
 import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Breadcrumb from './Breadcrumb';
-
+import TestDriveSelectField from "./testDriveSelectField";
 function TestDriveForm({eventId}) {
     const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
     const router = useRouter();
@@ -367,7 +361,7 @@ const breadcrumbLinks = [
         
         <div className="flex justify-between">
           <div className="w-full">
-            <SelectField
+            <TestDriveSelectField
                 label="خودرو مورد نظر"
                 options={carsList.map(car => ({
                   value: car.carName, label:car.carName
@@ -379,7 +373,7 @@ const breadcrumbLinks = [
               />
           </div>
           <div className="ms-2 w-full">
-            <SelectField
+            <TestDriveSelectField
               label="شهرستان"
               options={[
                 { value: '1', label: 'اذرشهر' },
@@ -394,7 +388,7 @@ const breadcrumbLinks = [
         </div>
         <div className="flex justify-between">
           <div className="w-full">
-            <SelectField
+            <TestDriveSelectField
                 label="جنسیت"
                 options={[
                   { value: 'مرد', label: 'مرد' },
@@ -407,7 +401,7 @@ const breadcrumbLinks = [
               />
           </div>
           <div className="ms-2 w-full">
-            <SelectField
+            <TestDriveSelectField
               label="قبلا مشتری ما بودید؟"
               options={[
                 { value: '1', label: 'بله' },
@@ -422,7 +416,7 @@ const breadcrumbLinks = [
         </div>
         <div className="flex justify-between">
           <div className="w-full">
-            <SelectField
+            <TestDriveSelectField
               label="شیوه اشنایی"
               options={[
                 { value: 'گوگل', label: 'گوگل' },
@@ -438,7 +432,7 @@ const breadcrumbLinks = [
             />
           </div>
           <div className="ms-2 w-full">
-          <SelectField
+          <TestDriveSelectField
               label="گواهینامه دارید؟"
               options={[
                 { value: 1, label: 'بله' },
@@ -476,27 +470,11 @@ const breadcrumbLinks = [
       <SwiperSlide
         className="bg-center bg-cover"
         style={{
-          backgroundImage: "url('/static/images/g.jpg')",
+          backgroundImage: "url('/static/images/tiggo8.jpg')",
         }}
       />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/gs.jpg')",
-        }}
-      />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/gss.jpg')",
-        }}
-      />
-      <SwiperSlide
-        className="bg-center bg-cover"
-        style={{
-          backgroundImage: "url('/static/images/gsss.jpg')",
-        }}
-      />
+      
+      
     </Swiper>
   </div>
 </div>

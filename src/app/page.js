@@ -7,18 +7,27 @@ import ThirdSection from "./components/thirdsection";
 import FourthSection from "./components/fourthsection";
 import FifthSection from "./components/fifthsection";
 import SixSection from "./components/sixsection";
+import Icon from "react-multi-date-picker/components/icon";
 
+// Define metadata for the page
+export const metadata = {
+  title: "هلدینگ خودرویی غلامزاده",
+  description: "هلدینگ خودرویی غلامزاده",
+  author: "09051383167",
+  // You can add more metadata as needed
+};
 
 export default function Home() {
-  return (<div>
-     <Header />
-     <MainSection />
-     <ThirdSection />
-     <FourthSection />
-     <FifthSection />
-     <SixSection />
-     <SecondSection />
-     <Footer />
+  return (
+    <div>
+      <Header />
+      <MainSection />
+      <ThirdSection />
+      <FourthSection />
+      <FifthSection />
+      <SixSection />
+      <SecondSection />
+      <Footer />
     </div>
   );
 }
