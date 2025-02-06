@@ -21,9 +21,9 @@ const Accordion = ({ RepresentationName,RepresentationPhone,RepresentationInstag
                     </span>
                 </div>
                 <div className={`p-4 ${openIndex === index ? '' : 'hidden'} text-center w-full flex justify-between`}>
-                    <Link href={`tel:${RepresentationPhone}`} className="flex w-full justify-center items-center"><i className="bi bi-telephone hover:text-gholamzadeh-color"></i></Link>
-                    <div className="w-full"><i className="border"></i></div>
-                    <Link href={`https://www.instagram.com/${RepresentationInstagram}`} className="flex w-full justify-center items-center"><i className="bi bi-instagram hover:text-gholamzadeh-color"></i></Link>
+                    <Link href={`tel:${RepresentationPhone}`} className="flex w-full justify-center items-center"><i className="bi bi-telephone text-white hover:text-gholamzadeh-color"></i></Link>
+                    <div className="w-full"><i className="border border-white text-white"></i></div>
+                    <Link href={`https://www.instagram.com/${RepresentationInstagram}`} className="flex w-full justify-center items-center"><i className="bi bi-instagram text-white hover:text-gholamzadeh-color"></i></Link>
                 
                 
                 
