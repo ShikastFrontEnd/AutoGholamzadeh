@@ -20,7 +20,9 @@ import persian from "react-date-object/calendars/persian"
 import persian_fa from "react-date-object/locales/persian_fa"
 import Breadcrumb from './Breadcrumb';
 import TestDriveSelectField from "./testDriveSelectField";
+import { BeatLoader } from "react-spinners";
 function TestDriveForm({eventId}) {
+    const [loading,setLoading] =useState(false)
     const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
     const router = useRouter();
     const [selectedItem, setSelectedItem] = useState(null);
@@ -167,6 +169,7 @@ function TestDriveForm({eventId}) {
   };
 
   const fetchData = async () => {
+    setLoading(true)
     try {
         const response = await axios.post(
             `${baseUrl}/api/web/testDrive/carModel/${event_id}`,
@@ -181,6 +184,7 @@ function TestDriveForm({eventId}) {
 
         if (response.status === 200) {
             setCarsList(response.data.data)
+            setLoading(false)
         } else {
             throw new Error('Network response was not ok');
         }
@@ -198,9 +202,11 @@ function TestDriveForm({eventId}) {
                     theme: "dark",
                     className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                 });
+                
               const cameRoute = `/testdrive/${event_id}`
               localStorage.setItem('cameRoute', cameRoute);
               router.push('/loginRegister');
+              setLoading(true)
                
             } else {
               
@@ -231,7 +237,16 @@ const breadcrumbLinks = [
                         style={{ backgroundImage: "url('/static/images/extrim.png')" }} 
                     >
                         <div className="w-full h-full backdrop-blur-md flex  pt-28 pb-96">
-                        <main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
+                        {loading ? (
+                      <div className="w-full h-screen flex justify-center items-center">
+                          <BeatLoader
+                              color={'red'}
+                              size={'30 md:150'}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                          />
+                      </div>
+                  ) : (<main id="content" role="main" className=" w-full h-full md:mx-auto flex justify-center items-center p-5  ">
                         <div dir="rtl" className=" px-5 py-16 bg-gholamzadeh-productcolor lg:max-w-[1700px] sm:w-screen w-full h-full lg:h-full md:h-screen  rounded-3xl shadow-2xl border border-white">
                         <div dir='ltr' className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
             <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
@@ -480,7 +495,7 @@ const breadcrumbLinks = [
 </div>
 </section>
 </div>
-</main>
+</main>)}
                         </div>
                      
                     </div>

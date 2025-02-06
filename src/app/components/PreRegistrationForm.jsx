@@ -403,16 +403,21 @@ function PreRegistrationForm({carid}) {
       </div>
 
       <div className="flex items-center justify-between">
-        <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
-          <div className="">پیش ثبت نام</div>{<div className="w-full h-full flex justify-between items-center">
-                          <ClipLoader
-                              color={'red'}
-                              size={'15'}
-                              aria-label="Loading Spinner"
-                              data-testid="loader"
-                          />
-                      </div>}
-        </button>
+      <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
+  <div className="flex items-center justify-between w-full">
+    <span>پیش ثبت نام</span>
+    {buttonLoading && (
+      <div className="flex items-center mr-2"> {/* Add margin to space it from the text */}
+        <ClipLoader
+          color={'red'}
+          size={'15'}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    )}
+  </div>
+</button>
       </div>
     </form>
   </div>
