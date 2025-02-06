@@ -16,7 +16,7 @@ const Header = () => {
             setNextButtonText('تغییر شماره');
         } else {
             setButtonText('ثبت نام / ورود');
-            setNextButtonText('رادین تجارت');
+            setNextButtonText('غلامزاده');
         }
     }, [token]); 
     const [isMounted, setIsMounted] = useState(false);
