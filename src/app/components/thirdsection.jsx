@@ -14,7 +14,7 @@ export default function ThirdSection(params) {
             </div>
 
             <span href="#"
-                className="inline-block rounded-lg border bg-gholamzadeh-productcolor dark:border-none px-4 py-2 text-center text-sm text-white hover:bg-zinc-900 outline-none ring-indigo-300 transition duration-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
+                className="inline-block rounded-lg border bg-gholamzadeh-color dark:border-none px-4 py-2 text-center text-sm text-white hover:bg-zinc-900 outline-none ring-indigo-300 transition duration-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
                 بیشتر
             </span>
         </div>
