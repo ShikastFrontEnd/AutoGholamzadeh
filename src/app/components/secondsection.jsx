@@ -20,7 +20,7 @@ export default function SecondSection() {
                 <section className="py-base container w-full">
                     <div className="grid gap-8 grid-cols-2 md:gap-y-16 md:grid-cols-6 w-full py-10 px-6">
                         {logos.map((logo, index) => (
-                            <span key={index} className="w-full box flex items-center justify-center rounded-xl py-3">
+                            <span key={index} className="w-full border-gray-100 box flex items-center justify-center rounded-xl py-3">
                                 <span className="sr-only">{logo.alt} logo.</span>
                                 <div aria-hidden="true">
                                     <img className="" src={logo.src} alt={logo.alt} width={logo.width} height={logo.height} />

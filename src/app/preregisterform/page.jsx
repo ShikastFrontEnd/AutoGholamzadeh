@@ -40,7 +40,7 @@ function Cars({ car }) {
     };
     return (
         <>
-            <div className={`mx-auto relative rounded-xl w-full max-w-full border box bg-black/50 shadow backdrop-blur-sm lg:max-w-screen-lg`}>
+            <div className={`mx-auto relative rounded-xl w-full max-w-full border border-gray-100 box bg-black/50 shadow backdrop-blur-sm lg:max-w-screen-lg`}>
                 <div className="flex flex-col justify-between h-full">
                     <div className="relative w-full">
                         <LazyLoad height={200} offset={100} className="size-72 rounded-xl object-cover shadow-sm w-full h-full border-gray-100">

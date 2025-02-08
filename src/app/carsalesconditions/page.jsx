@@ -15,13 +15,17 @@ import Link from "next/link";
 const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL
 
 function Conditioncars({condition}) {
+  
   const formatNumberWithDots = (number) => {
+    // Check if the input is null or not a number
+    if (number === null || isNaN(number)) {
+        return ''; // or return 'Invalid input' or any other default value
+    }
+    
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 };
-
-  
     return(<>
-        <div className={`mx-auto rounded-xl w-full max-w-full border box bg-black/50  shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
+        <div className={`mx-auto rounded-xl w-full max-w-full border border-gray-100 box bg-black/50  shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
        <div className="md:p-3">
        <div className="flex flex-col md:flex-row justify-evenly md:space-x-5">
        <div className="relative w-full ">

@@ -16,7 +16,7 @@ function MyDrives({infos}) {
     return(<>
     <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
-            className="relative block overflow-hidden rounded-xl h-full border box p-4 sm:p-6 lg:p-8"
+            className="relative block overflow-hidden rounded-xl h-full border border-gray-100 box p-4 sm:p-6 lg:p-8"
             dir="rtl"
             >
             <span

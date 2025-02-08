@@ -8,7 +8,7 @@ const SelectField = ({ label, options, placeholder, value, onChange, error }) =>
           </label>
         )}
         <select
-          className={`form-select block w-full mt-1 py-3 rounded-lg border ${
+          className={`form-select block h-full w-full mt-1 py-3 rounded-lg border ${
             error ? 'border-red-600 bg-red-100' : 'border-gray-300'
           } focus:outline-none focus:ring-2 focus:ring-gholamzadeh-color focus:border-gholamzadeh-color transition duration-150 ease-in-out`}
           value={value}

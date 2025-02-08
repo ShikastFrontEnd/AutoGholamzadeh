@@ -7,10 +7,10 @@ const LocationCard = (data) => {
         window.open(data.data.LocationAddress, "_blank");
     }
     return (
-        <div className="w-full">
+        <div className="w-full ">
             {/* Card start */}
-            <div className="mx-auto border-white bg-gholamzadeh-color rounded-lg  overflow-hidden shadow-lg shadow-gholamzadeh-color border">
-                <div className="border-b px-0 pb-6 w-full ">
+            <div className="mx-auto border-white h-full bg-gholamzadeh-color rounded-lg  overflow-hidden shadow-lg shadow-gholamzadeh-color border">
+                <div className=" px-0 pb-6 w-full ">
                     <div className="text-center w-full">
                     <div className="w-full h-96">
                         
@@ -23,7 +23,7 @@ const LocationCard = (data) => {
                             title="Google Map"
                         ></iframe>
                     </div>
-                        <div className="py-2">
+                        <div className="py-2 min-h-24">
                             <h3 className="font-bold text-2xl text-gray-800 dark:text-white mb-1">{data.data.RepresentationName}</h3>
                             <div className="inline-flex text-gray-700 dark:text-gray-300 items-center">
                                 <div className=""></div>

@@ -11,7 +11,7 @@ const Accordion = ({ RepresentationName,RepresentationPhone,RepresentationInstag
 
     return (
         <div className="mx-auto w-full max-w-screen-2xl px-4 md:px-8 py-12">
-            <div className="overflow-hidden w-full shadow-md rounded-2xl bg-gholamzadeh-productcolor box">
+            <div className="overflow-hidden w-full shadow-md rounded-2xl bg-gholamzadeh-productcolor box border-gray-100">
                 <div
                     className="bg-gholamzadeh-color p-4 w-full cursor-pointer flex justify-between items-center rounded-2xl"
                     onClick={() => toggleAccordion(index)}
