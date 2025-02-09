@@ -44,73 +44,73 @@ function Conditioncars({condition}) {
    </div>
            <div className="w-full space-y-4 p-3 md:p-0">
             <div className="flex justify-between border-b-2 pb-4 border-gholamzadeh-color ">
-                <div className="w-full text-center text-xl flex "><span className="pe-1">تومان</span><span>{PN.convertEnToPe(formatNumberWithDots(condition.price))}</span></div>
-                <div className="w-full text-center text-xl flex justify-end">قیمت</div>
+                <div className="w-full text-center text-xl text-gray-100 flex "><span className="pe-1">تومان</span><span>{PN.convertEnToPe(formatNumberWithDots(condition.price))}</span></div>
+                <div className="w-full text-center text-xl flex  text-gray-100 justify-end">قیمت</div>
             </div>
             {condition.percentage != null ? (
             <>
                 <div className="flex justify-between">
-                    <div className="w-full text-center text-base flex justify-start"></div>
-                    <div className="w-full text-center text-base flex justify-end">شرایط اقساط</div>
+                    <div className="w-full text-center text-base flex text-gray-100 justify-start"></div>
+                    <div className="w-full text-center text-base flex text-gray-100 justify-end">شرایط اقساط</div>
                 </div>
                 <div className="flex justify-between">
-                    <div className="w-full text-center text-base flex justify-start">{condition.percentage}%</div>
-                    <div className="w-full text-center text-base flex justify-end">درصد اقساط</div>
+                    <div className="w-full text-center text-base flex text-gray-100 justify-start">{condition.percentage}%</div>
+                    <div className="w-full text-center text-base flex text-gray-100 justify-end">درصد اقساط</div>
                 </div>
                 <div className="flex justify-between">
-                    <div className="w-full text-center text-base flex justify-start">
+                    <div className="w-full text-center text-base flex text-gray-100 justify-start">
                         <span className="pe-1">تومان</span>
                         <span>{PN.convertEnToPe(formatNumberWithDots(condition.advance))}</span>
                     </div>
-                    <div className="w-full text-center text-base flex justify-end">پیش پرداخت</div>
+                    <div className="w-full text-center text-base flex text-gray-100 justify-end">پیش پرداخت</div>
                 </div>
                 
                     <div className="flex justify-between">
-                        <div className="w-full text-center text-base flex justify-start">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-start">
                             <span className="pe-1">تومان</span>
                             <span>{PN.convertEnToPe(formatNumberWithDots(condition.twelveMonth))}</span>
                         </div>
-                        <div className="w-full text-center text-base flex justify-end">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-end">
                             <span className="pe-1">ماهه</span>
                             <span>12</span>
                         </div>
                     </div>
                     <div className="flex justify-between">
-                        <div className="w-full text-center text-base flex justify-start">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-start">
                             <span className="pe-1">تومان</span>
                             <span>{PN.convertEnToPe(formatNumberWithDots(condition.twentyFourMonth))}</span>
                         </div>
-                        <div className="w-full text-center text-base flex justify-end">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-end">
                             <span className="pe-1">ماهه</span>
                             <span>24</span>
                         </div>
                     </div>
                     <div className="flex justify-between">
-                        <div className="w-full text-center text-base flex justify-start">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-start">
                             <span className="pe-1">تومان</span>
                             <span>{PN.convertEnToPe(formatNumberWithDots(condition.thirtySixMonth))}</span>
                         </div>
-                        <div className="w-full text-center text-base flex justify-end">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-end">
                             <span className="pe-1">ماهه</span>
                             <span>36</span>
                         </div>
                     </div>
                     <div className="flex justify-between">
-                        <div className="w-full text-center text-base flex justify-start">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-start">
                             <span className="pe-1">تومان</span>
                             {PN.convertEnToPe(formatNumberWithDots(condition.fortyEightMonth))}
                         </div>
-                        <div className="w-full text-center text-base flex justify-end">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-end">
                             <span className="pe-1">ماهه</span>
                             <span>48</span>
                         </div>
                     </div>
                     <div className="flex justify-between">
-                        <div className="w-full text-center text-base flex justify-start">
+                        <div className="w-full text-center text-base flex text-gray-100 justify-start">
                             <span className="pe-1">تومان</span>
                             <span>{PN.convertEnToPe(formatNumberWithDots(condition.sixtyMonth))}</span>
                         </div>
-                        <div className="w-full text-center text-base flex justify-end">
+                        <div className="w-full text-center text-base text-gray-100 flex justify-end">
                             <span className="pe-1">ماهه</span>
                             <span>60</span>
                         </div>
@@ -180,8 +180,8 @@ export default function carsalesconditions() {
             <ToastContainer />
             <div className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
             <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
-              <div className=""><Breadcrumb links={breadcrumbLinks} /></div>
-              <div className=""><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
+              <div className="flex items-center text-gray-100"><Breadcrumb links={breadcrumbLinks} /></div>
+              <div className="flex items-center text-gray-100 justify-end"><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
             </div>
             </div>
            {loading? <div className="w-full flex justify-center items-center">
