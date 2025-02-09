@@ -276,7 +276,7 @@ function PreRegistrationForm({carid}) {
                                 />
                         </div>
                     </button> */}
-                          <h1 className="w-auto max-w-[360px] text-center h-auto text-6xl BeutyFont text-gholamzadeh-color" >Gholamzadeh</h1>
+                          <Link href={'/'}><h1 className="w-auto max-w-[360px] text-center h-auto text-6xl BeutyFont text-gholamzadeh-color" >Gholamzadeh</h1></Link>
       <h1 className="text-base md:text-xl text-center text-wrap w-72 md:w-full text-white font-bold">فرم پیش ثبت نام نمایندگی <span className="text-gholamzadeh-color">غلامزاده</span></h1>
 
     </div>
@@ -323,7 +323,7 @@ function PreRegistrationForm({carid}) {
           <div className="w-full">
           <div className="relative z-30">
           <label className="block text-sm font-medium text-gholamzadeh-color mb-1  backdrop-blur-sm">خودروی مورد نظر</label>
-            <div className="w-full flex justify-center items-center text-wrap"><h1 className='pt-2 text-center text-xl'>{carName}</h1></div>
+            <div className="w-full flex justify-center text-center items-center text-wrap"><h1 className='pt-2 text-center text-xl'>{carName}</h1></div>
           </div>
           </div>
           <div className="ms-2 w-full">

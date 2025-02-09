@@ -140,50 +140,58 @@ export default function TestDrive(params) {
       { url: '/testdrive', label: 'ایونت های تست درایو' },
     ];
 
-    return(
-      <>
-      <Header />
-      <div className="z-50"><ToastContainer /></div>
-      <div className="bg-zinc-400 bg-auto h-full w-full">
-          <div
-              className={`bg-gholamzadeh-productcolor bg-no-repeat bg-cover bg-bottom flex justify-center items-center w-full ${loading ? 'h-screen' : 'h-full'}`}
-          >
-              <div className="pt-56">
-                  {loading ? (
-                      <div className="w-full h-screen flex justify-center items-center">
-                          <BeatLoader
-                              color={'red'}
-                              size={'30 md:150'}
-                              aria-label="Loading Spinner"
-                              data-testid="loader"
-                          />
-                      </div>
-                  ) : (
-                      <>
-                          <div className="mb-5 pb-5 mx-auto w-full max-w-full border-b-2 border-gray-100 md:top-6 lg:max-w-screen-lg">
-                              <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
-                                  <div className="w-full">
-                                      <Breadcrumb links={breadcrumbLinks} />
-                                  </div>
-                                  <div className="flex justify-end items-center w-full">
-                                      <h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1>
-                                  </div>
-                              </div>
-                          </div>
-                      </>
-                  )}
-                  <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
-                      <div className="w-full flex justify-center items-center ">
-                          {allevents.map((element, index) => (
-                              <Events key={index} event={element} />
-                          ))}
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <Footer />
-  </>
-        
-    )
+    return (
+        <>
+            <Header />
+            <div className="z-50">
+                <ToastContainer />
+            </div>
+            <div className="bg-zinc-400 bg-auto h-full w-full">
+                <div
+                    className={`bg-gholamzadeh-productcolor bg-no-repeat bg-cover bg-bottom flex justify-center items-center w-full ${loading ? 'h-screen' : 'h-full'}`}
+                >
+                    <div className="pt-56">
+                        {loading ? (
+                            <div className="w-full h-screen flex justify-center items-center">
+                                <BeatLoader
+                                    color={'red'}
+                                    size={'30 md:150'}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="mb-5 pb-5 mx-auto w-full max-w-full border-b-2 border-gray-100 md:top-6 lg:max-w-screen-lg">
+                                    <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+                                        <div className="w-full">
+                                            <Breadcrumb links={breadcrumbLinks} />
+                                        </div>
+                                        <div className="flex justify-end items-center w-full">
+                                            <h1 className="text-end text-gray-100">ایونت های تست درایو</h1>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                {allevents.length > 0 ? (
+                                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
+                                        {allevents.map((element, index) => (
+                                            <Events key={index} event={element} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="w-full grid grid-cols-1  gap-10 px-5 my-5">
+                                        <div className="h-screen w-screen flex justify-center items-center">
+                                            <h1 className="text-center">ایونتی وجود ندارد لطفا بعدا تلاش کنید</h1>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+            <Footer />
+        </>
+    );
 }

@@ -12,11 +12,11 @@ export default function ThirdSection(params) {
                     ماشین های پرطرفدار
                 </p>
             </div>
-
-            <span href="#"
+            <Link href="/photogallery"><span 
                 className="inline-block rounded-lg border bg-gholamzadeh-color dark:border-none px-4 py-2 text-center text-sm text-white hover:bg-zinc-900 outline-none ring-indigo-300 transition duration-100 focus-visible:ring active:bg-gray-200 md:px-8 md:py-3 md:text-base">
                 بیشتر
-            </span>
+            </span></Link>
+            
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">

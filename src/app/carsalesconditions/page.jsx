@@ -121,7 +121,7 @@ function Conditioncars({condition}) {
         </div>)}
           <div className="w-full flex justify-between">
             <div className="w-full flex justify-center items-center"></div>
-            <div className="w-full flex justify-center items-center"><Link href={`/preregisterform/${condition.id}`} className="text-center w-1/2 border rounded-2xl hover:border-gholamzadeh-color hover:text-gholamzadeh-color">ثبت نام</Link></div>
+            <div className="w-full flex justify-center items-center"><Link href={`/preregisterform/${condition.id}`} className="text-center text-gray-100 w-1/2 border rounded-2xl hover:border-gholamzadeh-color hover:text-gholamzadeh-color">ثبت نام</Link></div>
           </div>
             
             
