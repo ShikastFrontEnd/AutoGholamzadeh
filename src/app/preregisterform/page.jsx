@@ -12,6 +12,7 @@ import LazyLoad from "react-lazyload";
 import PN from "persian-number";
 import { BeatLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
+import SearchBox from "../components/searchbox";
 const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
 function Cars({ car }) {
     const router = useRouter(); 
@@ -181,48 +182,90 @@ export default function PreRegisterForm(params) {
         fetchData();
     }, []);
 
+    // search box api and const stuff
+
+    const [data,setData] =useState()
+    const [error,setError] =useState()
+    const [searchLoading,setSearchLoading] =useState()
+    const [results,setResults] = useState()
+    useEffect(() => {
+      setResults(allcars.filter((item) => {return item.carName.includes(data)}))},[allcars,data])
+      console.log(results)
+
+
+
+
+
+    // end search box
+
+
+
+
+
     const breadcrumbLinks = [
         { url: '/preregisterform', label: 'لیست خودرو ها' },
       ];
-    return(
+      return (
         <>
-    
-        
-    <Header />
-        <div className="z-50"><ToastContainer /></div>
-        <div className="bg-zinc-400 bg-auto h-full w-full" >
-                    <div
-                        className={`bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900 bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full ${loading?'h-screen':'h-full'}`}
-                        // style={{ backgroundImage: "url('/static/images/gxtrim.jpg')" }} 
-                    >
-
-                        <div className="pt-56">
-                         
-            {loading? <div className="w-full h-screen flex justify-center items-center">
-              <BeatLoader
-        color={'red'}
-        size={'30 md:150'}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      /></div>:<><div className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
-      <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
-        <div className="w-full"><Breadcrumb links={breadcrumbLinks}
-        /></div>
-        <div className="flex justify-end items-center w-full"><h1 className="text-end text-white">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
-      </div>
-      </div></>}
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
-    {Array.isArray(allcars) && allcars.length > 0 ? (
-        allcars.map((element, index) => (
-            <Cars key={index} car={element} />
-        ))
-    ) : (<></>)}
-</div>
+            <Header />
+            <div className="z-50">
+                <ToastContainer />
+            </div>
+            <div className="bg-zinc-400 bg-auto h-full w-full">
+                <div
+                    className={`bg-gradient-to-t from-gholamzadeh-productcolor to-zinc-900 bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full ${loading ? 'h-screen' : 'h-full'}`}
+                >
+                    <div className="pt-56">
+                        {loading ? (
+                            <div className="w-full h-screen flex justify-center items-center">
+                                <BeatLoader
+                                    color={'red'}
+                                    size={'30 md:150'}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                />
+                            </div>
+                        ) : (
+                            <>
+                                <div className="mb-5 pb-5 mx-auto w-full max-w-full border-b-2 border-gray-100 md:top-6 lg:max-w-screen-lg">
+                                    <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
+                                        <div className="w-full">
+                                            <Breadcrumb links={breadcrumbLinks} />
+                                        </div>
+                                        <div className="flex justify-center items-center w-full">
+                                            <SearchBox
+                                                value={data}
+                                                setValue={setData}
+                                                onChange={(e) => {
+                                                    setData(e.target.value);
+                                                    console.log(e.target.value); // Log the new value instead of data
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                        <div className="flex justify-center items-center w-full">
+                            <h1 className="text-center text-white">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1>
                         </div>
-
+                        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:max-w-[1200px] gap-10 px-5 my-5">
+                            {Array.isArray(results) && results.length > 0 ? (
+                                results.map((element, index) => (
+                                    <Cars key={index} car={element} />
+                                ))
+                            ) : Array.isArray(allcars) && allcars.length > 0 ? (
+                                allcars.map((element, index) => (
+                                    <Cars key={index} car={element} />
+                                ))
+                            ) : (
+                                <p className="text-center text-white">No cars available</p>
+                            )}
                         </div>
-        </div>
-        <Footer />
+                    </div>
+                </div>
+            </div>
+            <Footer />
         </>
-    )
+    );
 }
