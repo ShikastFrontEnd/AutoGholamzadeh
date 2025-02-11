@@ -16,11 +16,12 @@ export default function MainSection() {
         { text: "تست درایو", href: "/testdrive" },
         { text: "تست درایو های من", href: "/mytestdrives" },
         { text: " پیش ثبت نام های من", href: "/showpreregisterform" },
+        { text: " محصولات", href: "/products" },
         { text: "شرایط فروش خودروها", href: "/carsalesconditions" }
     ].map((item, index) => (
         <div 
             key={index} 
-            className={`relative inline-flex group ${index === 6 ? 'col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-2' : ''}`}
+            className={`relative inline-flex group `}
         >
             <div
                 className="sm:w-full absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-gholamzadeh-color via-gholamzadeh-productcolor to-gholamzadeh-color rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
