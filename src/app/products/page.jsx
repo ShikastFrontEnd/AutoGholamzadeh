@@ -53,75 +53,19 @@ function Product({ car }) {
                         </LazyLoad>
                         <div className="absolute bottom-0 flex items-center justify-center w-full">
                             <span className="text-white pb-3 border-gray-100 text-xl bg-gradient-to-t from-black to-transparent p-2 pt-5 w-full">
-                                {car.carName}
+                                {car.CarName}
                             </span>
                         </div>
                     </div>
                     <div className="w-full space-y-4 p-3">
                         <div className="flex justify-between border-b-2 pb-4 border-gray-100">
                             <div className="w-full text-white text-center text-xl flex">
-                                <span className="pe-1">تومان</span>
-                                <span className="PEYDA-BOLD">{PN.convertEnToPe(formatNumberWithDots(car.carPrice))}</span>
+                                <span className="PEYDA-BOLD">{car.company}</span>
+                                
                             </div>
-                            <div className="w-full text-white text-center text-xl flex justify-end">قیمت</div>
+                            <div className="w-full text-white text-center text-xl flex justify-end">کمپانی</div>
                         </div>
-                        {car.is_installments !== 0 ? (
-            <>
-                <div className="flex justify-center">
-                    <div className="w-full text-center text-base flex justify-center hover:text-white text-gholamzadeh-color">شرایط اقساط</div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start"><span className="pe-1">ماه</span>
-                        <span>{car.maxMonth}</span></div>
-                    <div className="w-full text-center text-base flex justify-end">حداکثر طول اقساط</div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start">
-                        <span>{car.minInstallmentsPercentage}</span>
-                        <span className="pe-1">٪</span>
-                    </div>
-                    <div className="w-full text-center text-base text-nowrap flex justify-end">حداقل اقساط درصد</div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start">
-                        <span>{car.maxInstallmentsPercentage}</span>
-                        <span className="pe-1">٪</span>
-                    </div>
-                    <div className="w-full text-center text-base text-nowrap flex justify-end">حداکثر اقساط درصد</div>
-                </div>
-            </>
-        ) : car.conditionals !== null && car.conditionals.isMultiStage !== 0 ? (
-            <>
-                <div className="flex justify-evenly text-white">
-                    <div className="w-full text-center text-base flex justify-start"></div>
-                    <div className="w-full text-center text-base flex justify-end text-nowrap text-gholamzadeh-color hover:text-white">شرایط پرداخت چند مرحله ای</div>
-                    <div className="w-full text-center text-base flex justify-start"></div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start"><span className="pe-1">تومان</span>
-                    <span>{PN.convertEnToPe(formatNumberWithDots(car.conditionals.stageOne))}</span></div>
-                    <div className="w-full text-center text-base flex justify-end">مرحله اول</div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start">
-                        <span className="pe-1">تومان</span>
                         
-                    </div>
-                    <div className="w-full text-center text-base text-nowrap flex justify-end">مرحله دوم</div>
-                </div>
-                <div className="flex justify-between text-white">
-                    <div className="w-full text-center text-base flex justify-start">
-                        <span className="pe-1">تومان</span>
-                        <span>{PN.convertEnToPe(formatNumberWithDots(car.conditionals.stageTow))}</span>
-                    </div>
-                    <div className="w-full text-center text-base text-nowrap flex justify-end">مرحله سوم</div>
-                </div>
-            </>
-        ) : (
-            <div className="flex justify-center items-center h-36">
-                <h1 className="text-center text-3xl text-gholamzadeh-color">فروش به صورت نقدی</h1>
-            </div>
-        )}
                             <div className="flex justify-between">
                                 <div className="w-full text-center text-base flex justify-start">
                                     <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={handleCarConditions}>شرایط فروش</button>
@@ -146,7 +90,7 @@ export default function Products() {
     const fetchData = async () => {
         setLoading(true)
         try {
-          const response = await axios.get(`${baseUrl}/api/web/carRegister/createView2`, {
+          const response = await axios.get(`${baseUrl}/api/web/brands`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
@@ -156,6 +100,7 @@ export default function Products() {
           if (response.status === 200) {
             setLoading(false)
             setAllCars(response.data.data)
+            console.log(response.data.data)
           } else {
             throw new Error('Network response was not ok');
           }
@@ -184,14 +129,14 @@ export default function Products() {
 
     // search box api and const stuff
 
-    const [data,setData] =useState()
-    const [error,setError] =useState()
-    const [searchLoading,setSearchLoading] =useState()
-    const [results,setResults] = useState()
-    useEffect(() => {
-      setResults(allcars.filter((item) => {return item.carName.includes(data)}))},[allcars,data])
-      console.log(results)
+    const [data, setData] = useState(''); // Initialize as an empty string
+const [error, setError] = useState();
+const [searchLoading, setSearchLoading] = useState();
+const [results, setResults] = useState();
 
+useEffect(() => {
+    setResults(allcars.filter((item) => item.CarName.includes(data)));
+}, [allcars, data]);
 
 
 
@@ -238,7 +183,6 @@ export default function Products() {
                                                 setValue={setData}
                                                 onChange={(e) => {
                                                     setData(e.target.value);
-                                                    console.log(e.target.value); // Log the new value instead of data
                                                 }}
                                             />
                                         </div>
@@ -259,7 +203,7 @@ export default function Products() {
                                     <Product key={index} car={element} />
                                 ))
                             ) : (
-                                <p className="text-center text-white">No cars available</p>
+                                <p className="text-center text-white">هیچ محصولی وجود ندارد</p>
                             )}
                         </div>
                     </div>

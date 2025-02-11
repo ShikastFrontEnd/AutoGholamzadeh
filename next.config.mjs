@@ -12,8 +12,9 @@ const nextConfig = {
         ],
     },
     env: {
-        NEXT_PUBLIC_API_BASE_URL: 'https://api.gholamzadeh.com',
+        NEXT_PUBLIC_API_BASE_URL: 'http://192.168.1.103:8000'
     },
+        // NEXT_PUBLIC_API_BASE_URL: 'https://api.gholamzadeh.com',
 };
 
 export default nextConfig;

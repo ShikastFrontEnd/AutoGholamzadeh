@@ -3,14 +3,78 @@ import { ToastContainer } from "react-toastify";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import { BeatLoader } from "react-spinners";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Breadcrumb from "../components/Breadcrumb";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import Link from "next/link";
 
 
+function Product({ car , keyProp}) {
 
-export default function photogallery() {
+    return (
+        <>
+        <Link href={`/preregisterform/${car.id}`} className={`relative overflow-hidden rounded-2xl shadow-lg group ${[0, 10, 20 , 27].includes(keyProp) ? 'md:col-span-2 md:row-span-2' : ''}`}>
+            <img src={`${baseUrl}${car.imageUrl}`} alt={car.CarName} className="w-full h-full object-cover"></img>
+            <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-2xl font-bold text-white">{car.CarName}</h3>
+                    <p className="text-white">{car.company}</p>
+                </div>
+            </div>
+        </Link>
+        </>
+    );
+}
+
+
+const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;;
+export default function PhotoGallery() {
     const [loading,setLoading] = useState(false)
-    
+    const [allcars,setAllCars] = useState([])
+    const router = useRouter();
+    const fetchData = async () => {
+        setLoading(true)
+        try {
+          const response = await axios.get(`${baseUrl}/api/web/brands`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+      
+          if (response.status === 200) {
+            setLoading(false)
+            setAllCars(response.data.data)
+            console.log(response.data.data)
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        } catch (error) {
+          if (error.response) {
+            if (error.response.status === 401) {
+              router.push('/loginRegister');
+              const cameRoute = '/photogallery'
+              localStorage.setItem('cameRoute', cameRoute);
+            } else {
+              
+              setLoading(false)
+            }
+          } else if (error.request) {
+           
+            setLoading(false)
+          } else {
+            
+            setLoading(false)
+          }
+        }
+      };
+    useEffect(() => {
+        fetchData();
+    }, []);
+    console.log('-----------------')
+    console.log(allcars)
+    console.log('-----------------')
     const breadcrumbLinks = [
         { url: '/photogallery', label: 'گالری ماشین ها' },
       ];
@@ -45,91 +109,16 @@ export default function photogallery() {
     <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8"></h1>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080" alt="Nature" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-2xl font-bold text-white">اکسپلور کن</h3>
-                        <p className="text-white">در دامان طبیعت دنبال گردشگر</p>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxuYXR1cmV8ZW58MHwwfHx8MTcyMTA0MjYwMXww&ixlib=rb-4.0.3&q=80&w=1080" alt="Nature" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-2xl font-bold text-white">اکسپلور کن</h3>
-                    <p className="text-white">در دامان طبیعت دنبال گردشگر</p>
-                    </div>
-                </div>
-            </div>
-           
+            {Array.isArray(allcars) && allcars.length > 0 ? (
+                    allcars.map((element, index) => {
+                        console.log(element); // Check each element
+                        return <Product key={index} car={element} keyProp={index} />; // Pass the key or any other property
+                    })
+                ) : (
+                    <p className="w-full h-full text-center col-span-4">گالری خودرو ها خالی میباشد</p>
+                )}
             
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0ZWNobm9sb2d5fGVufDB8MHx8fDE3MjEwNDI2Mjh8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Technology" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">پروزه ساخت سرور میزبان</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-            <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHx0cmF2ZWx8ZW58MHwwfHx8MTcyMTA0MjY0MXww&ixlib=rb-4.0.3&q=80&w=1080" alt="Travel" className="w-full  h-full object-cover"></img>
-            <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                    <h4 className="text-xl font-bold text-white">Travel Adventures</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxhcnR8ZW58MHwwfHx8MTcyMTA0MjY5Nnww&ixlib=rb-4.0.3&q=80&w=1080" alt="Art" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">Artistic Expressions</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxzd2ltbWluZ3xlbnwwfDB8fHwxNzIxMDQzMjkxfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Sport" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">Swimming</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1611195974226-a6a9be9dd763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8Y2hlc3N8ZW58MHwwfHx8MTcyMTA0MzI0Nnww&ixlib=rb-4.0.3&q=80&w=1080" alt="Sport" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">Chess</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1553778263-73a83bab9b0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxmb290YmFsbHxlbnwwfDB8fHwxNzIxMDQzMjExfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="Sport" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">Football</h4>
-                    </div>
-                </div>
-            </div>
-            <div className="relative overflow-hidden rounded-2xl shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxjcmlja2V0fGVufDB8MHx8fDE3MjEwNDMxNTh8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Sport" className="w-full  h-full object-cover"></img>
-                <div
-                    className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div dir="rtl" className="absolute bottom-0 left-0 right-0 p-4">
-                        <h4 className="text-xl font-bold text-white">Cricket</h4>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
