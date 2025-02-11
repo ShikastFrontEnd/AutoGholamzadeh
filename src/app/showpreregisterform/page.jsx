@@ -67,7 +67,7 @@ export default function MyTestDrives(params) {
                         >
                             <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
             <span
-            className="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
+            className="relative block overflow-hidden rounded-lg border w-screen sm:w-full border-gray-100 p-4 sm:p-6 lg:p-8"
             dir="rtl"
             >
             <span
