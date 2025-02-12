@@ -11,6 +11,7 @@ import LazyLoad from "react-lazyload";
 import { BeatLoader, ClipLoader } from "react-spinners";
 import Breadcrumb from "../components/Breadcrumb";
 import Link from "next/link";
+import SearchBox from "../components/searchbox";
 
 const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -171,6 +172,17 @@ export default function carsalesconditions() {
       useEffect(() => {
         fetchData(); // Call the fetchData function when the component mounts
       }, []);
+          // search box api and const stuff
+
+    const [data,setData] =useState('')
+    const [error,setError] =useState()
+    const [searchLoading,setSearchLoading] =useState()
+    const [results,setResults] = useState()
+    useEffect(() => {
+      setResults(conditions.filter((item) => {return item.carName.includes(data)}))},[conditions,data])
+      console.log(results)
+
+    // end search box
       const breadcrumbLinks = [
         { url: '/carsalesconditions', label: 'شرایط فروش خودروها' }
       ];
@@ -180,8 +192,19 @@ export default function carsalesconditions() {
             <ToastContainer />
             <div className="mb-5 pb-5 mx-auto  w-full  max-w-full border-b-2 border-gray-100  md:top-6  lg:max-w-screen-lg">
             <div className="w-full flex flex-col md:flex-row justify-between px-5 md:px-0">
-              <div className="flex items-center text-gray-100"><Breadcrumb links={breadcrumbLinks} /></div>
-              <div className="flex items-center text-gray-100 justify-end"><h1 className="text-end">لیست خودرو های موجود و شرایط فروش نقدی و اقساطی</h1></div>
+            <div className="w-full">
+                                            <Breadcrumb links={breadcrumbLinks} />
+                                        </div>
+                                        <div className="flex justify-center items-center w-full">
+                                            <SearchBox
+                                                value={data}
+                                                setValue={setData}
+                                                onChange={(e) => {
+                                                    setData(e.target.value);
+                                                    console.log(e.target.value); // Log the new value instead of data
+                                                }}
+                                            />
+                                        </div>
             </div>
             </div>
            {loading? <div className="w-full flex justify-center items-center">
@@ -193,11 +216,22 @@ export default function carsalesconditions() {
       /></div>:<></>}
             <div className="mx-5 md:mx-0 space-y-9">
             
-            {Array.isArray(conditions) && conditions.map((element) => (
-                            <div key={element.id} className="w-full flex justify-center">
-                                <Conditioncars  condition={element} />
-                            </div>
-                        ))}
+
+{Array.isArray(results) && results.length > 0 ? (
+                                results.map((element, index) => (
+                                  <div key={element.id} className="w-full flex justify-center">
+                                  <Conditioncars  condition={element} />
+                                  </div>
+                                ))
+                            ) : Array.isArray(conditions) && conditions.length > 0 ? (
+                              conditions.map((element, index) => (
+                                <div key={element.id} className="w-full flex justify-center">
+                                  <Conditioncars  condition={element} />
+                                  </div>
+                                ))
+                            ) : (
+                                <p className="text-center text-white">No cars available</p>
+                            )}
             </div>
     </div>
     <Footer />
