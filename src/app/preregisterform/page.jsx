@@ -184,7 +184,7 @@ export default function PreRegisterForm(params) {
 
     // search box api and const stuff
 
-    const [data,setData] =useState()
+    const [data,setData] =useState('')
     const [error,setError] =useState()
     const [searchLoading,setSearchLoading] =useState()
     const [results,setResults] = useState()
