@@ -21,7 +21,7 @@ function Product({ car }) {
         router.push(`/preregisterform/${car.id}`)
     }
     const handleCarConditions = () => {
-        router.push(`carconditions/${car.id}`)
+        router.push(`products/${car.slug}`)
     }
 
     const formatNumberWithDots = (input) => {
@@ -68,7 +68,7 @@ function Product({ car }) {
                         
                             <div className="flex justify-between">
                                 <div className="w-full text-center text-base flex justify-start">
-                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={handleCarConditions}>شرایط فروش</button>
+                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={handleCarConditions}>مشخصات</button>
                                 </div>
                                 <div className="w-full text-center text-base text-nowrap flex justify-end">
                                     <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color  px-2 py-1 rounded-xl" onClick={handlePreRegisterButton}>پیش ثبت نام</button>
@@ -148,7 +148,7 @@ useEffect(() => {
 
 
     const breadcrumbLinks = [
-        { url: '/preregisterform', label: 'لیست خودرو ها' },
+        { url: '/products', label: 'محصولات' },
       ];
       return (
         <>
