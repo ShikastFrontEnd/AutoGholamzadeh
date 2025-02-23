@@ -21,10 +21,10 @@ export default function MainSection() {
     ].map((item, index) => (
         <div 
             key={index} 
-            className={`relative inline-flex group `}
+            className={`relative ${index === 6 ? 'col-span-2' : ''}  inline-flex group `}
         >
             <div
-                className="sm:w-full absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-gholamzadeh-color via-gholamzadeh-productcolor to-gholamzadeh-color rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"
+                className={`sm:w-full  absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-gholamzadeh-color via-gholamzadeh-productcolor to-gholamzadeh-color rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt`}
             ></div>
             <Link href={item.href} passHref className="w-full">
                 <span

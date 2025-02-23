@@ -587,7 +587,8 @@ const [selectedItem, setSelectedItem] = useState(null);
             shouldCloseOnOverlayClick={true}
             style={getModalStyles()}
         >
-                <div className="w-full h-full box rounded-[15px]">
+          {oldRegister.carModel !== changable ? <>
+            <div className="w-full h-full box rounded-[15px]">
                 <div className="w-full h-full flex flex-col md:flex-row justify-evenly">
                     <div className="flex w-full md:h-full justify-center items-center">
                         <div className="rounded-lg w-fit h-auto backdrop-blur-3xl   flex justify-center items-center">
@@ -678,6 +679,7 @@ const [selectedItem, setSelectedItem] = useState(null);
     <h1 dir="rtl" className="text-start inline text-white">
         را دارید تایید کنید
     </h1>
+    
 </div>
         <div dir="rtl" className="w-full flex justify-center items-center px-5">
             
@@ -782,6 +784,15 @@ const [selectedItem, setSelectedItem] = useState(null);
                     </div>
                 </div>
                 </div>
+                </> : <>
+                
+                <div className="w-full relative h-full flex justify-center items-center box">
+                  <h1 className="text-red-600 border p-5 rounded-lg">این خودرو را قبلا ثبت نام کرده اید نمیتوانید ان را تغییر دهید!</h1>
+                <button onClick={() => {closeModal()}} className="text-gholamzadeh-color hover:text-zinc-900 hover:border-zinc-900 absolute top-5 right-5 border hover:bg-gholamzadeh-color border-gholamzadeh-color rounded-lg px-5">خروج</button>
+                </div>
+                
+                </>}
+               
             </Modal>
             </div>
         
