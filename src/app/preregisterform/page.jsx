@@ -142,10 +142,14 @@ export default function PreRegisterForm(params) {
     const [loading,setLoading]=useState(false)
     const [allcars,setAllCars] = useState([])
     const [isOpen,setIsOpen] = useState(false)
-    const closeModal = (e) => {
-        if (e.target === e.currentTarget) {
-            setIsOpen(false);
-        }
+    const openModal = () => {
+      setIsOpen(true);
+      document.body.style.overflow = 'hidden'; // Prevent body scroll
+  };
+    
+    const closeModal = () => {
+        setIsOpen(false);
+        document.body.style.overflow = 'unset'; // Restore body scroll
     };
     const router = useRouter();
     
@@ -240,6 +244,7 @@ export default function PreRegisterForm(params) {
         fetchMyRegisterData();
     }, []);
     const handlePreRegisterButton = async (carid, carModal) => {
+      setLoading(true);
         await fetchMyRegisterData();
         await fetchDataProperty(carid);
         setLoading(false);
@@ -510,7 +515,7 @@ const [selectedItem, setSelectedItem] = useState(null);
                   zIndex: 999,
                   border: '0px',
                   borderRadius: '15px',
-              },
+              },  
           };
       };
       return (
@@ -658,19 +663,19 @@ const [selectedItem, setSelectedItem] = useState(null);
                     <div className="w-full md:h-full flex justify-center items-center ">
                     <div className=" relative ">
                     <div dir="rtl" className="text-start p-5">
-    <h1 dir="rtl" className="text-start inline">
+    <h1 dir="rtl" className="text-start text-white inline">
         شما قبلا پیش ثبت نام دیگری برای خودرو {oldRegister.carModel} انجام داده اید چنانچه قصد تغییر خودرو
     </h1>
     <h1 dir="rtl" className="text-gholamzadeh-color text-start inline">
         ( {oldRegister.carModel} )
     </h1>
-    <h1 dir="rtl" className="text-start inline">
+    <h1 dir="rtl" className="text-start inline text-white">
         به
     </h1>
-    <h1 dir="rtl" className="text-start inline">
+    <h1 dir="rtl" className="text-start inline text-white">
         {changable}
     </h1>
-    <h1 dir="rtl" className="text-start inline">
+    <h1 dir="rtl" className="text-start inline text-white">
         را دارید تایید کنید
     </h1>
 </div>
@@ -766,7 +771,7 @@ const [selectedItem, setSelectedItem] = useState(null);
                     
                         <div className="flex justify-between w-full">
                                 <div className="w-full text-center text-base flex justify-start">
-                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" >خروج</button>
+                                    <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color px-2 py-1 rounded-xl" onClick={() => {setIsOpen(false)}} >خروج</button>
                                 </div>
                                 <div className="w-full text-center text-base text-nowrap flex justify-end">
     <button className="border text-gray-100 border-gray-100 hover:border-gholamzadeh-color hover:text-gholamzadeh-color  px-2 py-1 rounded-xl" onClick={handlechangeRegister} >تایید</button>
