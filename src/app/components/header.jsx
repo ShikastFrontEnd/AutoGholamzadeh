@@ -47,11 +47,11 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className=" items-center hidden md:flex justify-center gap-5 md:items-center md:justify-center md:gap-5">
-                        <Link href="/products" passHref>
+                        {/* <Link href="/products" passHref>
                             <span className=" text-nowrap inline-block rounded-lg px-2 py-1 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-gray-100 hover:text-gray-900">
                                محصولات
                             </span>
-                        </Link>
+                        </Link> */}
                         <Link href="/preregisterform" passHref>
                             <span className="text-nowrap inline-block rounded-lg px-2 py-1 text-xs sm:text-sm font-medium text-white transition-all duration-200 hover:bg-gray-100 hover:text-gray-900">
                                 پیش ثبت نام 

@@ -16,7 +16,7 @@ export default function MainSection() {
         { text: "تست درایو", href: "/testdrive" },
         { text: "تست درایو های من", href: "/mytestdrives" },
         { text: " پیش ثبت نام های من", href: "/showpreregisterform" },
-        { text: " محصولات", href: "/products" },
+        // { text: " محصولات", href: "/products" },
         { text: "شرایط فروش خودروها", href: "/carsalesconditions" }
     ].map((item, index) => (
         <div 
