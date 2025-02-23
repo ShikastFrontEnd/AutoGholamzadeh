@@ -228,6 +228,7 @@ function PreRegistrationForm({carid}) {
     }
   };
   
+  
   useEffect(() => {
     fetchData(); // Call the fetchData function when the component mounts
   }, []);
@@ -377,9 +378,9 @@ function PreRegistrationForm({carid}) {
         {isInstallments !==0?(<div className="flex justify-between">
             <div className="w-full">
             <SelectField
-                label="درصد اقساط"
+                label="درصد پیش پرداخت"
                 options={startPercentage !== null && endPercentage !== null ? generatePercentageOptions() : []}
-                placeholder="درصد اقساط"
+                placeholder="درصد پیش پرداخت"
                 value={selectedPercentage}
                 onChange={handleSelectedPercentage}
                 error={errors.installmentsPercentage}

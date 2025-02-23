@@ -92,7 +92,6 @@ export default function Products() {
         try {
           const response = await axios.get(`${baseUrl}/api/web/brands`, {
             headers: {
-              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           });
