@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Cookies from "js-cookie";
@@ -144,13 +144,12 @@ export default function PreRegisterForm(params) {
     const [isOpen,setIsOpen] = useState(false)
     const openModal = () => {
       setIsOpen(true);
-      document.body.style.overflow = 'hidden'; // Prevent body scroll
   };
-    
-    const closeModal = () => {
-        setIsOpen(false);
-        document.body.style.overflow = 'unset'; // Restore body scroll
-    };
+  
+  const closeModal = () => {
+      setIsOpen(false);
+  };
+  
     const router = useRouter();
     
     const fetchData = async () => {
@@ -463,40 +462,49 @@ const [selectedItem, setSelectedItem] = useState(null);
 
 // ---------------------------------------------- color fields and aother things
 
-    const getModalWidth = () => {
-        if (window.innerWidth < 576) { // Small screens (sm)
-            return '40%'; // Adjust as needed
-        } else if (window.innerWidth < 768) { // Medium screens (md)
-            return '70%'; // Adjust as needed
-        } else { // Large screens (lg)
-            return '70%'; // Adjust as needed
+const breadcrumbLinks = [
+  { url: '/preregisterform', label: 'لیست خودرو ها' },
+];
+
+  // Initialize state with a default value
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    // Function to check window size
+    const checkScreenSize = () => {
+        if (typeof window !== 'undefined') {
+            setIsSmallScreen(window.innerWidth < 768);
         }
     };
-    const breadcrumbLinks = [
-        { url: '/preregisterform', label: 'لیست خودرو ها' },
-      ];
 
-      const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+    // Check screen size on mount
+    checkScreenSize();
 
-      useEffect(() => {
-          const handleResize = () => {
-              setIsSmallScreen(window.innerWidth < 768);
-          };
+    // Add resize event listener
+    window.addEventListener('resize', checkScreenSize);
+    
+    // Cleanup event listener on unmount
+    return () => {
+        window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+
+  const getModalWidth = () => {
+    if (isSmallScreen) {
+        return '40%'; // Adjust as needed for small screens
+    } else {
+        return '70%'; // Adjust as needed for larger screens
+    }
+  };
   
-          window.addEventListener('resize', handleResize);
-          return () => {
-              window.removeEventListener('resize', handleResize);
-          };
-      }, []);
-  
-      const getModalStyles = () => {
-          return {
-              overlay: {
-                  background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5))',
-                  zIndex: 1000,
-              },
-              content: {
-                  display: 'flex',
+  const getModalStyles = () => {
+    return {
+      overlay: {
+        background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5))',
+        zIndex: 1000,
+      },
+      content: {
+        display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   background: 'linear-gradient(#ffff, #ffff, #ffff, #ffff, #ffff)',
@@ -515,9 +523,13 @@ const [selectedItem, setSelectedItem] = useState(null);
                   zIndex: 999,
                   border: '0px',
                   borderRadius: '15px',
-              },  
-          };
-      };
+                },  
+              };
+            };
+            const modalRootRef = useRef(null);
+            useEffect(() => {
+              Modal.setAppElement('#preroot'); // Set the app element to #preroot
+          }, []);
       return (
         <>
             <Header />
@@ -582,7 +594,7 @@ const [selectedItem, setSelectedItem] = useState(null);
             <Modal
             isOpen={isOpen}
             onRequestClose={closeModal}
-            appElement={document.getElementById('preroot')}
+            appElement={modalRootRef.current || undefined} // This can be used if you want to set it dynamically
             contentLabel="Example Modal"
             shouldCloseOnOverlayClick={true}
             style={getModalStyles()}
