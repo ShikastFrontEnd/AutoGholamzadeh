@@ -1,3 +1,7 @@
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Your existing imports
 import Image from "next/image";
 import Header from "./components/header";
 import Footer from "./components/footer";
@@ -28,6 +32,7 @@ export default function Home() {
       <SixSection />
       <SecondSection />
       <Footer />
+      <ToastContainer /> {/* Add this line */}
     </div>
   );
 }

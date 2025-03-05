@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
 
 export default function MainSection() {
     return (
-        <>
-            <div
+        <>    
+        <div
                 className="bg-no-repeat bg-cover bg-bottom bg-gray-200 flex justify-center items-center w-full  h-screen"
                 style={{ backgroundImage: "url('/static/images/Xtrim.png')" }}
             >

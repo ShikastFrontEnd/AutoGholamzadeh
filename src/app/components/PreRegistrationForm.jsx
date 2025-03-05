@@ -33,6 +33,7 @@ function PreRegistrationForm({carid}) {
   const [loading,setLoading] = useState(false)
   const [buttonLoading,setButtonLoading] = useState(false)
   const car_id =carid
+  const [changable,setChangable] = useState('')
   const router = useRouter();
   const [selectedItem, setSelectedItem] = useState(null);
   const [firstName, setFirstName] = useState('');
@@ -53,6 +54,8 @@ function PreRegistrationForm({carid}) {
   const [startPercentage,setStartPercentage] =useState(null);
   const [endPercentage,setEndPercentage] = useState(null);
   const [isInstallments,setIsInstallments] = useState(null);
+  const [isInstallmentsShow,setIsInstallmentsShow] = useState(null);
+  const [oldRegister,setOldRegister] = useState({})
   const generatePercentageOptions = () => {
     const options = [];
     const start = parseInt(startPercentage, 10);
@@ -110,17 +113,148 @@ const [errors, setErrors] = useState({
     setSelectedColor(event.target.value);
   };
   const handleRegChange = (event) => {
+    if (event.target.value === 'نقدی') {
+      setIsInstallmentsShow(0);
+    } else if (event.target.value === 'اقساطی') {
+      setIsInstallmentsShow(true);
+    }
     setRegModal(event.target.value);
-  };
+};
   const handleMaxMonth = (event) => {
     setMaxMonth(event.target.value);
   };
+  
+    const getUserIsRegistered = async() => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/web/carRegister/show`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.status === 200) {
+          setOldRegister(response.data.data) 
+          
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 401) {
+            router.push('/loginRegister');
+            const cameRoute = '/preregisterform'
+            localStorage.setItem('cameRoute', cameRoute);
+          } else {
+            
+          }
+        } else if (error.request) {
+         
+        } else {
+          
+        }
+      }
+    };
+    useEffect(() => {
+      getUserIsRegistered();
+  }, []);
 
   const handleSubmit = async (event) => {
     setButtonLoading(true)
     event.preventDefault();
-  
-  
+    if (oldRegister && Object.keys(oldRegister).length > 0) {
+      try {
+        const url = `${baseUrl}/api/web/carRegister/update/${oldRegister.id}`;
+        const data = {
+          firstName:oldRegister.firstName,
+            lastName:oldRegister.lastName,
+            fatherName:oldRegister.fatherName,
+            phone: oldRegister.phone,
+            nationalCode:oldRegister.nationalCode,
+            carModel: carName,
+            regModel,
+            color: selectedColor,
+            installmentsPercentage:selectedPercentage,
+            installmentsMonth:maxMonth,
+            knowMySite: selectedCat,
+            address:oldRegister.address,
+        }; 
+        const response = await axios.post(url, data, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.status === 201) {
+          router.push('/showpreregisterform');
+          toast.success(response.data.message, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+          });
+        } else {
+          router.push('/')
+          toast.success(response, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+          });
+        }
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 401) {
+            const cameRoute = `/preregisterform/${car_id}`
+                localStorage.setItem('cameRoute', cameRoute);
+                router.push('/loginRegister');
+          } else {
+            const errorMessage = error.response.data.message;
+            toast.error(errorMessage, {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+            });
+            setErrors(error.response.data.errors);
+            setButtonLoading(false)
+          }
+        } else if (error.request) {
+          const errorMessage = error.response.data.message;
+          toast.error(errorMessage, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+          });
+          setErrors(error.response.data.errors);
+          setButtonLoading(false)
+        } else {
+          
+        }
+      }
+  } else {
     try {
       const url = `${baseUrl}/api/web/carRegister/store`;
       const data = {
@@ -137,7 +271,7 @@ const [errors, setErrors] = useState({
         knowMySite: selectedCat,
         address,
       };
-  
+      
       const response = await axios.post(url, data, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -205,6 +339,8 @@ const [errors, setErrors] = useState({
         
       }
     }
+  }
+    
   };
   
 
@@ -302,7 +438,116 @@ const [errors, setErrors] = useState({
 
     </div>
 
-    <form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+    {oldRegister?(<form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <div className="relative z-30 space-y-4">
+          <div dir="rtl" className="text-start w-full p-5">
+            <h1 dir="rtl" className="text-start text-white inline">
+            شما قبلا پیش ثبت نام دیگری برای خودرو  {oldRegister.carModel} انجام داده اید چنانچه قصد تغییر خودرو
+            </h1>
+            <h1 dir="rtl" className="text-start inline text-white">
+             را به 
+            </h1>
+            <h1 dir="rtl" className="text-gholamzadeh-color text-start inline">
+                ( {carName} )
+            </h1>
+            <h1 dir="rtl" className="text-start inline text-white">
+                {changable}
+            </h1>
+            
+            <h1 dir="rtl" className="text-start inline text-white">
+             دارید تایید کنید 
+            </h1>
+            
+        </div>
+        <div className="flex justify-between">
+          <div className="w-full">
+          <div className="relative z-30">
+          <label className="block text-sm font-medium text-gholamzadeh-color mb-1  backdrop-blur-sm">خودروی مورد نظر</label>
+            <div className="w-full flex justify-center text-center items-center text-wrap"><h1 className='pt-2 text-center text-xl text-white'>{carName}</h1></div>
+          </div>
+          </div>
+          <div className="ms-2 w-full">
+          <ColorSelectField
+            label="رنگ مورد نظر"
+            options={(carscolors || []).map(color => ({
+                value: color.name,
+                label: color.name,
+                colorCode: color.color
+            }))}
+            placeholder="رنگ های موجود فعلی"
+            value={selectedColor}
+            onChange={handleColorChange}
+            error={errors?.color}
+            
+        />
+          </div>
+        </div>
+        <div className="flex justify-between">
+          
+          <div className=" w-full">
+          <SelectField
+              label="روش پرداخت"
+              options={isInstallments !== 0 ? [
+                { value: 'اقساطی', label: 'اقساطی' },
+                { value: 'نقدی', label: 'نقدی' },
+              ] : [
+                { value: 'نقدی', label: 'نقدی' },
+              ]}
+              placeholder="روش پرداخت"
+              value={regModel}
+              onChange={handleRegChange}
+              error={errors?.regModel} 
+            />
+          </div>
+        </div>
+        {isInstallmentsShow & isInstallments !==0?(<div className="flex justify-between">
+            <div className="w-full">
+            <SelectField
+                label="درصد پیش پرداخت"
+                options={startPercentage !== null && endPercentage !== null ? generatePercentageOptions() : []}
+                placeholder="درصد پیش پرداخت"
+                value={selectedPercentage}
+                onChange={handleSelectedPercentage}
+                error={errors?.installmentsPercentage}
+              />
+            </div>
+          <div className="ms-2 w-full">
+          <SelectField
+                label="تعداد اقساط"
+                
+                options={startMonth !== null && endMonth !== null ? generateMonth() : []}
+                placeholder="تعداد اقساط"
+                value={maxMonth}
+                onChange={handleMaxMonth}
+                error={errors?.installmentsMonth} 
+            />
+          </div>
+        </div>):(<></>)}
+        
+        <div className="">
+            
+          </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+      <button type="submit" className="inline-block rounded-lg bg-gholamzadeh-color px-5 py-3 text-sm font-medium text-white">
+  <div className="flex items-center justify-between w-full">
+    <span>پیش ثبت نام</span>
+    {buttonLoading && (
+      <div className="flex items-center mr-2"> {/* Add margin to space it from the text */}
+        <ClipLoader
+          color={'red'}
+          size={'15'}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    )}
+  </div>
+</button>
+      </div>
+    </form>
+  ):(<form onSubmit={handleSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
       <div className="relative z-30 space-y-4">
         <PreInputField
           placeholder="نام خود را وارد کنید"
@@ -344,7 +589,7 @@ const [errors, setErrors] = useState({
           <div className="w-full">
           <div className="relative z-30">
           <label className="block text-sm font-medium text-gholamzadeh-color mb-1  backdrop-blur-sm">خودروی مورد نظر</label>
-            <div className="w-full flex justify-center text-center items-center text-wrap"><h1 className='pt-2 text-center text-xl'>{carName}</h1></div>
+            <div className="w-full flex justify-center text-center items-center text-wrap"><h1 className='pt-2 text-center text-xl text-white'>{carName}</h1></div>
           </div>
           </div>
           <div className="ms-2 w-full">
@@ -441,7 +686,7 @@ const [errors, setErrors] = useState({
   </div>
 </button>
       </div>
-    </form>
+    </form>)}
   </div>
 
   <div className="relative flex justify-center items-center w-full md:h-[700px] lg:h-[800px] lg:w-1/2 overflow-hidden py-4 hidden  md:block ">
