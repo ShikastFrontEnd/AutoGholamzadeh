@@ -599,7 +599,7 @@ const breadcrumbLinks = [
             shouldCloseOnOverlayClick={true}
             style={getModalStyles()}
         >
-          {oldRegister.carModel !== changable ? <>
+          {oldRegister&&oldRegister.carModel !== changable ? <>
             <div className="w-full h-full box rounded-[15px]">
                 <div className="w-full h-full flex flex-col md:flex-row justify-evenly">
                     <div className="flex w-full md:h-full justify-center items-center">

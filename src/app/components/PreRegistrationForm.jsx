@@ -81,20 +81,20 @@ function PreRegistrationForm({carid}) {
 
     return options;
 };
-  const [errors, setErrors] = useState({
-    firstName:"",
-    lastName: "",
-    fatherName:"",
-    nationalCode:"" ,
-    address: "",
-    selectedOption:"",
-    phone: "",
-    color: "",
-    installmentsPercentage:"",
-    installmentsMonth:"",
-    selectedPercentage: "" ,
-    regModel:""
-  });
+const [errors, setErrors] = useState({
+  firstName: "",
+  lastName: "",
+  fatherName: "",
+  nationalCode: "",
+  address: "",
+  selectedOption: "",
+  phone: "",
+  color: "",
+  installmentsPercentage: "",
+  installmentsMonth: "",
+  selectedPercentage: "",
+  regModel: ""
+});
   const token=Cookies.get('user-cookie');
   const handleSelectedPercentage = (event) => {
     setSelectedPercentage(event.target.value);
@@ -165,6 +165,28 @@ function PreRegistrationForm({carid}) {
       }
     } catch (error) {
       if (error.response) {
+        if (error.response.status === 401) {
+          
+          const cameRoute = `/preregisterform/${car_id}`
+              localStorage.setItem('cameRoute', cameRoute);
+              router.push('/loginRegister');
+        } else {
+          const errorMessage = error.response.data.message;
+        toast.error(errorMessage, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          className: 'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
+        });
+        setErrors(error.response.data.errors);
+        setButtonLoading(false)
+        }
+      } else if (error.request) {
         const errorMessage = error.response.data.message;
         toast.error(errorMessage, {
           position: "bottom-right",
@@ -179,10 +201,8 @@ function PreRegistrationForm({carid}) {
         });
         setErrors(error.response.data.errors);
         setButtonLoading(false)
-      } else if (error.request) {
-        router.push('/')
       } else {
-        router.push('/')
+        
       }
     }
   };
@@ -289,21 +309,21 @@ function PreRegistrationForm({carid}) {
           iconClass="bi-person-badge-fill"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          error={errors.firstName} 
+          error={errors?.firstName} // Use optional chaining here
         />
         <PreInputField
           placeholder="نام خانوادگی خود را وارد کنید"
           iconClass="bi-person-badge"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          error={errors.lastName} 
+          error={errors?.lastName} // Use optional chaining here
         />
         <PreInputField
           placeholder="نام پدر خود را وارد کنید"
           iconClass="bi-person-bounding-box"
           value={fatherName}
           onChange={(e) => setFatherName(e.target.value)}
-          error={errors.fatherName} 
+          error={errors?.fatherName} // Use optional chaining here
         />
         
         <PreInputField
@@ -311,14 +331,14 @@ function PreRegistrationForm({carid}) {
           iconClass="bi-person-vcard-fill"
           value={nationalCode}
           onChange={(e) => setNationalCode(e.target.value)}
-          error={errors.nationalCode} 
+          error={errors?.nationalCode}
         />
         <PreInputField
           placeholder="ادرس محل سکونت"
           iconClass="bi-geo-alt"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          error={errors.address} 
+          error={errors?.address}
         />
         <div className="flex justify-between">
           <div className="w-full">
@@ -338,7 +358,8 @@ function PreRegistrationForm({carid}) {
             placeholder="رنگ های موجود فعلی"
             value={selectedColor}
             onChange={handleColorChange}
-            error={errors.color}
+            error={errors?.color}
+            
         />
           </div>
         </div>
@@ -356,7 +377,7 @@ function PreRegistrationForm({carid}) {
               placeholder="شیوه اشنایی"
               value={selectedCat}
               onChange={handleSelectedCat}
-              error={errors.selectedCat} 
+              error={errors?.selectedCat} 
             />
           </div>
           <div className="ms-2 w-full">
@@ -371,7 +392,7 @@ function PreRegistrationForm({carid}) {
               placeholder="روش پرداخت"
               value={regModel}
               onChange={handleRegChange}
-              error={errors.regModel} 
+              error={errors?.regModel} 
             />
           </div>
         </div>
@@ -383,7 +404,7 @@ function PreRegistrationForm({carid}) {
                 placeholder="درصد پیش پرداخت"
                 value={selectedPercentage}
                 onChange={handleSelectedPercentage}
-                error={errors.installmentsPercentage}
+                error={errors?.installmentsPercentage}
               />
             </div>
           <div className="ms-2 w-full">
@@ -394,7 +415,7 @@ function PreRegistrationForm({carid}) {
                 placeholder="تعداد اقساط"
                 value={maxMonth}
                 onChange={handleMaxMonth}
-                error={errors.installmentsMonth} 
+                error={errors?.installmentsMonth} 
             />
           </div>
         </div>):(<></>)}
