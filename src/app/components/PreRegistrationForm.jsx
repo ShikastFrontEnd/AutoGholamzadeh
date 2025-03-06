@@ -143,7 +143,7 @@ const [errors, setErrors] = useState({
         if (error.response) {
           if (error.response.status === 401) {
             router.push('/loginRegister');
-            const cameRoute = '/preregisterform'
+            const cameRoute =`/preregisterform/${car_id}`
             localStorage.setItem('cameRoute', cameRoute);
           } else {
             
