@@ -1,5 +1,5 @@
 {
-  "name": "lucano",
+  "name": "gholamzadeh",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.7.9",
     "bootstrap-icons": "^1.11.3",
+    "iran-license-plate": "^0.3.12",
     "jalali-moment": "^3.3.11",
     "js-cookie": "^3.0.5",
     "next": "^15.1.4",
@@ -24,6 +25,7 @@
     "react-lazyload": "^3.2.1",
     "react-modal": "^3.16.3",
     "react-multi-date-picker": "^4.5.2",
+    "react-paginate": "^8.3.0",
     "react-spinners": "^0.15.0",
     "react-toastify": "^11.0.2",
     "react-verification-input": "^4.2.0",

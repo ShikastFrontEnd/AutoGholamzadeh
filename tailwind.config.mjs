@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,9 +12,15 @@ export default {
       },
       colors: {
         'gholamzadeh-color': '#C38065',
-        'gholamzadeh-productcolor':'#282828',
+        'gholamzadeh-productcolor': '#282828',
+      },
+      screens: {
+        mdlg: '1500px',
+        bordersize: '1654px',
       },
     },
   },
-  variants: {},
+  plugins: [],
 };
+
+export default config;

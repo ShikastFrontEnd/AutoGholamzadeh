@@ -173,6 +173,7 @@ export default function Verify() {
                         className:'w-full sm:w-[200] md:min-w-[450] lg:min-w-[600px] lg:text-2xl PEYDA-REGULAR'
                     });
                     Cookies.set('user-cookie',response.data.data.token, { expires: 7 })
+                    Cookies.set('isAdmin',response.data.data.user.isAdmin, { expires: 7 })
                     setTimeout(() => {
                         const retrievedRoute = localStorage.getItem('cameRoute');
                         const routeToPush = retrievedRoute ? retrievedRoute : '/';

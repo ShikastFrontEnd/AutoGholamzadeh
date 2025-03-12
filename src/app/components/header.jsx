@@ -31,7 +31,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`fixed inset-x-0 top-0 z-50 mx-auto  max-w-screen w-full border border-gray-100 bg-black/50 py-3 shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
+        <header className={`fixed inset-x-0 top-0 z-50 mx-auto   max-w-screen w-full border border-gray-100 bg-black/50 py-3 shadow backdrop-blur-sm md:top-6 md:rounded-3xl lg:max-w-screen-lg`}>
             <div className="px-4">
                 <div className="flex items-center justify-between">
                     <div className="flex shrink-0">
