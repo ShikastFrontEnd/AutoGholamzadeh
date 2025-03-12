@@ -8,8 +8,6 @@ import Header from "@/app/components/header";
 import SuggInputField from "@/app/components/SuggInputField";
 import SuggSelectField from "@/app/components/SuggSelectField";
 import Footer from "@/app/components/footer";
-import "iran-license-plate/dist/License.css";
-import IranLicensePlate from "iran-license-plate";
 const baseUrl=process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const ImageGrid = ({beforeImages, images, onRemove }) => {
@@ -101,7 +99,6 @@ export default function ServiceOrder() {
             
             setService(response.data.data)
           } else {
-            throw new Error('Network response was not ok');
           }
         } catch (error) {
           if (error.response) {
@@ -341,7 +338,6 @@ export default function ServiceOrder() {
           setBrands(response.data.data.brands)
 
         } else {
-          throw new Error('Network response was not ok');
         }
       } catch (error) {
         if (error.response) {

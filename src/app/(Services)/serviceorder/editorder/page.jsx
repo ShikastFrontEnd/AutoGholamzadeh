@@ -47,7 +47,7 @@ export default function Product() {
                 setServices(response.data.data);
                 setTotalPages(response.data.meta.last_page);
             } else {
-                throw new Error('Network response was not ok');
+                
             }
         } catch (error) {
             if (error.response) {
