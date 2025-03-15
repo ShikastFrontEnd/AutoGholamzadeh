@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## اسکرین شات ها
 [![Gholamzadeh](https://i.postimg.cc/rsYmHhd9/Screenshot-2025-02-11-111040.png)](https://postimg.cc/PvYTpQQL)
 [![More Gholamzadeh](https://i.postimg.cc/DZw7Kr3p/Screenshot-2025-02-11-111808.png)](https://postimg.cc/Ff8MyJR0)
@@ -33,3 +34,6 @@ bun dev
 ساده‌ترین راه برای استقرار برنامه Next.js شما استفاده از پلتفرم Vercel از سازندگان Next.js است.
 
 برای جزئیات بیشتر، به مستندات استقرار Next.js مراجعه کنید.
+=======
+# AutoGholamzadeh
+>>>>>>> 742ff88cf1dd7d6206d6af472a440881e2457cec
